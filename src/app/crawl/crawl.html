@@ -1,0 +1,48 @@
+
+
+<div layout="vertical" layout-fill>
+
+  <md-content flex>
+    <header flex>
+      <navbar></navbar>
+    </header>
+
+    <div layout layout-align="center" layout-padding>
+    	
+		<div flex>
+			<h4>Crawling results </h4>
+
+			<div layout layout-align="center" layout-padding>
+
+		      <div flex="30">
+		        <md-input-container class="md-block" flex-gt-sm="">
+		          <label>URL</label>
+		          <input ng-model="crawl.url" name="url" required>
+		        </md-input-container>
+		      </div>
+		      
+		      <div>
+		        <md-button class="md-raised" ng-click="crawl.crawl()">CRAWL</md-button>
+		      </div>
+
+		    </div>
+
+			<div md-whiteframe="2" layout="column" layout-padding>
+				<div>
+					<h4>HEADERS</h4>
+					<pre>{{crawl.result.headers | json}}</pre>
+				</div>
+
+				<div>
+					<h4>REQUEST</h4>
+					<pre>{{crawl.result.request | json}}</pre>
+				</div>
+			</div>
+
+		</div>
+      
+    </div>
+
+  </md-content>
+
+</div>
