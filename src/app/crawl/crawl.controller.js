@@ -6,26 +6,11 @@
     .controller('CrawlController', CrawlController);
 
   /** @ngInject */
-  function CrawlController(CrawlService, cfpLoadingBar, $timeout) {
+  function CrawlController(CrawlService) {
     var vm = this;
 
     vm.crawl = crawl;
-    vm.start = function() {
-      cfpLoadingBar.start();
-    };
-
-    vm.complete = function () {
-      cfpLoadingBar.complete();
-    }
-
-
-    // fake the initial load so first time users can see it right away:
-    vm.start();
-    vm.fakeIntro = true;
-    $timeout(function() {
-      vm.complete();
-      vm.fakeIntro = false;
-    }, 750);
+    vm.haveIBeenPwned = haveIBeenPwned;
 
     function crawl(){
       var prefix = 'http://';
@@ -36,6 +21,13 @@
       }
 
       CrawlService.crawl(url).success(function(res){
+        vm.result = res;
+      });
+    }
+
+    function haveIBeenPwned(){
+
+      CrawlService.haveIBeenPwned(vm.email).success(function(res){
         vm.result = res;
       });
     }

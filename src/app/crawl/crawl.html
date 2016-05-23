@@ -15,7 +15,19 @@
 			      
 			      	<div>
 			        	<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
-			        	<md-button class="md-raised" ng-click="crawl.start()">starts</md-button>
+			      	</div>
+
+			      	<div flex="30">
+				        <md-input-container class="md-icon-float md-block" flex-gt-sm="">
+				          <label>EMAIL</label>
+				          <md-icon><i class="material-icons">email</i></md-icon>
+				          <input ng-model="crawl.email" name="email">
+				        </md-input-container>
+			      
+			      	</div>
+			      
+			      	<div>
+			        	<md-button class="md-raised" ng-click="crawl.haveIBeenPwned()" type="submit">HAVEIBEENPWNED</md-button>
 			      	</div>
 		     	
 		    </div>
@@ -29,6 +41,11 @@
 			<div>
 				<h4>REQUEST</h4>
 				<pre>{{crawl.result.request | json}}</pre>
+			</div>
+
+			<div>
+				<h4>REQUEST</h4>
+				<pre>{{crawl.result | json}}</pre>
 			</div>
 		</div>
 

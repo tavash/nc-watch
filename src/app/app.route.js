@@ -14,6 +14,12 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .state('procedure', {
+        url: '/procedure',
+        templateUrl: 'app/procedure/procedure.html',
+        controller: 'ProcedureController',
+        controllerAs: 'procedure'
+      })
       .state('crawl', {
         url: '/crawl',
         templateUrl: 'app/crawl/crawl.html',

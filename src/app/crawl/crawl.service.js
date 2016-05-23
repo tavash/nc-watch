@@ -10,6 +10,7 @@
     var service = {};
 
     service.crawl = crawl;
+    service.haveIBeenPwned = haveIBeenPwned;
 
     return service;
 
@@ -22,6 +23,14 @@
         headers: { 'Content-Type': 'application/json' }
       });
     }
+
+    function haveIBeenPwned(email){
+      return $http({
+        method: 'GET',
+        url: 'https://haveibeenpwned.com/api/v2/breachedaccount/'+email,
+        headers: { 'Content-Type': 'application/json'}
+      });
       
+    }
   }
 })();
