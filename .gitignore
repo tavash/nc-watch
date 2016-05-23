@@ -35,3 +35,6 @@ build/Release
 .tmp/
 /bower_components
 /server/node_modules
+
+# Webstorm
+.idea
