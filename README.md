@@ -7,17 +7,23 @@
 
 -> Recherches d'infos succeptibles de nuire à une entreprise (diffamations, e-reputation, ...)
 
+## Cloner le projet
+
+	1) Dans un répertoire vide, il faut cloner le projet depuis Github :
+		https://github.com/Tavash/NCWatch.git
+		On ne fait cette phase qu’une seule fois, c’est juste pour récupérer le projet quand on ne l’a pas.
+		Par défaut, on est sur la branche master du projet.
+
 ## Installation
 
+	## Client (Dans un terminal)
 	1) npm install
 	2) npm install -g bower
 	3) bower install
-
-	## Client
 	4) npm install -g gulp
 	5) gulp serve
 
-	## Serveur
+	## Serveur (dans un autre terminal)
 	6) cd server
 	7) npm install
 	8) npm start
