@@ -38,3 +38,6 @@ build/Release
 
 # Webstorm
 .idea
+
+# KEYS
+server/keys.json

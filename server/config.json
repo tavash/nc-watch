@@ -3,10 +3,6 @@
     "connectionStringDev": "mongodb://@ds027505.mlab.com:",
     "apiUrl":  "http://localhost:3000/",
     "name": "NCWatch",
-    "serverPort": 3000,
-    "mongodbPort": 27017,
-    "mongoDBName": "dbncwatch",
-    "version": {"api": "1.0.0", "appClient" : "1.0.0"},
-    "cloudMode": false
+    "serverPort": 3000
 }
 
