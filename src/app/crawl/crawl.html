@@ -37,7 +37,7 @@
 				<h3>CRAWL du site {{crawl.url}}</h3>
 				<div>
 					<h4>HEADERS</h4>
-					<table>
+					<table class="border-table">
 						<tr ng-repeat="(key,value) in crawl.crawlResult.headers">
 							<td> {{key}} </td>
 							<td> {{value}} </td>
@@ -47,7 +47,7 @@
 
 				<div>
 					<h4>REQUEST</h4><table>
-					<table>
+					<table class="border-table">
 						<tr ng-repeat="(key,value) in crawl.crawlResult.request">
 							<td> {{key}} </td>
 							<td ng-if="key=='uri'">
@@ -66,16 +66,12 @@
 			<div flex="50" ng-if="crawl.email">
 				<div>
 					<h3>HAVEIBEENPWNED de l'e-mail {{crawl.email}}</h3>
-					<table ng-repeat="item in crawl.haveIBeenPwnedResult">
+					<table ng-repeat="item in crawl.haveIBeenPwnedResult" class="border-table">
 						<tr ng-repeat="(key,value) in item">
 							<td> {{key}} </td>
 							<td> {{value}} </td>
 						</tr>
 					</table>
-				</div>
-				<div>
-					<h4>REQUEST</h4>
-					<pre>{{crawl.haveIBeenPwnedResult | json}}</pre>
 				</div>
 			</div>
 		</div>
