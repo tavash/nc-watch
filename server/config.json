@@ -5,9 +5,7 @@
     "name": "NCWatch",
     "serverPort": 3000,
     "mongodbPort": 27017,
-    "mongodbPortDev": 27505,
     "mongoDBName": "dbncwatch",
-    "mongoDBNameDev": "dbpom",
     "version": {"api": "1.0.0", "appClient" : "1.0.0"},
     "cloudMode": false
 }
