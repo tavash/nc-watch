@@ -1,13 +1,13 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('ncwatch')
-    .run(runBlock);
+	angular
+	.module('ncwatch')
+	.run(runBlock);
 
-  /** @ngInject */
-  function runBlock($log) {
-    $log.debug('runBlock end');
-  }
+	/** @ngInject */
+	function runBlock($log) {
+		$log.debug('runBlock end');
+	}
 
 })();

@@ -1,23 +1,23 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('ncwatch')
-    .controller('MainController', MainController);
+	angular
+	.module('ncwatch')
+	.controller('MainController', MainController);
 
-  /** @ngInject */
-  function MainController($timeout, toastr) {
-    var vm = this;
+	/** @ngInject */
+	function MainController($timeout, toastr) {
+		var vm = this;
 
-    vm.showToastr = showToastr;
-    vm.crawl = crawl;
+		vm.showToastr = showToastr;
+		vm.crawl = crawl;
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-    }
+		function showToastr() {
+			toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+		}
 
-    function crawl(){
-      
-    }
-  }
+		function crawl(){
+			
+		}
+	}
 })();

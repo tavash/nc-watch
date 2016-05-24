@@ -1,36 +1,36 @@
 <div layout layout-align="center" layout-padding>
-    	
+
 	<div flex>
 		<form>
 			<div layout layout-align="center" layout-padding>
 				
-			     	<div flex="30">
-				        <md-input-container class="md-icon-float md-block" flex-gt-sm="">
-				          <label>URL</label>
-				          <md-icon><i class="material-icons">http</i></md-icon>
-				          <input ng-model="crawl.url" name="url">
-				        </md-input-container>
-			      
-			      	</div>
-			      
-			      	<div>
-			        	<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
-			      	</div>
+				<div flex="30">
+					<md-input-container class="md-icon-float md-block" flex-gt-sm="">
+						<label>URL</label>
+						<md-icon><i class="material-icons">http</i></md-icon>
+						<input ng-model="crawl.url" name="url">
+					</md-input-container>
 
-			      	<div flex="30">
-				        <md-input-container class="md-icon-float md-block" flex-gt-sm="">
-				          <label>EMAIL</label>
-				          <md-icon><i class="material-icons">email</i></md-icon>
-				          <input ng-model="crawl.email" name="email">
-				        </md-input-container>
-			      
-			      	</div>
-			      
-			      	<div>
-			        	<md-button class="md-raised" ng-click="crawl.haveIBeenPwned()" type="submit">HAVEIBEENPWNED</md-button>
-			      	</div>
-		     	
-		    </div>
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
+				</div>
+
+				<div flex="30">
+					<md-input-container class="md-icon-float md-block" flex-gt-sm="">
+						<label>EMAIL</label>
+						<md-icon><i class="material-icons">email</i></md-icon>
+						<input ng-model="crawl.email" name="email">
+					</md-input-container>
+
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-click="crawl.haveIBeenPwned()" type="submit">HAVEIBEENPWNED</md-button>
+				</div>
+
+			</div>
 		</form>
 		<div md-whiteframe="2" layout="column" layout-padding>
 			<div>
@@ -50,5 +50,5 @@
 		</div>
 
 	</div>
-  
+
 </div>
