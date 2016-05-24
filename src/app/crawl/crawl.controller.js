@@ -21,14 +21,14 @@
 			}
 
 			CrawlService.crawl(url).success(function(res){
-				vm.result = res;
+				vm.crawlResult = res;
 			});
 		}
 
 		function haveIBeenPwned(){
 
 			CrawlService.haveIBeenPwned(vm.email).success(function(res){
-				vm.result = res;
+				vm.haveIBeenPwnedResult = res;
 			});
 		}
 	}

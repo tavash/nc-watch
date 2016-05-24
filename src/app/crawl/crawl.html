@@ -32,20 +32,30 @@
 
 			</div>
 		</form>
-		<div md-whiteframe="2" layout="column" layout-padding>
-			<div>
-				<h4>HEADERS</h4>
-				<pre>{{crawl.result.headers | json}}</pre>
-			</div>
+		<div md-whiteframe="2" layout layout-padding>
+			<div flex="50" ng-if="crawl.url">
+				<h3>CRAWL du site {{crawl.url}}</h3>
+				<div>
+					<h4>HEADERS</h4>
+					<div ng-repeat="(key,value) in crawl.crawlResult.headers">
+						<tr> 
+							<td> {{key}} </td>
+							<td> {{value}} </td>
+						</tr>
+					</div>
+					<pre>{{crawl.crawlResult.headers | json}}</pre>
+				</div>
 
-			<div>
-				<h4>REQUEST</h4>
-				<pre>{{crawl.result.request | json}}</pre>
+				<div>
+					<h4>REQUEST</h4>
+					<pre>{{crawl.crawlResult.request | json}}</pre>
+				</div>
 			</div>
-
-			<div>
-				<h4>REQUEST</h4>
-				<pre>{{crawl.result | json}}</pre>
+			<div flex="50" ng-if="crawl.email">
+				<div>
+					<h4>REQUEST</h4>
+					<pre>{{crawl.haveIBeenPwnedResult | json}}</pre>
+				</div>
 			</div>
 		</div>
 
