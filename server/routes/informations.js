@@ -5,6 +5,7 @@ var Bluebox = require('bluebox-ng'),
     bluebox = new Bluebox({});
 var whois = require('whois-json');
 var dns = require('dns');
+var async = require("async");
 
 router.get('/whois', getWhoIs);
 router.get('/shodanHost', getShodanHost);
@@ -64,17 +65,22 @@ function getDnsResolve(domain, res, callback) {
     });
 }
 
-//Récupère la location du serveur selon un nom de domaine donné
+//Récupère les localisations des serveur selon un nom de domaine donné
 function getGeolocation(req, res, next) {
     getDnsResolve(req.query.domain, res, function (serveurIps) {
-        getMultipleGeolocation(serveurIps, function (finalResult) {
-            res.send(finalResult);
+        getMultipleGeolocation(serveurIps, res, function (finalResult) {
+            var result ='{ "geolocationTab":[';
+            result+=finalResult;
+            result+="]}";
+            res.json(JSON.parse(result));
         });
     });
 }
 
-function getMultipleGeolocation(serveurIps, callback) {
+function getMultipleGeolocation(serveurIps, res, callback) {
     var finalResult = [];
+    var itemsProcessed = 0;
+    // Pour chaque addresse ip de serveurs trouvés
     for (var i in serveurIps) {
         var moduleOptions = {
             target: serveurIps[i]
@@ -87,11 +93,15 @@ function getMultipleGeolocation(serveurIps, callback) {
             } else {
                 console.log('RESULT:');
                 console.log(result);
-                finalResult.push(result);
+                finalResult.push(JSON.stringify(result));
+                itemsProcessed++;
+                if (itemsProcessed === serveurIps.length) {
+                    //Quand on a fini de récupérer la localisation de chaque serveur on envoie la réponse
+                    callback(finalResult);
+                }
             }
         });
     }
-    callback(finalResult);
 }
 
 module.exports = router;
