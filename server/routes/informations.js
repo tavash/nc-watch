@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../keys.json');
+//var config = require('../keys.json');
 var Bluebox = require('bluebox-ng'),
     bluebox = new Bluebox({});
 var whois = require('whois-json');
