@@ -35,6 +35,16 @@
           controllerAs: 'crawl',
         }
       }
+    })
+    .state('tools.haveibeenpwned', {
+      url: '/haveibeenpwned',
+      views: {
+        '@': {
+          templateUrl: 'app/tools/haveibeenpwned/haveibeenpwned.html',
+          controller: 'HaveIBeenPwnedController',
+          controllerAs: 'haveibeenpwned',
+        }
+      }
     });
 
 

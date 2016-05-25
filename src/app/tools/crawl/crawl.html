@@ -1,11 +1,11 @@
-<div layout layout-align="center" layout-padding>
+<md-content layout="column" layout-padding flex md-whiteframe="2">
 
 	<div flex>
 		<form>
 			<div layout layout-align="center" layout-padding>
 				
 				<div flex="30">
-					<md-input-container class="md-icon-float md-block" flex-gt-sm="">
+					<md-input-container class="md-icon-float md-block">
 						<label>URL</label>
 						<md-icon><i class="material-icons">http</i></md-icon>
 						<input ng-model="crawl.url" name="url">
@@ -17,27 +17,14 @@
 					<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
 				</div>
 
-				<div flex="30">
-					<md-input-container class="md-icon-float md-block" flex-gt-sm="">
-						<label>EMAIL</label>
-						<md-icon><i class="material-icons">email</i></md-icon>
-						<input ng-model="crawl.email" name="email">
-					</md-input-container>
-
-				</div>
-
-				<div>
-					<md-button class="md-raised" ng-click="crawl.haveIBeenPwned()" type="submit">HAVEIBEENPWNED</md-button>
-				</div>
-
 			</div>
 		</form>
-		<div md-whiteframe="2" layout layout-padding>
-			<div flex="50" ng-if="crawl.url">
+		<div layout layout-padding>
+			<div ng-if="crawl.url">
 				<h3>CRAWL du site {{crawl.url}}</h3>
 				<div>
 					<h4>HEADERS</h4>
-					<table class="border-table">
+					<table class="table border-table">
 						<tr ng-repeat="(key,value) in crawl.crawlResult.headers">
 							<td> {{key}} </td>
 							<td> {{value}} </td>
@@ -62,20 +49,8 @@
 						</tr>
 					</table>
 				</div>
-			</div>
-			<div flex="50" ng-if="crawl.email">
-				<div>
-					<h3>HAVEIBEENPWNED de l'e-mail {{crawl.email}}</h3>
-					<table ng-repeat="item in crawl.haveIBeenPwnedResult" class="border-table">
-						<tr ng-repeat="(key,value) in item">
-							<td> {{key}} </td>
-							<td> {{value}} </td>
-						</tr>
-					</table>
-				</div>
-			</div>
 		</div>
 
 	</div>
 
-</div>
+</md-content>
