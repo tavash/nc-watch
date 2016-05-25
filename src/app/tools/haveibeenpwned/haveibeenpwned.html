@@ -1,0 +1,40 @@
+<md-content layout="column" layout-padding flex md-whiteframe="2">
+
+	<div flex>
+		<form>
+			<div layout layout-align="center" layout-padding>
+				
+				<div flex="30">
+					<md-input-container class="md-icon-float md-block" flex="100">
+						<label>Email</label>
+						<md-icon><i class="material-icons">email</i></md-icon>
+						<input ng-model="haveibeenpwned.email" name="email">
+					</md-input-container>
+
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-click="haveibeenpwned.haveIBeenPwned()" type="submit">HAVEIBEENPWNED</md-button>
+				</div>
+
+			</div>
+		</form>
+		<div layout layout-padding>
+		
+			<div flex="100" ng-if="haveibeenpwned.email">
+				<div>
+					<h3 ng-if="haveibeenpwned.email">HAVEIBEENPWNED de l'e-mail {{haveibeenpwned.email}}</h3>
+					<table ng-repeat="item in haveibeenpwned.haveIBeenPwnedResult" class="">
+						<tr ng-repeat="(key,value) in item">
+							<td> {{key}} </td>
+							<td> {{value}} </td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</md-content>
