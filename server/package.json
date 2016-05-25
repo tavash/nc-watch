@@ -6,6 +6,7 @@
     "start": "node ./server.js"
   },
   "dependencies": {
+    "bluebox-ng": "~1.0.2",
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.1",
     "cors": "~2.7.1",
@@ -16,6 +17,6 @@
     "lodash": "~4.10.0",
     "mongoose": "^4.4.11",
     "static-favicon": "~1.0.0",
-    "bluebox-ng":"~1.0.2"
+    "whois-json": "^1.0.1"
   }
 }
