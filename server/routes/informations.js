@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var keys = require('../keys.json');
+//var keys = require('../keys.json');
 var Bluebox = require('bluebox-ng'),
     bluebox = new Bluebox({});
 var whois = require('whois-json');
@@ -27,12 +27,8 @@ function getWhoIs(req, res, next) {
 }
 
 function getShodanHost(req, res, next) {
-
     getDnsResolve(req.query.domain, res, function (serveurIps) {
 
-    var moduleOptions = {
-        target: req.query.domain
-    };
         if(serveurIps.length > 0) {
 
             var moduleOptions = {
@@ -51,8 +47,6 @@ function getShodanHost(req, res, next) {
             });
         }
     });
-
-
 }
 
 // Récupère l'addresse ip d'un serveur selon un nom de domaine donné
