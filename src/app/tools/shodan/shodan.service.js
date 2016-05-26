@@ -3,24 +3,24 @@
 
     angular
         .module('ncwatch')
-        .factory('CrawlService', CrawlService);
+        .factory('ShodanService', ShodanService);
 
     /** @ngInject */
-    function CrawlService($http) {
+    function ShodanService($http) {
         var service = {};
 
-        service.crawl = crawl;
+        service.shodan = shodan;
 
         return service;
 
-        function crawl(url){
+        function shodan(domain){
 
             return $http({
-                method: 'POST',
-                url: '/api/crawl',
-                data: JSON.stringify({'url': url}),
+                method: 'GET',
+                url: '/api/informations/shodan?domain=' + domain,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+
     }
 })();

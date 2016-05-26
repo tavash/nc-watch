@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var config = require('../keys.json');
+var keys = require('../keys.json');
 var Bluebox = require('bluebox-ng'),
     bluebox = new Bluebox({});
 var whois = require('whois-json');
@@ -8,7 +8,7 @@ var dns = require('dns');
 var async = require("async");
 
 router.get('/whois', getWhoIs);
-router.get('/shodanHost', getShodanHost);
+router.get('/shodan', getShodanHost);
 router.get('/geolocation', getGeolocation);
 
 //console.log('Modules info:');
@@ -24,7 +24,7 @@ function getWhoIs(req, res, next) {
         }
         else {
             console.log('RESULT:');
-            console.log(JSON.stringify(result, null, 2))
+            console.log(JSON.stringify(result, null, 2));
 
             res.json(result);
         }
@@ -32,25 +32,28 @@ function getWhoIs(req, res, next) {
 }
 
 function getShodanHost(req, res, next) {
-    var moduleOptions = {
-        target : req.query.domain
-    };
+    getDnsResolve(req.query.domain, res, function (serveurIps) {
 
-    // SHODAN KEY
-    bluebox.shodanKey = config.shodanKey;
+        if(serveurIps.length > 0) {
 
-    bluebox.runModule('shodanHost', moduleOptions, function (err, result) {
-        if (err) {
-            console.log('ERROR:');
-            console.log(err);
-            res.send(err);
-        } else {
-            console.log('RESULT:');
-            console.log(result);
+            var moduleOptions = {
+                target: serveurIps[0]
+            };
 
-            res.json(result);
+            // SHODAN KEY
+            bluebox.shodanKey = keys.shodanKey;
+
+            bluebox.runModule('shodanHost', moduleOptions, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(result);
+                }
+            });
         }
     });
+
+
 }
 
 // Récupère l'addresse ip d'un serveur selon un nom de domaine donné
@@ -59,7 +62,7 @@ function getDnsResolve(domain, res, callback) {
         if (err)
             res.send(err);
         else {
-            console.log("IP RESULT : " + addresses)
+            console.log("IP RESULT : " + addresses);
             callback(addresses);
         }
     });
