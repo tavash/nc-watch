@@ -14,7 +14,7 @@ router.get('/geolocation', getGeolocation);
 //console.log('Modules info:');
 //console.log(JSON.stringify(bluebox.getModulesInfo(), null, 2));
 
-// Récupérer des informations sur le posseceur du domaine
+// Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {
     whois(req.query.domain, function (err, result) {
         if (err) {

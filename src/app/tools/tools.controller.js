@@ -1,12 +1,12 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular.module('ncwatch')
-    .controller('ToolsController', ToolsController);
+	angular.module('ncwatch')
+	.controller('ToolsController', ToolsController);
 
-  /** @ngInject */
-  function ToolsController() {
-    var vm = this;
+	/** @ngInject */
+	function ToolsController() {
+		var vm = this;
 
-  }
+	}
 })();

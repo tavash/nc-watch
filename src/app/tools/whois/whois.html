@@ -1,0 +1,42 @@
+<md-content layout="column" layout-padding flex md-whiteframe="2">
+
+	<div flex>
+		<form>
+			<div layout layout-align="center" layout-padding>
+				
+				<div flex="30">
+					<md-input-container class="md-icon-float md-block">
+						<label>DOMAINE</label>
+						<input ng-model="whois.domain" name="domain">
+					</md-input-container>
+
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-click="whois.whois()" type="submit">WHOIS</md-button>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+
+	<div layout layout-padding>
+		
+			<div flex="100" ng-if="whois.domain">
+				<div>
+					<h3 ng-if="whois.domain">WHOIS de {{whois.domain}}</h3>
+					<table class="border-table">
+						<tr ng-repeat="(key,value) in whois.whoIsResult">
+							<td> {{key}} </td>
+							<td> {{value}} </td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</md-content>

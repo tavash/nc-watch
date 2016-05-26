@@ -45,6 +45,16 @@
           controllerAs: 'haveibeenpwned',
         }
       }
+    })
+    .state('tools.whois', {
+      url: '/whois',
+      views: {
+        '@': {
+          templateUrl: 'app/tools/whois/whois.html',
+          controller: 'WhoIsController',
+          controllerAs: 'whois',
+        }
+      }
     });
 
 
