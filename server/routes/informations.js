@@ -11,21 +11,13 @@ router.get('/whois', getWhoIs);
 router.get('/shodan', getShodanHost);
 router.get('/geolocation', getGeolocation);
 
-//console.log('Modules info:');
-//console.log(JSON.stringify(bluebox.getModulesInfo(), null, 2));
-
 // Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {
     whois(req.query.domain, function (err, result) {
         if (err) {
-            console.log('ERROR:');
-            console.log(err);
             res.send(err);
         }
         else {
-            console.log('RESULT:');
-            console.log(JSON.stringify(result, null, 2));
-
             res.json(result);
         }
     })
@@ -62,7 +54,6 @@ function getDnsResolve(domain, res, callback) {
         if (err)
             res.send(err);
         else {
-            console.log("IP RESULT : " + addresses);
             callback(addresses);
         }
     });
@@ -90,12 +81,8 @@ function getMultipleGeolocation(serveurIps, res, callback) {
         };
         bluebox.runModule('geolocation', moduleOptions, function (err, result) {
             if (err) {
-                console.log('ERROR:');
-                console.log(err);
                 res.send(err);
             } else {
-                console.log('RESULT:');
-                console.log(result);
                 finalResult.push(JSON.stringify(result));
                 itemsProcessed++;
                 if (itemsProcessed === serveurIps.length) {
