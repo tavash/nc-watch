@@ -11,6 +11,9 @@ router.get('/whois', getWhoIs);
 router.get('/shodan', getShodanHost);
 router.get('/geolocation', getGeolocation);
 
+//console.log('Modules info:');
+//console.log(JSON.stringify(bluebox.getModulesInfo(), null, 2));
+
 // Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {
     whois(req.query.domain, function (err, result) {
@@ -24,8 +27,12 @@ function getWhoIs(req, res, next) {
 }
 
 function getShodanHost(req, res, next) {
+
     getDnsResolve(req.query.domain, res, function (serveurIps) {
 
+    var moduleOptions = {
+        target: req.query.domain
+    };
         if(serveurIps.length > 0) {
 
             var moduleOptions = {
@@ -63,9 +70,9 @@ function getDnsResolve(domain, res, callback) {
 function getGeolocation(req, res, next) {
     getDnsResolve(req.query.domain, res, function (serveurIps) {
         getMultipleGeolocation(serveurIps, res, function (finalResult) {
-            var result ='{ "geolocationTab":[';
-            result+=finalResult;
-            result+="]}";
+            var result = '{ "geolocationTab":[';
+            result += finalResult;
+            result += "]}";
             res.json(JSON.parse(result));
         });
     });

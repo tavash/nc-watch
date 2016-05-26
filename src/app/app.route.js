@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -65,8 +65,17 @@
                         controllerAs: 'shodan'
                     }
                 }
+            })
+            .state('tools.googledorks', {
+                url: '/googledorks',
+                views: {
+                    '@': {
+                        templateUrl: 'app/tools/googledorks/googledorks.html',
+                        controller: 'GoogleDorksController',
+                        controllerAs: 'googledorks',
+                    }
+                }
             });
-
         $urlRouterProvider.otherwise('/');
     }
 
