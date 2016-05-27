@@ -34,7 +34,13 @@
 	## Client (Dans un terminal)
 	1) sudo apt install npm
 	2) npm install
-	3) sudo npm install -g bower
-	4) bower install
-	5) sudo npm install -g gulp
-	6) gulp serve
+	3) sudo ln -s /usr/bin/nodejs /usr/bin/node (facultatif)
+	4) sudo npm install -g bower
+	5) bower install
+	6) sudo npm install -g gulp
+	7) gulp serve
+	
+	## Serveur (dans un autre terminal)
+	6) cd server
+	7) npm install
+	8) npm start
