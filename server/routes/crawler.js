@@ -23,7 +23,7 @@ function crawlPost(req, res, next) {
 	c.queue(req.body.url);
 	// Queue a list of URLs
 	//c.queue(['http://jamendo.com/','http://tedxparis.com']);
-	/*c.queue({ uri: googleSearch('adacis') });*/
+	/c.queue({ uri: googleSearch('adacis') });*/
 }
 
 function crawlGet(req, res, next){
