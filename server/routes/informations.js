@@ -23,8 +23,6 @@ function getWhoIs(req, res, next) {
             res.send(err);
         }
         else {
-            console.log('RESULT:');
-            console.log(JSON.stringify(result, null, 2))
 
             res.json(result);
         }

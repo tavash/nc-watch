@@ -18,6 +18,7 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+    <link rel="stylesheet" href="/assets/leaflet/leaflet.css" />
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -31,6 +32,13 @@
     <div class="container">
         <div ui-view></div>
     </div>
+
+		<script src="/assets/leaflet/leaflet.js"></script>
+		<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+
+          
+        
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

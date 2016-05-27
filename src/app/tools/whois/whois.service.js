@@ -10,6 +10,7 @@
 		var service = {};
 
 		service.whois = whois;
+		service.geocode = geocode;
 
 		return service;
 
@@ -17,6 +18,14 @@
 			return $http({
 				method: 'GET',
 				url: '/api/informations/whois?domain=' + domain,
+				headers: { 'Content-Type': 'application/json' }
+			});
+		}
+
+		function geocode(address) {
+			return $http({
+				method: 'GET',
+				url: 'http://maps.googleapis.com/maps/api/geocode/json?address=' + address,
 				headers: { 'Content-Type': 'application/json' }
 			});
 		}

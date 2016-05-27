@@ -20,23 +20,25 @@
 		</form>
 
 	</div>
+	
+	<div id='map' style='width: 400px; height: 300px;'></div>
 
 	<div layout layout-padding>
 		
-			<div flex="100" ng-if="whois.domain">
-				<div>
-					<h3 ng-if="whois.domain">WHOIS de {{whois.domain}}</h3>
-					<table class="border-table">
-						<tr ng-repeat="(key,value) in whois.whoIsResult">
-							<td> {{key}} </td>
-							<td> {{value}} </td>
-						</tr>
-					</table>
-				</div>
+		<div flex="100" ng-if="whois.domain">
+			<div>
+				<h3 ng-if="whois.domain">WHOIS de {{whois.domain}}</h3>
+				<table class="border-table">
+					<tr ng-repeat="(key,value) in whois.whoIsResult">
+						<td> {{key}} </td>
+						<td> {{value}} </td>
+					</tr>
+				</table>
 			</div>
-
 		</div>
 
 	</div>
+
+</div>
 
 </md-content>
