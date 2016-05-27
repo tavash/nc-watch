@@ -1,4 +1,5 @@
-<div layout layout-align="center" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
+<md-content layout="column" layout-padding flex md-whiteframe="2">
+    <!--<div layout-align="center" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">-->
     <div flex>
         <form>
             <div layout layout-align="center" layout-padding>
@@ -12,9 +13,29 @@
                     <md-button class="md-raised" ng-click="shodan.shodan()" type="submit">GO SHODAN</md-button>
                 </div>
             </div>
-            <pre>
-                {{shodan.shodanResult | json}}
-            </pre>
+
+            <div ng-show="shodan.isLoad">
+                <json-formatter json="shodan.shodanResult" open="10"></json-formatter>
+            </div>
+
         </form>
     </div>
-</div>
+<!--
+    <div layout layout-padding>
+
+        <div flex="100" ng-if="shodan.domain">
+            <div>
+                <h3 ng-if="shodan.domain">SHODAN de {{shodan.domain}}</h3>
+                <table class="border-table">
+                    <tr ng-repeat="(key,value) in shodan.shodanResult">
+                        <td> {{key}} </td>
+                        <td> {{value}} </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+-->
+    <!--</div>-->
+</md-content>
