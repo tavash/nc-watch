@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 //var keys = require('../keys.json');
 var Bluebox = require('bluebox-ng'),
-    bluebox = new Bluebox({});
+bluebox = new Bluebox({});
 var whois = require('whois-json');
 var dns = require('dns');
 var async = require("async");
@@ -10,9 +10,6 @@ var async = require("async");
 router.get('/whois', getWhoIs);
 router.get('/shodan', getShodanHost);
 router.get('/geolocation', getGeolocation);
-
-//console.log('Modules info:');
-//console.log(JSON.stringify(bluebox.getModulesInfo(), null, 2));
 
 // Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {

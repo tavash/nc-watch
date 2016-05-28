@@ -5,7 +5,7 @@
             <md-input-container flex="33%" class="md-icon-float md-block" >
                 <label>Site</label>
                 <md-icon><i class="material-icons">search</i></md-icon>
-                <input ng-model="googledorks.toFind" name="toFind">
+                <input ng-model="googledorks.domain" name="domain" required>
             </md-input-container>
 
             <md-input-container flex="33%">
@@ -24,4 +24,19 @@
             
         </div>
     </form>
+
+   <!--  <div layout layout-padding layout-align="center"> -->
+        <md-content layout layout-padding>
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="result in googledorks.googleSearchResult">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ result.title }}</h3>
+                        <h4><a href="{{result.href}}">{{result.href}}</a></h4>
+                        <p>{{ result.description }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+   <!--  </div> -->
+
 </md-content>

@@ -1,8 +1,29 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2">
 	<div layout layout-align="center" layout-padding>
-		<h2>Welcome to NCWatch</h2>
-	</div>
-	<div>
-		<p>NCWatch is a tool designed to make it easy to discover data about organizations, users and networks - on the web, using common (and not so common) OSINT techniques.</p>
+
+		<md-input-container class="md-block" flex="30" flex-xs="100" flex-md="50">
+			<label>Domain</label>
+			<input ng-model="main.domain" name="domain" type="text" required>
+		</md-input-container>
+		<div>
+			<md-button class="md-raised" ng-click="main.watch()" ng-disabled="haveibeenpwnedForm.$invalid" type="submit">WATCH</md-button>
+		</div>
 	</div>
 </md-content>
+<div layout layout-wrap>
+	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50" ng-repeat="item in main.watchResult" >
+		<md-card flex>
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{item.title}}</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content flex style="min-height:300px">
+				<label>List of elements</label> 
+				{{item.element}}
+			</md-card-content>
+		</md-card>
+	</div>
+</div>
+
+
