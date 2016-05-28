@@ -30,9 +30,9 @@
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="result in googledorks.googleSearchResult">
                     <div class="md-list-item-text" layout="column">
-                        <h3>{{ result.title }}</h3>
-                        <h4><a href="{{result.href}}">{{result.href}}</a></h4>
-                        <p>{{ result.description }}</p>
+                        <h3><a href="{{result.href}}" ng-bind-html="result.title"></a></h3>
+                        <h4 style="color:#009688">{{result.href}}</h4>
+                        <p ng-bind-html="result.description"></p>
                     </div>
                 </md-list-item>
             </md-list>
