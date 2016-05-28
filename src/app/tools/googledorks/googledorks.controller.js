@@ -36,18 +36,24 @@
             switch (dorkSelected.name){
                 case 'Emails': query = '"@' + domain + '" -www. ' + domain; break;
                 case 'Recherche': query = "site:" + domain + " -www." + domain; break;
+                case 'Google Groupes': $window.open(dorkSelected.dork + domain); break;
                 default: query = dorkSelected.dork + domain; break;
             }
-          
-            GoogleDorksService.googleSearch(query).success(function(res){
-                var desc;
-                var reg = new RegExp("(adacis.net)", "gi");
-                for (var i = res.length - 1; i >= 0; i--) {
-                    res[i].description = res[i].description.replace(reg, "<b>$1</b>");
-                    res[i].title = res[i].title.replace(reg, "<a href="+res[i].href+"><b>$1</b></a>");
-                }
-                vm.googleSearchResult = res;
-            }).error(function(err){console.log(err);});
+            if(dorkSelected.name != 'Google Groupes'){
+                GoogleDorksService.googleSearch(query).success(function(res){
+                    var desc;
+                    var reg = new RegExp("(adacis.net)", "gi");
+                    for (var i = res.length - 1; i >= 0; i--) {
+                        res[i].description = res[i].description.replace(reg, "<b>$1</b>");
+                        res[i].title = res[i].title.replace(reg, "<b>$1</b>");
+                    }
+
+                    if(res.length>0){
+                        vm.googleSearchResult = res;
+                        vm.hasResult = true;
+                    } else vm.hasResult = false;
+                }).error(function(err){console.log(err);});
+            }
         }
     }
 })();
