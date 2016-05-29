@@ -6,7 +6,7 @@ router.get('/', googleSearchResult);
 
 function googleSearchResult(req, res, next){
     google.resultsPerPage = 25;
-    google.lang = 'fr';
+    //google.lang = 'fr';
     var nextCounter = 0;
     var result, results = [];
   

@@ -1,4 +1,4 @@
-<md-content layout="column" layout-padding flex md-whiteframe="2">
+<md-content layout="column" layout-padding flex md-whiteframe="2" ng-cloak>
     <form name="googleDorksForm">
         <div layout layout-align="center" layout-xs="column">
 
@@ -30,7 +30,7 @@
             
         </div>
     </form>
-
+    <md-divider ng-if="googledorks.hasResult"></md-divider>
     <md-content layout layout-padding>
         <md-list ng-if="googledorks.hasResult">
             <md-list-item class="md-3-line" ng-repeat="result in googledorks.googleSearchResult">

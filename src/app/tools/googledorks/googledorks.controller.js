@@ -42,18 +42,25 @@
             if(dorkSelected.name != 'Google Groupes'){
                 GoogleDorksService.googleSearch(query).success(function(res){
                     var desc;
-                    var reg = new RegExp("(adacis.net)", "gi");
+                    var word = "adacis.net";
+                    
                     for (var i = res.length - 1; i >= 0; i--) {
-                        res[i].description = res[i].description.replace(reg, "<b>$1</b>");
-                        res[i].title = res[i].title.replace(reg, "<b>$1</b>");
+                        res[i].description = makeBold(word, res[i].description);
+                        res[i].title = makeBold(word, res[i].title);
                     }
 
                     if(res.length>0){
                         vm.googleSearchResult = res;
                         vm.hasResult = true;
                     } else vm.hasResult = false;
+                    
                 }).error(function(err){console.log(err);});
             }
+        }
+
+        function makeBold(toBold, phrase){
+            var reg = new RegExp("(" + toBold + ")", "gi");
+            return phrase.replace(reg, "<b>$1</b>");
         }
     }
 })();
