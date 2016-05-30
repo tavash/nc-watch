@@ -21,7 +21,55 @@
 
 	</div>
 	
-	<div id='map' style='width: 400px; height: 300px;'></div>
+	<div ng-show="whois.isMap" id='map' style='width: 400px; height: 300px;'></div>
+
+
+	<div layout layout-wrap ng-show="whois.iswhois">
+			<md-card flex="45" style="background-color:#F6F6F6;">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">Domaine</span> 
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content flex class="font-mono">
+					<label><b> Nom : </b> {{ whois.whoIsResult.domainName }} </label> <br>
+					<label><b> Identifiant : </b> {{ whois.whoIsResult.registryDomainId }} </label> <br>
+					<label><b> Date création : </b> {{ whois.whoIsResult.creationDate | date: 'dd/MM/yyyy' }} </label> <br>
+					<label><b> Date expiration : </b> {{ whois.whoIsResult.registrarRegistrationExpirationDate | date: 'dd/MM/yyyy' }} </label> <br>
+					<label><b> Statut : </b> {{ whois.whoIsResult.domainStatus }} </label> <br>
+				</md-card-content>
+			</md-card>
+			<md-card flex="45" style="background-color:#F6F6F6;">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">Propriétaire</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content flex class="font-mono">
+					<label><b> Nom : </b> {{ whois.whoIsResult.registrantName }} </label> <br>
+					<label><b> Entreprise : </b> {{ whois.whoIsResult.registrantOrganization }} </label> <br>
+					<label><b> Adresse : </b> {{ whois.whoIsResult.registrantStreet }}   {{ whois.whoIsResult.registrantCity }}   {{ whois.whoIsResult.registrantPostalCode }}   {{ whois.whoIsResult.registrantCountry }}</label> <br>
+					<label><b> Téléphone : </b> {{ whois.whoIsResult.registrantPhone }} </label> <br>
+					<label><b> E-mail : </b> {{ whois.whoIsResult.registrantEmail }} </label> <br>
+				</md-card-content>
+			</md-card>
+			<md-card flex="45" style="background-color:#F6F6F6;">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">Propriétaire</span>
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content flex class="font-mono">
+					<label><b> Nom : </b> {{ whois.whoIsResult.registrantName }} </label> <br>
+					<label><b> Entreprise : </b> {{ whois.whoIsResult.registrantOrganization }} </label> <br>
+					<label><b> Adresse : </b> {{ whois.whoIsResult.registrantStreet }}   {{ whois.whoIsResult.registrantCity }}   {{ whois.whoIsResult.registrantPostalCode }}   {{ whois.whoIsResult.registrantCountry }}</label> <br>
+					<label><b> Téléphone : </b> {{ whois.whoIsResult.registrantPhone }} </label> <br>
+					<label><b> E-mail : </b> {{ whois.whoIsResult.registrantEmail }} </label> <br>
+				</md-card-content>
+			</md-card>
+
+	</div>
+
 
 	<div layout layout-padding>
 		
