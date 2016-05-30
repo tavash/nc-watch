@@ -1,0 +1,37 @@
+<md-content layout="column" layout-padding flex>
+	<div layout layout-wrap>
+		
+		<div layout flex="33" flex-xs="100" ng-repeat="c in contact.contacts">
+			<md-card flex>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{c.name}}</span>
+						<span class="md-subhead">{{c.email}}</span>
+						<span class="md-subhead">{{c.telephone}}</span>
+					</md-card-title-text>
+					<md-card-title-media>
+						<div class="md-media-sm card-media">
+							<img ng-src="{{c.avatar}}"/>
+						</div>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<ul class="social-links list-inline">
+						<li>
+							<a ng-href="{{c.facebook}}" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+						</li>
+						<li>
+							<a ng-href="{{c.linkedin}}" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a>
+						</li>
+						<li>
+							<a ng-href="{{c.github}}" target="_blank" class="github"><i class="fa fa-github"></i></a>
+						</li>
+					</ul>
+				</md-card-actions>
+			</md-card>
+		</div>
+
+	</div>
+</md-content>
+
+

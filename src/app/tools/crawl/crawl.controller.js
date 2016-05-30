@@ -10,8 +10,7 @@
 		var vm = this;
 
 		vm.crawl = crawl;
-		vm.haveIBeenPwned = haveIBeenPwned;
-
+		
 		function crawl(){
 			var prefix = 'http://';
 			var url = vm.url;
@@ -22,13 +21,6 @@
 
 			CrawlService.crawl(url).success(function(res){
 				vm.crawlResult = res;
-			});
-		}
-
-		function haveIBeenPwned(){
-
-			CrawlService.haveIBeenPwned(vm.email).success(function(res){
-				vm.haveIBeenPwnedResult = res;
 			});
 		}
 	}

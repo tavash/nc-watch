@@ -38,7 +38,7 @@
 				<h2 style="color:green"><i class="material-icons" >mood</i> No breached accounts ! </h2>
 			</div>
 		</div>
-		<div layout layout-wrap ng-show="haveibeenpwned.isPwned">
+		<div layout layout-wrap ng-if="haveibeenpwned.isPwned">
 			<div layout flex="50" flex-xs="100" ng-repeat="item in haveibeenpwned.haveIBeenPwnedResult">
 				<md-card flex style="background-color:#FFCDD2;">
 					<md-card-title>
@@ -47,7 +47,7 @@
 						</md-card-title-text>
 						<md-card-title-media>
 							<div class="md-media-md card-media">
-								<img src="//az594751.vo.msecnd.net/cdn/{{item.Name}}.{{item.LogoType}}">
+								<img ng-src="{{item.Logo}}">
 							</div>
 						</md-card-title-media>
 					</md-card-title>

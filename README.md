@@ -14,7 +14,7 @@
 		On ne fait cette phase qu’une seule fois, c’est juste pour récupérer le projet quand on ne l’a pas.
 		Par défaut, on est sur la branche master du projet.
 
-## Installation
+## Installation Windows
 
 	## Client (Dans un terminal)
 	1) npm install
@@ -23,6 +23,23 @@
 	4) npm install -g gulp
 	5) gulp serve
 
+	## Serveur (dans un autre terminal)
+	6) cd server
+	7) npm install
+	8) npm start
+
+
+## Installation Linux
+	
+	## Client (Dans un terminal)
+	1) sudo apt install npm
+	2) npm install
+	3) sudo ln -s /usr/bin/nodejs /usr/bin/node (facultatif)
+	4) sudo npm install -g bower
+	5) bower install
+	6) sudo npm install -g gulp
+	7) gulp serve
+	
 	## Serveur (dans un autre terminal)
 	6) cd server
 	7) npm install

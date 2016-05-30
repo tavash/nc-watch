@@ -8,38 +8,59 @@
     /** @ngInject */
     function GoogleDorksController($window, GoogleDorksService) {
         var vm = this;
-        var googleLink = "https://www.google.com/webhp?ie=utf-8&oe=utf-8gfe_rd=cr&ei=ILFGV6GTL7Ss8wer_7igAw#safe=off&q=";
+
+        vm.search = search;
+        //var googleLink = https://www.google.com/webhp?ie=utf-8&oe=utf-8gfe_rd=cr&ei=ILFGV6GTL7Ss8wer_7igAw#safe=off&q=";
         var googleGroupsLink = "https://groups.google.com/forum/#!search/";
 
         vm.dorkSelected = '';
-        var dorksList = [];
         vm.dorksList = [
-            {dork: googleLink + 'filetype:pdf site:', name: 'PDFs'},
-            {dork: googleLink + 'filetype:xls OR filetype:xlsx site:', name: 'Excels'},
-            {dork: googleLink + '', name: 'Emails'}, // TO DO
+            {dork: 'filetype:pdf site:', name: 'PDFs'},
+            {dork: 'filetype:xls OR filetype:xlsx site:', name: 'Excels'},
+            {dork: '', name: 'Emails'}, // TO DO
             {dork: googleGroupsLink, name: 'Google Groupes'},
-            {dork: googleLink + 'filetype:ppt OR filetype:pptx site:', name: 'PowerPoint'},
-            {dork: googleLink + 'filetype:doc OR filetype:docx site:', name: 'Words'},
-            {dork: googleLink + 'filetype:xls OR filetype:ppt OR filetype:doc site:', name: 'Office 2003'},
-            {dork: googleLink + 'filetype:xlsx OR filetype:pptx OR filetype:docx site:', name: 'Office 2007'},
-            {dork: googleLink + 'filetype:rtf site:', name: 'RTF'},
-            {dork: googleLink + '', name: 'Recherche'}, // TO DO
-            {dork: googleLink + 'filetype:txt site:', name: 'TXTs'}
+            {dork: 'filetype:ppt OR filetype:pptx site:', name: 'PowerPoint'},
+            {dork: 'filetype:doc OR filetype:docx site:', name: 'Words'},
+            {dork: 'filetype:xls OR filetype:ppt OR filetype:doc site:', name: 'Office 2003'},
+            {dork: 'filetype:xlsx OR filetype:pptx OR filetype:docx site:', name: 'Office 2007'},
+            {dork: 'filetype:rtf site:', name: 'RTF'},
+            {dork: '', name: 'Recherche'}, // TO DO
+            {dork: 'filetype:txt site:', name: 'TXTs'}
         ];
 
-        vm.search = search;
-
         function search() {
-            var toFind = vm.toFind;
-            var dorkSelected = vm.dorkSelected;
-            dorkSelected=JSON.parse(dorkSelected);
+            var domain = vm.domain;
+            var dorkSelected = JSON.parse(vm.dorkSelected);
+            var query;
+            
+            switch (dorkSelected.name){
+                case 'Emails': query = '"@' + domain + '" -www. ' + domain; break;
+                case 'Recherche': query = "site:" + domain + " -www." + domain; break;
+                case 'Google Groupes': $window.open(dorkSelected.dork + domain); break;
+                default: query = dorkSelected.dork + domain; break;
+            }
+            if(dorkSelected.name != 'Google Groupes'){
+                GoogleDorksService.googleSearch(query).success(function(res){
+                    var desc;
+                    var word = "adacis.net";
+                    
+                    for (var i = res.length - 1; i >= 0; i--) {
+                        res[i].description = makeBold(word, res[i].description);
+                        res[i].title = makeBold(word, res[i].title);
+                    }
 
-            if (dorkSelected.name == "Emails")
-                dorkSelected.dork = googleLink + '"@' + toFind + '" -www. ';
-            else if (dorkSelected.name == "Recherche")
-                dorkSelected.dork = googleLink+"site:"+toFind+" -www.";
+                    if(res.length>0){
+                        vm.googleSearchResult = res;
+                        vm.hasResult = true;
+                    } else vm.hasResult = false;
+                    
+                }).error(function(err){console.log(err);});
+            }
+        }
 
-            $window.open(dorkSelected.dork + toFind);
+        function makeBold(toBold, phrase){
+            var reg = new RegExp("(" + toBold + ")", "gi");
+            return phrase.replace(reg, "<b>$1</b>");
         }
     }
 })();

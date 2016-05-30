@@ -16,7 +16,6 @@
 
             ShodanService.shodan(domain).success(function(res){
                 vm.shodanResult = res;
-                console.log(res);
             });
         }
 

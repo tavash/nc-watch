@@ -1,19 +1,22 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2">
 
 	<div flex>
-		<form>
+		<form name="whoisForm">
 			<div layout layout-align="center" layout-padding>
 				
 				<div flex="30">
 					<md-input-container class="md-icon-float md-block">
-						<label>DOMAINE</label>
-						<input ng-model="whois.domain" name="domain">
+						<label>Domain</label>
+						<input ng-model="whois.domain" name="domain" required>
+						<div ng-messages="whoisForm.domain.$error">
+							<div ng-message="required">Ce champ est obligatoire.</div>
+						</div>
 					</md-input-container>
 
 				</div>
 
 				<div>
-					<md-button class="md-raised" ng-click="whois.whois()" type="submit">WHOIS</md-button>
+					<md-button class="md-raised" ng-click="whois.whois()" type="submit" ng-disabled="whoisForm.$invalid">WHOIS</md-button>
 				</div>
 
 			</div>
