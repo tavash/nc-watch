@@ -1,0 +1,62 @@
+<md-content layout="column" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
+	<div flex>
+		<form>
+			<div layout layout-align="center" layout-xs="column">
+				<md-input-container flex="33%" class="md-icon-float md-block">
+					<label>Domain</label>
+					<input ng-model="ssl.domain" name="domain">
+				</md-input-container>
+				<div flex="33%">
+					<md-button class="md-raised" ng-click="ssl.getSsl()" type="submit">CHECK</md-button>
+				</div>
+			</div>
+		</form>
+
+		<div layout layout-wrap ng-show="ssl.isSsl">
+			<div layout flex="50" flex-xs="100">
+				<md-card flex="49" style="background-color:#F6F6F6;">
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline">SSL Report : {{ssl.domain}} </span> 
+						</md-card-title-text>
+					</md-card-title>
+					<md-card-content flex class="font-mono">
+						<label><b> Host : </b> {{ ssl.sslResult.host }} </label> <br>
+						<label><b> Port : </b> {{ ssl.sslResult.port }} </label> <br>
+						<label><b> Protocol : </b> {{ ssl.sslResult.protocol }} </label> <br>
+						<label><b> IsPublic: </b> {{ ssl.sslResult.isPublic }} </label> <br>
+						<label><b> EngineVersion: </b> {{ ssl.sslResult.engineVersion }} </label> <br>
+					</md-card-content>
+				</md-card>
+			</div>
+		</div>
+		<div layout layout-wrap ng-show="ssl.isSsl">
+			<div layout flex="50" flex-xs="100" ng-repeat="item in ssl.sslResult.endpoints">
+				<md-card flex="49" style="background-color:#F6F6F6;">
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline"> {{item.ipAddress}} </span> 
+						</md-card-title-text>
+						<md-card-title-media>
+							<div class="md-media-md card-media grade">
+								{{item.grade}}
+							</div>
+						</md-card-title-media>
+					</md-card-title>
+					<md-card-content flex class="font-mono">
+					</md-card-content>
+				</md-card>
+			</div>
+		</div>
+
+		<div layout layout-padding>
+			<div ng-show="ssl.isSsl" flex="100">
+				<h3>SSL de {{ssl.domain}}</h3>
+
+				{{ssl.sslResult}}
+			</div>
+		</div>
+
+	</div>
+
+</md-content>

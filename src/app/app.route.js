@@ -81,6 +81,16 @@
                 templateUrl: 'app/contact/contact.html',
                 controller: 'ContactController',
                 controllerAs: 'contact'
+            })
+            .state('tools.ssl', {
+                url: '/ssl',
+                views: {
+                    '@': {
+                        templateUrl: 'app/tools/ssl/ssl.html',
+                        controller: 'SslController',
+                        controllerAs: 'ssl',
+                    }
+                }
             });
         $urlRouterProvider.otherwise('/');
     }
