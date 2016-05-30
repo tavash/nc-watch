@@ -23,12 +23,13 @@
 		</form>
 
 	</div>
-	
-	<div ng-show="whois.isMap" id='map' style='width: 400px; height: 300px;'></div>
+	<div layout layout-wrap>
+		<div ng-show="whois.isMap" id='map' style='width: 100%; height: 300px;'></div>
+	</div>
 
 
-	<div layout layout-wrap ng-show="whois.iswhois">
-			<md-card flex="45" style="background-color:#F6F6F6;">
+	<div layout layout-wrap ng-show="whois.iswhois" flex-offset="1">
+			<md-card flex="49" style="background-color:#F6F6F6;">
 				<md-card-title>
 					<md-card-title-text>
 						<span class="md-headline">Domaine</span> 
@@ -40,9 +41,11 @@
 					<label><b> Date création : </b> {{ whois.whoIsResult.creationDate | date: 'dd/MM/yyyy' }} </label> <br>
 					<label><b> Date expiration : </b> {{ whois.whoIsResult.registrarRegistrationExpirationDate | date: 'dd/MM/yyyy' }} </label> <br>
 					<label><b> Statut : </b> {{ whois.whoIsResult.domainStatus }} </label> <br>
+					<label><b> Serveur : </b> {{ whois.whoIsResult.nameServer }} </label> <br>
+					<label><b> DNSSEC : </b> {{ whois.whoIsResult.dnssec }} </label> <br>
 				</md-card-content>
 			</md-card>
-			<md-card flex="45" style="background-color:#F6F6F6;">
+			<md-card flex="49" style="background-color:#F6F6F6;">
 				<md-card-title>
 					<md-card-title-text>
 						<span class="md-headline">Propriétaire</span>
@@ -56,18 +59,18 @@
 					<label><b> E-mail : </b> {{ whois.whoIsResult.registrantEmail }} </label> <br>
 				</md-card-content>
 			</md-card>
-			<md-card flex="45" style="background-color:#F6F6F6;">
+			<md-card flex="49" style="background-color:#F6F6F6;">
 				<md-card-title>
 					<md-card-title-text>
-						<span class="md-headline">Propriétaire</span>
+						<span class="md-headline">Administrateur</span>
 					</md-card-title-text>
 				</md-card-title>
 				<md-card-content flex class="font-mono">
-					<label><b> Nom : </b> {{ whois.whoIsResult.registrantName }} </label> <br>
-					<label><b> Entreprise : </b> {{ whois.whoIsResult.registrantOrganization }} </label> <br>
-					<label><b> Adresse : </b> {{ whois.whoIsResult.registrantStreet }}   {{ whois.whoIsResult.registrantCity }}   {{ whois.whoIsResult.registrantPostalCode }}   {{ whois.whoIsResult.registrantCountry }}</label> <br>
-					<label><b> Téléphone : </b> {{ whois.whoIsResult.registrantPhone }} </label> <br>
-					<label><b> E-mail : </b> {{ whois.whoIsResult.registrantEmail }} </label> <br>
+					<label><b> Nom : </b> {{ whois.whoIsResult.adminName }} </label> <br>
+					<label><b> Entreprise : </b> {{ whois.whoIsResult.adminOrganization }} </label> <br>
+					<label><b> Adresse : </b> {{ whois.whoIsResult.adminStreet }}   {{ whois.whoIsResult.adminCity }}   {{ whois.whoIsResult.adminPostalCode }}   {{ whois.whoIsResult.adminCountry }}</label> <br>
+					<label><b> Téléphone : </b> {{ whois.whoIsResult.adminPhone }} </label> <br>
+					<label><b> E-mail : </b> {{ whois.whoIsResult.adminEmail }} </label> <br>
 				</md-card-content>
 			</md-card>
 
@@ -76,9 +79,9 @@
 
 	<div layout layout-padding>
 		
-		<div flex="100" ng-if="whois.domain">
+		<div flex="100" ng-show="whois.iswhois">
 			<div>
-				<h3 ng-if="whois.domain">WHOIS de {{whois.domain}}</h3>
+				<h3 ng-if="whois.domain">Contenu brut</h3>
 				<table class="border-table">
 					<tr ng-repeat="(key,value) in whois.whoIsResult">
 						<td> {{key}} </td>
