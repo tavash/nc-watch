@@ -8,7 +8,6 @@ router.get('/', crawlGet);
 
 
 function crawlPost(req, res, next) {
-
 	var c = new Crawler({
 		maxConnections : 10,
 		callback : function (error, result, $) {
