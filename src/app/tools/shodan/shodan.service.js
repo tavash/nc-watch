@@ -9,15 +9,14 @@
     function ShodanService($http) {
         var service = {};
 
-        service.shodan = shodan;
+        service.shodanHost = shodanHost;
 
         return service;
 
-        function shodan(domain){
-
+        function shodanHost(domain){
             return $http({
                 method: 'GET',
-                url: '/api/informations/shodan?domain=' + domain,
+                url: '/api/informations/shodanHost?domain=' + domain,
                 headers: { 'Content-Type': 'application/json' }
             });
         }

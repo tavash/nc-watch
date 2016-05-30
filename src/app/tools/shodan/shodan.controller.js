@@ -9,17 +9,17 @@
     function ShodanController($scope, ShodanService) {
         var vm = this;
 
-        vm.shodan = shodan;
-        vm.isLoad = false;
+        vm.shodanHost = shodanHost;
+        vm.hostIsLoad = false;
 
-        function shodan(){
+        function shodanHost(){
             var domain = vm.domain;
 
-            ShodanService.shodan(domain).success(function(res){
-                
-                vm.shodanResult = res;
-                vm.isLoad = true;
+            ShodanService.shodanHost(domain).success(function(res){
+                vm.shodanHostResult = res;
+                vm.hostIsLoad = true;
             });
         }
+
     }
 })();
