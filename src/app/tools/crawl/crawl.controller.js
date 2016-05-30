@@ -8,20 +8,24 @@
 	/** @ngInject */
 	function CrawlController(CrawlService) {
 		var vm = this;
-
 		vm.crawl = crawl;
-		
+		vm.prefixeSelected = 'http://';
+
 		function crawl(){
-			var prefix = 'http://';
-			var url = vm.url;
-			if (vm.url.substr(0, prefix.length) !== prefix)
-			{
-				url = prefix + vm.url;
-			}
+			var url = vm.prefixeSelected + vm.url;
 
 			CrawlService.crawl(url).success(function(res){
 				vm.crawlResult = res;
+				vm.isCrawl = true;
 			});
+
+			// Robots.txt
+			CrawlService.crawl(url + '/robots.txt').success(function(res) {
+				console.log(res);
+				vm.robotsTxtResult = res;
+				vm.isRobotsTxt = true;
+			});
+
 		}
 	}
 })();

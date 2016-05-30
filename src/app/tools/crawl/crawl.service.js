@@ -1,26 +1,25 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('ncwatch')
-        .factory('CrawlService', CrawlService);
+	angular
+	.module('ncwatch')
+	.factory('CrawlService', CrawlService);
 
-    /** @ngInject */
-    function CrawlService($http) {
-        var service = {};
+	/** @ngInject */
+	function CrawlService($http) {
+		var service = {};
 
-        service.crawl = crawl;
+		service.crawl = crawl;
+		return service;
 
-        return service;
+		function crawl(url){
 
-        function crawl(url){
-
-            return $http({
-                method: 'POST',
-                url: '/api/crawl',
-                data: JSON.stringify({'url': url}),
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-    }
+			return $http({
+				method: 'POST',
+				url: '/api/crawl',
+				data: JSON.stringify({'url': url}),
+				headers: { 'Content-Type': 'application/json' }
+			});
+		}
+	}
 })();

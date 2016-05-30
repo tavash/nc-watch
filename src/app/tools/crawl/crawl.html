@@ -1,61 +1,73 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
-    <div flex>
-        <form>
-            <div layout layout-align="center" layout-padding>
+	<div flex>
+		<form>
+			<div layout layout-align="center" layout-xs="column">
+				<md-input-container flex="33%">
+					<label>Préfixe</label>
+					<md-select ng-model="crawl.prefixeSelected" name="prefixe" required>
+						<md-option value="http://">
+							http://
+						</md-option>
+						<md-option value="https://">
+							https://
+						</md-option>
+					</md-select>
+				</md-input-container>
+				<md-input-container flex="33%" class="md-icon-float md-block">
+					<label>URL</label>
+					<md-icon><i class="material-icons">http</i></md-icon>
+					<input ng-model="crawl.url" name="url">
+				</md-input-container>
+				<div flex="33%">
+					<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
+				</div>
+			</div>
+		</form>
 
-                <div flex="30">
-                    <md-input-container class="md-icon-float md-block">
-                        <label>URL</label>
-                        <md-icon><i class="material-icons">http</i></md-icon>
-                        <input ng-model="crawl.url" name="url">
-                    </md-input-container>
+		<div layout layout-padding>
+			<div ng-show="crawl.isCrawl" flex="100">
+				<h3>CRAWL du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
+				<div>
+					<h4>HEADERS</h4>
+					<table class="table border-table">
+						<tr ng-repeat="(key,value) in crawl.crawlResult.headers">
+							<td> {{key}} </td>
+							<td> {{value}} </td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<h4>REQUEST</h4>
+					<table class="border-table">
+						<tr ng-repeat="(key,value) in crawl.crawlResult.request">
+							<td> {{key}} </td>
+							<td ng-if="key=='uri'">
+								<table>
+									<tr ng-repeat="(key2,value2) in value">
+										<td> {{key2}} </td>
+										<td> {{value2}} </td>
+									</tr>
+								</table>
+							</td>
+							<td ng-if="key!='uri'"> {{value}} </td>
+						</tr>
+					</table>
+				</div>
+			</div>
 
-                </div>
+		</div>
 
-                <div>
-                    <md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
-                </div>
+		<div layout layout-padding>
+			<div ng-show="crawl.isRobotsTxt" flex="100">
+				<h3>ROBOTS.TXT du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
+				<table class="table border-table">
+					<td><b> Body </b></td>
+					<td> {{crawl.robotsTxtResult.body}} </td>
+				</table>
+			</div>
+		</div>
 
-            </div>
-        </form>
 
-        <div layout layout-padding>
-            <div ng-if="crawl.url">
-                <h3>CRAWL du site {{crawl.url}}</h3>
-                <div>
-                    <h4>HEADERS</h4>
-                    <table class="table border-table">
-                        <tr ng-repeat="(key,value) in crawl.crawlResult.headers">
-                            <td> {{key}} </td>
-                            <td> {{value}} </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div>
-                    <h4>REQUEST</h4>
-                    <table class="border-table">
-                        <tr ng-repeat="(key,value) in crawl.crawlResult.request">
-                            <td> {{key}} </td>
-                            <td ng-if="key=='uri'">
-                                <table>
-                                    <tr ng-repeat="(key2,value2) in value">
-                                        <td> {{key2}} </td>
-                                        <td> {{value2}} </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td ng-if="key!='uri'"> {{value}} </td>
-                        </tr>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+	</div>
 
 </md-content>
