@@ -25,7 +25,7 @@
 		</form>
 
 		<div layout layout-padding>
-			<div ng-show="crawl.isCrawl">
+			<div ng-show="crawl.isCrawl" flex="100">
 				<h3>CRAWL du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
 				<div>
 					<h4>HEADERS</h4>
@@ -55,15 +55,15 @@
 				</div>
 			</div>
 
-			<div ng-show="crawl.isRobotsTxt">
-				<h3>ROBOTS.TXT du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
-
-				{{crawl.robotsTxtResult}}
-				
-			</div>
-
-
 		</div>
+
+		<div layout layout-padding>
+			<div ng-show="crawl.isRobotsTxt" flex="100">
+				<h3>ROBOTS.TXT du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
+				{{crawl.robotsTxtResult.body}}
+			</div>
+		</div>
+
 
 	</div>
 
