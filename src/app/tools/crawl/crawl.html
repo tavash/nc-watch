@@ -60,7 +60,10 @@
 		<div layout layout-padding>
 			<div ng-show="crawl.isRobotsTxt" flex="100">
 				<h3>ROBOTS.TXT du site {{crawl.prefixeSelected}}{{crawl.url}}</h3>
-				{{crawl.robotsTxtResult.body}}
+				<table class="table border-table">
+					<td><b> Body </b></td>
+					<td> {{crawl.robotsTxtResult.body}} </td>
+				</table>
 			</div>
 		</div>
 
