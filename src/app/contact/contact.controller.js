@@ -39,7 +39,7 @@
 			 'linkedin': 'https://fr.linkedin.com/in/robin-bobo-52a36810a',
 			 'github': 'https://github.com/florian2412'
 			},
-			{'name': 'Tavahiura SANG', 'email': 'tava.sang@gmail.com', 'telephone': '06 57 43 93 23', 
+			{'name': 'Tavahiura SANG', 'email': 'tavash.songs@gmail.com', 'telephone': '06 57 43 93 23', 
 			 'avatar': 'https://scontent-cdg2-1.xx.fbcdn.net/t31.0-8/10321031_10204503038075179_8792692438382031990_o.jpg',
 			 'facebook': 'https://www.facebook.com/robin.bobo?fref=ts',
 			 'linkedin': 'https://fr.linkedin.com/in/robin-bobo-52a36810a',

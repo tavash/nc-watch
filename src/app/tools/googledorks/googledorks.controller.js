@@ -42,7 +42,7 @@
             if(dorkSelected.name != 'Google Groupes'){
                 GoogleDorksService.googleSearch(query).success(function(res){
                     var desc;
-                    var word = "adacis.net";
+                    var word = vm.domain;
                     
                     for (var i = res.length - 1; i >= 0; i--) {
                         res[i].description = makeBold(word, res[i].description);
