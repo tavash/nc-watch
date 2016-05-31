@@ -1,0 +1,20 @@
+<div layout layout-align="center" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
+    <div flex>
+        <form>
+            <div layout layout-align="center" layout-padding>
+                <div flex="30">
+                    <md-input-container class="md-icon-float md-block" flex-gt-sm="">
+                        <label>Domain</label>
+                        <input ng-model="buildwith.domain" name="domain">
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-button class="md-raised" ng-click="buildwith.buildwith()" type="submit">GO BUILD WITH</md-button>
+                </div>
+            </div>
+            <pre>
+                {{buildwith.buildwithResult | json}}
+            </pre>
+        </form>
+    </div>
+</div>

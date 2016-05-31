@@ -2,7 +2,7 @@
     <form name="googleDorksForm">
         <div layout layout-align="center" layout-xs="column">
 
-            <md-input-container flex="33%" class="md-icon-float md-block" >
+            <md-input-container flex="31" class="md-icon-float md-block">
                 <label>Site</label>
                 <md-icon><i class="material-icons">search</i></md-icon>
                 <input ng-model="googledorks.domain" name="domain" required>
@@ -10,24 +10,38 @@
                     <div ng-message="required">Ce champ est obligatoire.</div>
                 </div>
             </md-input-container>
-
-            <md-input-container flex="33%">
-                <label>Google Dorks</label>
-                <md-select ng-model="googledorks.dorkSelected" name="googleDorks" required>
-                    <md-option ng-repeat="dork in googledorks.dorksList" value="{{dork}}">
-                        {{dork.name}}
-                    </md-option>
-                </md-select>
-                <div ng-messages="googleDorksForm.googleDorks.$error">
-                    <div ng-message="required">Veuillez choisir un google dorks.</div>
+            <div layout flex="5"></div>
+            <div layout flex="32">
+                <div layout="column" flex>
+                    <md-input-container flex>
+                        <label>Google Dorks</label>
+                        <md-select ng-model="googledorks.dorkSelected" name="googleDorks"
+                                   ng-change="googledorks.changedValue(googledorks.dorkSelected)" required>
+                            <md-option ng-repeat="dork in googledorks.dorksList" value="{{dork}}">
+                                {{dork.name}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="googleDorksForm.googleDorks.$error">
+                            <div ng-message="required">Veuillez choisir un google dorks.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex style="margin-top: -20%; padding: 0" ng-show="googledorks.dorkSelectedDetail.name =='Personnalisé'">
+                        <label>Google Dorks Personnalisé</label>
+                        <input ng-model="googledorks.customDork"/>
+                    </md-input-container>
+                    <md-input-container flex style="margin-top: -20%; padding: 0">
+                        <input ng-show="googledorks.dorkSelectedDetail && googledorks.dorkSelectedDetail.name !='Personnalisé'" ng-disabled="true"
+                               value="{{googledorks.dorkSelectedDetail.dork}}"/>
+                    </md-input-container>
                 </div>
-            </md-input-container>
-            <div flex="33%">
-                <md-button class="md-raised" ng-click="googledorks.search()" type="submit" ng-disabled="googleDorksForm.$invalid">
+            </div>
+            <div flex="31">
+                <md-button class="md-raised" ng-click="googledorks.search()" type="submit"
+                           ng-disabled="googleDorksForm.$invalid">
                     Chercher
                 </md-button>
             </div>
-            
+
         </div>
     </form>
     <md-divider ng-if="googledorks.hasResult"></md-divider>
