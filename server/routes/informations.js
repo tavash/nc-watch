@@ -55,7 +55,7 @@ function getBuildwith(req, res, next) {
         method: 'GET',
         port: 80
     };
-    
+
     http.get(options, function(result) {
 
         var body = '';
