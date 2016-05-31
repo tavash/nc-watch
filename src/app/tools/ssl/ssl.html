@@ -30,23 +30,57 @@
 				</md-card>
 			</div>
 		</div>
-		<div layout layout-wrap ng-show="ssl.isSsl">
-			<div layout flex="50" flex-xs="100" ng-repeat="item in ssl.sslResult.endpoints">
-				<md-card flex="49" style="background-color:#F6F6F6;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline"> {{item.ipAddress}} </span> 
-						</md-card-title-text>
-						<md-card-title-media>
-							<div class="md-media-md card-media grade">
-								{{item.grade}}
+		<div layout flex="100" ng-show="ssl.isSsl" ng-repeat="item in ssl.sslResult.endpoints">
+			<md-card flex style="background-color:#F6F6F6;">
+				<md-card-title flex>
+					<md-card-title-text>
+						<span class="md-headline"> {{item.ipAddress}} </span> 
+					</md-card-title-text>
+					<md-card-title-media>
+						<div class="md-media-md card-media grade">
+							{{item.grade}}
+						</div>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-content flex class="font-mono">
+					<div flex layout>
+						<div flex="49" flex-xs="100">
+							<h2> Authentification </h2><br>
+							<h3> Server Key and Certificate </h3>
+							<label><b> Subject : </b>  </label> <br>
+							<label><b> Common Names : </b> {{ item.details.cert.commonNames }} </label> <br>
+							<label><b> Alternative names : </b> {{ item.details.cert.altNames }} </label> <br>
+							<label><b> Valid from : </b> {{ item.details.cert.notBefore | date: 'dd/MM/yyyy' }} </label> <br>
+							<label><b> Valid until : </b> {{ item.details.cert.notAfter | date: 'dd/MM/yyyy' }} </label> <br>
+							<label><b> Key : </b> {{item.details.key.alg}} {{item.details.key.size}}bits </label> <br>
+							<label><b> Issuer : </b> {{ item.details.cert.issuerLabel }} </label> <br>
+							<label><b> AIA : </b> {{ item.details.cert.ocspURIs }} </label> <br>
+							<label><b> Signature algorithm : </b> {{ item.details.cert.sigAlg }} </label> <br>
+							<label><b> Extended Validation : </b> ?? </label> <br>
+							<label><b> Certificate Transparency : </b> {{ item.details.cert.sct }} </label> <br>
+							<label><b> Revocation information : </b> 
+								<span ng-show="item.details.cert.crlRevocationStatus=='2'">CRL </span>
+								<span ng-show="item.details.cert.ocspRevocationStatus=='2'">OCSP</span>
+							</label> <br>
+							<label ng-show="item.details.cert.crlRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.crlURIs}}</label> <br>
+							<label ng-show="item.details.cert.ocspRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.ocspURIs}}</label> <br>
+							<label><b> Revocation status : </b> {{ item.details.cert.revocationStatus }} </label> <br> TODO Filter
+							<label><b> Trusted : </b> ?? </label> <br>
+						</div>
+						<div flex="49" flex-xs="100">
+							<h2> Configuration </h2><br>
+							<h3> Protocols </h3>
+							<div ng-repeat="protocol in item.details.protocols">
+								<label>{{protocol.name}} {{protocol.version}} </label> <br>
 							</div>
-						</md-card-title-media>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-					</md-card-content>
-				</md-card>
-			</div>
+							<h3> Cipher Suites </h3>
+							<div ng-repeat="suites in item.details.suites.list">
+								<label>{{suites.name}} <span style="float: right;">{{suites.cipherStrength}}</span> </label> <br>
+							</div>
+						</div>
+					</div>
+				</md-card-content>
+			</md-card>
 		</div>
 
 		<div layout layout-padding>
