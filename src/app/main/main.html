@@ -12,18 +12,44 @@
 </md-content>
 <div layout layout-wrap>
 	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50" ng-repeat="item in main.watchResult" >
-		<md-card flex>
+		<md-card flex ng-if="item.title != 'WhoIs'">
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">{{item.title}}</span>
 				</md-card-title-text>
 			</md-card-title>
-			<md-card-content flex style="min-height:300px">
+			<md-card-content flex style="min-height:350px">
 				<label>List of elements</label> 
-				{{item.element}}
+				{{item.content}}
 			</md-card-content>
 		</md-card>
+		<md-card flex style="background-color:#F6F6F6;" ng-if="item.title == 'WhoIs'">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{item.title}}</span> 
+					</md-card-title-text>
+				</md-card-title>
+				<md-card-content flex class="font-mono" style="min-height:350px">
+					<h4>Domain</h4>
+					<label><b> Nom : </b> {{ item.content.domainName }} </label> <br>
+					<label><b> Identifiant : </b> {{ item.content.registryDomainId }} </label> <br>
+					<label><b> Date création : </b> {{ item.content.creationDate | date: 'dd/MM/yyyy' }} </label> <br>
+					<label><b> Date expiration : </b> {{ item.content.registrarRegistrationExpirationDate | date: 'dd/MM/yyyy' }} </label> <br>
+					<label><b> Statut : </b> {{ item.content.domainStatus }} </label> <br>
+					<label><b> Serveur : </b> {{ item.content.nameServer }} </label> <br>
+					<label><b> DNSSEC : </b> {{ item.content.dnssec }} </label> <br>
+
+					<h4>Owner</h4>
+					<label><b> Nom : </b> {{  item.content.registrantName }} </label> <br>
+					<label><b> Entreprise : </b> {{  item.content.registrantOrganization }} </label> <br>
+					<label><b> Adresse : </b> {{  item.content.registrantStreet }}   {{  item.content.registrantCity }}   {{  item.content.registrantPostalCode }}   {{  item.content.registrantCountry }}</label> <br>
+					<label><b> Téléphone : </b> {{  item.content.registrantPhone }} </label> <br>
+					<label><b> E-mail : </b> {{  item.contentt.registrantEmail }} </label> <br>
+				</md-card-content>
+			</md-card>
 	</div>
+
+
 </div>
 
 

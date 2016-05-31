@@ -5,16 +5,24 @@
 	.controller('MainController', MainController);
 
 	/** @ngInject */
-	function MainController(toastr) {
+	function MainController(WhoIsService, GoogleDorksService) {
 		var vm = this;
 
 		vm.watch = watch;
 
 		function watch(){
-			console.log(vm.domain);
-			vm.watchResult = [{'title':'BuiltWith', 'element': 4},{'title':'HaveIBeenPwned', 'element': 1},
-							  {'title':'File', 'element': 4},{'title':'Shodan', 'element': 4},
-							  {'title':'SSL', 'element': 4},{'title':'WhoIs', 'element': 4}	];
+
+			WhoIsService.whois(vm.domain).success(function(result){vm.whoisResult = result;
+			
+			vm.watchResult = [{'title':'BuiltWith', 'content': 4},
+							  {'title':'HaveIBeenPwned', 'content': 1},
+							  {'title':'File', 'content': 4},
+							  {'title':'Shodan', 'content': 4},
+							  {'title':'SSL', 'content': 4},
+							  {'title':'WhoIs', 'content': vm.whoisResult}]; });
+
+
+			
 		}
 	}
 })();
