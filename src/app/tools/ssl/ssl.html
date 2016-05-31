@@ -44,53 +44,100 @@
 				</md-card-title>
 				<md-card-content flex class="font-mono">
 					<div flex layout>
-						<div flex="49" flex-xs="100">
+						<div flex>
 							<h2> Authentification </h2><br>
-							<h3> Server Key and Certificate </h3>
-							<label><b> Subject : </b>  </label> <br>
-							<label><b> Common Names : </b> {{ item.details.cert.commonNames }} </label> <br>
-							<label><b> Alternative names : </b> {{ item.details.cert.altNames }} </label> <br>
-							<label><b> Valid from : </b> {{ item.details.cert.notBefore | date: 'dd/MM/yyyy' }} </label> <br>
-							<label><b> Valid until : </b> {{ item.details.cert.notAfter | date: 'dd/MM/yyyy' }} </label> <br>
-							<label><b> Key : </b> {{item.details.key.alg}} {{item.details.key.size}}bits </label> <br>
-							<label><b> Issuer : </b> {{ item.details.cert.issuerLabel }} </label> <br>
-							<label><b> AIA : </b> {{ item.details.cert.ocspURIs }} </label> <br>
-							<label><b> Signature algorithm : </b> {{ item.details.cert.sigAlg }} </label> <br>
-							<label><b> Extended Validation : </b> ?? </label> <br>
-							<label><b> Certificate Transparency : </b> {{ item.details.cert.sct }} </label> <br>
-							<label><b> Revocation information : </b> 
-								<span ng-show="item.details.cert.crlRevocationStatus=='2'">CRL </span>
-								<span ng-show="item.details.cert.ocspRevocationStatus=='2'">OCSP</span>
-							</label> <br>
-							<label ng-show="item.details.cert.crlRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.crlURIs}}</label> <br>
-							<label ng-show="item.details.cert.ocspRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.ocspURIs}}</label> <br>
-							<label><b> Revocation status : </b> {{ item.details.cert.revocationStatus }} </label> <br> TODO Filter
-							<label><b> Trusted : </b> ?? </label> <br>
-						</div>
-						<div flex="49" flex-xs="100">
-							<h2> Configuration </h2><br>
-							<h3> Protocols </h3>
-							<div ng-repeat="protocol in item.details.protocols">
-								<label>{{protocol.name}} {{protocol.version}} </label> <br>
-							</div>
-							<h3> Cipher Suites </h3>
-							<div ng-repeat="suites in item.details.suites.list">
-								<label>{{suites.name}} <span style="float: right;">{{suites.cipherStrength}}</span> </label> <br>
-							</div>
+							<md-card>
+								<md-card-title flex>
+									<md-card-title-text><h3> Server Key and Certificate </h3></md-card-title-text>
+								</md-card-title>
+								<md-card-content class="font-mono">
+									<label><b> Subject : </b>  </label> <br>
+									<label><b> Common Names : </b> {{ item.details.cert.commonNames }} </label> <br>
+									<label><b> Alternative names : </b> {{ item.details.cert.altNames }} </label> <br>
+									<label><b> Valid from : </b> {{ item.details.cert.notBefore | date: 'dd/MM/yyyy' }} </label> <br>
+									<label><b> Valid until : </b> {{ item.details.cert.notAfter | date: 'dd/MM/yyyy' }} </label> <br>
+									<label><b> Key : </b> {{item.details.key.alg}} {{item.details.key.size}}bits </label> <br>
+									<label><b> Issuer : </b> {{ item.details.cert.issuerLabel }} </label> <br>
+									<label><b> AIA : </b> {{ item.details.cert.ocspURIs }} </label> <br>
+									<label><b> Signature algorithm : </b> {{ item.details.cert.sigAlg }} </label> <br>
+									<label><b> Extended Validation : </b> ?? </label> <br>
+									<label><b> Certificate Transparency : </b> {{ item.details.cert.sct }} </label> <br>
+									<label><b> Revocation information : </b> 
+										<span ng-show="item.details.cert.crlRevocationStatus=='2'">CRL </span>
+										<span ng-show="item.details.cert.ocspRevocationStatus=='2'">OCSP</span>
+									</label> <br>
+									<label ng-show="item.details.cert.crlRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.crlURIs}}</label> <br>
+									<label ng-show="item.details.cert.ocspRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.ocspURIs}}</label> <br>
+									<label><b> Revocation status : </b> {{ item.details.cert.revocationStatus }} </label> <br> TODO Filter
+									<label><b> Trusted : </b> ?? </label> <br>
+								</md-card-content>
+							</md-card>
 						</div>
 					</div>
-				</md-card-content>
-			</md-card>
-		</div>
-
-		<div layout layout-padding>
-			<div ng-show="ssl.isSsl" flex="100">
-				<h3>SSL de {{ssl.domain}}</h3>
-
-				{{ssl.sslResult}}
+					<h2 flex> Configuration </h2><br>
+					<div flex layout>
+						<md-card flex="49">
+							<md-card-title flex>
+								<md-card-title-text><h3> Protocols </h3></md-card-title-text>
+							</md-card-title>
+							<md-card-content>
+								<div ng-repeat="protocol in item.details.protocols">
+									<label>{{protocol.name}} {{protocol.version}} </label> <br>
+								</div>
+							</md-card-content>
+						</md-card>
+						<md-card flex="49">
+							<md-card-title flex>
+								<md-card-title-text><h3> Cipher Suites </h3></md-card-title-text>
+							</md-card-title>
+							<md-card-content>
+								<div ng-repeat="suites in item.details.suites.list">
+									<label>{{suites.name}} <span style="float: right;">{{suites.cipherStrength}}</span> </label> <br>
+								</div>
+							</md-card-content>
+						</md-card>
+					</div>
+					<div flex layout>
+						<md-card flex>
+							<md-card-title flex>
+								<md-card-title-text><h3> Handshake Simulation </h3></md-card-title-text>
+							</md-card-title>
+							<md-card-content flex layout>
+								<div flex="45" style="padding-right:5px;border-right:2px solid">
+									<div ng-repeat="sim in item.details.sims.results | range: {begin:0,end:(item.details.sims.results.length /2)-1}" >
+										<label>{{sim.client.name}} {{sim.client.platform}} {{sim.client.version}}
+											<span ng-show="sim.protocolId=='769'" style="float: right;">TLS 1.0</span>
+											<span ng-show="sim.protocolId=='771'" style="float: right;">TLS 1.2</span>
+										</label>
+									</div>
+								</div>
+								<div flex="45" style="padding-left:5px">
+									<div ng-repeat="sim in item.details.sims.results | range: {begin:(item.details.sims.results.length /2),end:item.details.sims.results.length}">
+										<label>{{sim.client.name}} {{sim.client.version}}
+											<span ng-show="sim.protocolId=='769'" style="float: right;">TLS 1.0</span>
+											<span ng-show="sim.protocolId=='771'" style="float: right;">TLS 1.2</span>
+										</label> <br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</md-card-content>
+				</md-card>
 			</div>
 		</div>
 
+	</md-card-content>
+</md-card>
+</div>
+
+<div layout layout-padding>
+	<div ng-show="ssl.isSsl" flex="100">
+		<h3>SSL de {{ssl.domain}}</h3>
+
+		{{ssl.sslResult}}
 	</div>
+</div>
+
+</div>
 
 </md-content>
