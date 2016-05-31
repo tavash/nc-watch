@@ -2,14 +2,17 @@ var express = require('express');
 var router = express.Router();
 var keys = require('../keys.json');
 var Bluebox = require('bluebox-ng'),
-bluebox = new Bluebox({});
+    bluebox = new Bluebox({});
 var whois = require('whois-json');
 var dns = require('dns');
-var async = require("async");
+var async = require('async');
+var http = require('http');
+var querystring = require('querystring');
 
 router.get('/whois', getWhoIs);
 router.get('/shodan', getShodanHost);
 router.get('/geolocation', getGeolocation);
+router.get('/buildwith', getBuildwith);
 
 // Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {
@@ -45,6 +48,93 @@ function getShodanHost(req, res, next) {
         }
     });
 }
+
+function getBuildwith(req, res, next) {
+
+    var getHeader = {
+        'Content-Type' : 'application/json',
+        'Content-Length' : keys.buildwithKey.length
+    };
+
+    var options = {
+        host: 'api.builtwith.com',
+        path: '/v9/api.json?key=' + keys.buildwithKey + '&lookup=' + req.query.domain,
+        method: 'GET',
+       // headers: getHeader,
+        port: 80
+    };
+
+
+
+    http.get(options, function(result) {
+
+        var body = '';
+
+        result.on('data', function (chunk) {
+            body += chunk;
+        });
+
+        result.on('end', function() {
+            //res.send(body);
+            console.log(body);
+            var jsonBody = JSON.parse(body);
+            res.json(jsonBody);
+        });
+        //result.end();
+    });
+
+
+    //var success = '';
+    //var data = { key: keys.buildwithKey };
+
+    //performRequest('GET', data, success);
+
+    //console.log(success);
+
+}
+
+function performRequest(method, data, success) {
+    var dataString = JSON.stringify(data);
+    var headers = {};
+    var host = 'api.builtwith.com';
+    var endpoint = '';
+
+    if (method == 'GET') {
+        endpoint += '?' + querystring.stringify(data);
+    }
+    else {
+        headers = {
+            'Content-Type': 'application/json',
+            'Content-Length': dataString.length
+        };
+    }
+    var options = {
+        host: host,
+        path: endpoint,
+        method: method,
+        headers: headers
+    };
+
+    var req = http.request(options, function(res) {
+        res.setEncoding('utf-8');
+
+        var responseString = '';
+
+        res.on('data', function(data) {
+            responseString += data;
+        });
+
+        res.on('end', function() {
+            console.log(responseString);
+            var responseObject = JSON.parse(responseString);
+            success(responseObject);
+        });
+    });
+
+    req.write(dataString);
+    req.end();
+}
+
 
 // Récupère l'addresse ip d'un serveur selon un nom de domaine donné
 function getDnsResolve(domain, res, callback) {

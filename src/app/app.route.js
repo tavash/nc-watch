@@ -76,6 +76,16 @@
                     }
                 }
             })
+            .state('tools.buildwith', {
+                url: '/buildwith',
+                views: {
+                    '@': {
+                        templateUrl: 'app/tools/buildwith/buildwith.html',
+                        controller: 'BuildwithController',
+                        controllerAs: 'buildwith',
+                    }
+                }
+            })
             .state('contact', {
                 url: '/contact',
                 templateUrl: 'app/contact/contact.html',
