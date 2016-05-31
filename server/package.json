@@ -18,6 +18,7 @@
     "lodash": "~4.10.0",
     "mongoose": "^4.4.11",
     "node-ssllabs": "^0.4.3",
+    "robots": "^0.9.4",
     "static-favicon": "~1.0.0",
     "whois-json": "^1.0.1"
   }
