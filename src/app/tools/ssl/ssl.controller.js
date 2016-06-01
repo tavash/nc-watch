@@ -16,6 +16,22 @@
 			return res;
 		};
 	})
+	.filter('altNamesFilter', function() {
+		return function(input) {
+			var res=[]
+			for(var i in input) {
+				if(i<20) {
+					res.push(input[i]);
+				}
+			}
+			return res;
+		};
+	})
+	.filter('validationTypeFilter', function() {
+		return function(input) {
+			return (input=='E')?"Extended":"no";
+		}
+	})
 	.filter('renegSupportFilter', function() {
 		return function(input) {
 			var res = "";
@@ -31,6 +47,43 @@
 				break;
 				case 8:
 				res = "the server requires secure renegotiation support"
+				break;
+				default:
+				res = "test failed"
+			};
+			return res;
+		}
+	})
+	.filter('issuesFilter', function() {
+		return function(input) {
+			var res = "";
+			switch(input) {
+				case 1:
+				res = "no chain of trust"
+				break;
+				case 2:
+				res = "not before"
+				break;
+				case 4:
+				res = "not after"
+				break;
+				case 8:
+				res = "hostname mismatch"
+				break;
+				case 16:
+				res = "revoked"
+				break;
+				case 32:
+				res = "bad common name"
+				break;
+				case 64:
+				res = "self-signed"
+				break;
+				case 128:
+				res = "blacklisted"
+				break;
+				case 256:
+				res = "insecure signature"
 				break;
 				default:
 				res = "test failed"
@@ -162,10 +215,62 @@
 				res = "supported"
 				break;
 				case 2:
-				res = " implementation is faulty [not implemented]"
+				res = "implementation is faulty [not implemented]"
 				break;
 				case 4:
 				res = "server is intolerant to the extension"
+				break;
+				default:
+				res = "test failed"
+			};
+			return res;
+		}
+	})
+	.filter('dhUsesKnownPrimesFilter', function() {
+		return function(input) {
+			var res = "";
+			switch(input) {
+				case 0:
+				res = "no"
+				break;
+				case 1:
+				res = "yes, but they're not weak"
+				break;
+				case 2:
+				res = "yes and they're weak"
+				break;
+				default:
+				res = "test failed"
+			};
+			return res;
+		}
+	})
+	.filter('handshakeCompatibilityFilter', function() {
+		return function(input) {
+			return (input)?"no":"yes";;
+		}
+	})
+	.filter('revocationStatusFilter', function() {
+		return function(input) {
+			var res = "";
+			switch(input) {
+				case 0:
+				res = "not checked"
+				break;
+				case 1:
+				res = "certificate revoked"
+				break;
+				case 2:
+				res = "certificate not revoked"
+				break;
+				case 3:
+				res = "revocation check error"
+				break;
+				case 4:
+				res = "no revocation information"
+				break;
+				case 5:
+				res = "internal error"
 				break;
 				default:
 				res = "test failed"
@@ -182,7 +287,6 @@
 
 		function getSsl(){
 			SslService.getSsl(vm.domain).success(function(res){
-				console.log(res);
 				vm.sslResult = res;
 				vm.isSsl = true;
 			});

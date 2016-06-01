@@ -14,7 +14,7 @@
 
 		<div layout layout-wrap ng-show="ssl.isSsl">
 			<div layout flex="50" flex-xs="100">
-				<md-card flex="49" style="background-color:#F6F6F6;">
+				<md-card flex="49" class="bg-grey">
 					<md-card-title>
 						<md-card-title-text>
 							<span class="md-headline">SSL Report : {{ssl.domain}} </span> 
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div layout flex="100" ng-show="ssl.isSsl" ng-repeat="item in ssl.sslResult.endpoints">
-			<md-card flex style="background-color:#F6F6F6;">
+			<md-card flex class="bg-grey">
 				<md-card-title flex>
 					<md-card-title-text>
 						<span class="md-headline"> {{item.ipAddress}} </span> 
@@ -53,23 +53,23 @@
 								<md-card-content class="font-mono">
 									<label><b> Subject : </b>  </label> <br>
 									<label><b> Common Names : </b> {{ item.details.cert.commonNames }} </label> <br>
-									<label><b> Alternative names : </b> {{ item.details.cert.altNames }} </label> <br>
+									<label><b> Alternative names : </b>{{ item.details.cert.altNames | altNamesFilter }} </label> <br>
 									<label><b> Valid from : </b> {{ item.details.cert.notBefore | date: 'dd/MM/yyyy' }} </label> <br>
 									<label><b> Valid until : </b> {{ item.details.cert.notAfter | date: 'dd/MM/yyyy' }} </label> <br>
 									<label><b> Key : </b> {{item.details.key.alg}} {{item.details.key.size}}bits </label> <br>
 									<label><b> Issuer : </b> {{ item.details.cert.issuerLabel }} </label> <br>
 									<label><b> AIA : </b> {{ item.details.cert.ocspURIs }} </label> <br>
 									<label><b> Signature algorithm : </b> {{ item.details.cert.sigAlg }} </label> <br>
-									<label><b> Extended Validation : </b> ?? </label> <br>
+									<label><b> Extended Validation : </b> {{ item.details.cert.validationType | validationTypeFilter }} </label> <br>
 									<label><b> Certificate Transparency : </b> {{ item.details.cert.sct }} </label> <br>
 									<label><b> Revocation information : </b> 
 										<span ng-show="item.details.cert.crlRevocationStatus=='2'">CRL </span>
 										<span ng-show="item.details.cert.ocspRevocationStatus=='2'">OCSP</span>
 									</label> <br>
 									<label ng-show="item.details.cert.crlRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.crlURIs}}</label> <br>
-									<label ng-show="item.details.cert.ocspRevocationStatus=='2'"><b> CRL : </b> {{item.details.cert.ocspURIs}}</label> <br>
-									<label><b> Revocation status : </b> {{ item.details.cert.revocationStatus }} </label> <br> TODO Filter
-									<label><b> Trusted : </b> ?? </label> <br>
+									<label ng-show="item.details.cert.ocspRevocationStatus=='2'"><b> OCSP : </b> {{item.details.cert.ocspURIs}}</label> <br>
+									<label><b> Revocation status : </b> {{ item.details.cert.revocationStatus | revocationStatusFilter }} </label> <br>
+									<label><b> Trusted : </b> {{item.details.issues | issuesFilter}} </label> <br>
 								</md-card-content>
 							</md-card>
 						</div>
@@ -77,10 +77,10 @@
 					<h2 flex> Configuration </h2><br>
 					<div flex layout>
 						<md-card flex="49">
-							<md-card-title flex>
+							<md-card-title>
 								<md-card-title-text><h3> Protocols </h3></md-card-title-text>
 							</md-card-title>
-							<md-card-content>
+							<md-card-content flex>
 								<div ng-repeat="protocol in item.details.protocols">
 									<label>{{protocol.name}} {{protocol.version}} </label> <br>
 								</div>
@@ -92,7 +92,7 @@
 							</md-card-title>
 							<md-card-content>
 								<div ng-repeat="suites in item.details.suites.list">
-									<label>{{suites.name}} <span style="float: right;">{{suites.cipherStrength}}</span> </label> <br>
+									<label>{{suites.name}} <span class="float-right">{{suites.cipherStrength}}</span> </label> <br>
 								</div>
 							</md-card-content>
 						</md-card>
@@ -103,19 +103,19 @@
 								<md-card-title-text><h3> Handshake Simulation </h3></md-card-title-text>
 							</md-card-title>
 							<md-card-content flex layout>
-								<div flex="45" style="padding-right:5px;border-right:2px solid">
+								<div flex="45" class="two-column-border">
 									<div ng-repeat="sim in item.details.sims.results | range: {begin:0,end:(item.details.sims.results.length /2)-1}" >
 										<label>{{sim.client.name}} {{sim.client.platform}} {{sim.client.version}}
-											<span ng-show="sim.protocolId=='769'" style="float: right;">TLS 1.0</span>
-											<span ng-show="sim.protocolId=='771'" style="float: right;">TLS 1.2</span>
+											<span ng-show="sim.protocolId=='769'" class="float-right">TLS 1.0</span>
+											<span ng-show="sim.protocolId=='771'" class="float-right";">TLS 1.2</span>
 										</label>
 									</div>
 								</div>
-								<div flex="45" style="padding-left:5px">
+								<div flex="45" class="padding-left">
 									<div ng-repeat="sim in item.details.sims.results | range: {begin:(item.details.sims.results.length /2),end:item.details.sims.results.length}">
 										<label>{{sim.client.name}} {{sim.client.version}}
-											<span ng-show="sim.protocolId=='769'" style="float: right;">TLS 1.0</span>
-											<span ng-show="sim.protocolId=='771'" style="float: right;">TLS 1.2</span>
+											<span ng-show="sim.protocolId=='769'" class="float-right">TLS 1.0</span>
+											<span ng-show="sim.protocolId=='771'" class="float-right">TLS 1.2</span>
 										</label> <br>
 									</div>
 								</div>
@@ -151,7 +151,12 @@
 								<label><b>Session resumption (tickets) : </b> {{item.details.sessionTickets | sessionTicketsFilter}}</label><br>
 								<label><b>OCSP stapling : </b> {{item.details.ocspStapling | yesNowithBooleanFilter}}</label><br>
 								<label><b>Strict Transport Security (HSTS) : </b> {{item.details.hstsPolicy.status}}</label><br>
-
+								<label><b>HSTS Preloading : </b> not in 
+									<span ng-repeat="hsts in item.details.hstsPreloads"> {{hsts.source}} </span>
+								</label><br>
+								<label><b>Uses common DH primes : </b> {{item.details.dhUsesKnownPrimes | dhUsesKnownPrimesFilter}}</label><br>
+								<label><b>DH public server param (Ys) reuse : </b> {{item.details.dhYsReuse | yesNowithBooleanFilter}}</label><br>
+								<label><b>SSL 2 handshake compatibility : </b> {{item.details.sims.results[0].errorCode | handshakeCompatibilityFilter}}</label><br>
 							</md-card-content>
 						</md-card>
 					</div>
