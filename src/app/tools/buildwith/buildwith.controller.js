@@ -8,10 +8,8 @@
     /** @ngInject */
     function BuildwithController(BuildwithService) {
         var vm = this;
-
         vm.buildwith = buildwith;
         vm.isLoad = false;
-
 
         function buildwith(){
 
@@ -28,9 +26,7 @@
                             tagsName.push(vm.buildwithTechnologiesResult[i].Tag);
                     }
 
-                    var techByTag = sortTechnologiesByTag(tagsName, vm.buildwithTechnologiesResult);
-
-                    vm.techByTag = techByTag;
+                    vm.techByTag = sortTechnologiesByTag(tagsName, vm.buildwithTechnologiesResult);
                     vm.isLoad = true;
                 });
         }
@@ -40,6 +36,9 @@
             var techByTag = getRealTagsName(tagsName);
 
             for(var i = 0; i < technologies.length; i++) {
+                var firtDate = new Date(technologies[i].FirstDetected);
+                var lastDate = new Date(technologies[i].LastDetected);
+
                 var indexOfTag = arrayObjectIndexOf(techByTag, technologies[i].Tag, 'shortTagName');
                 if (indexOfTag != -1)
                     techByTag[indexOfTag].technologies.push(technologies[i]);

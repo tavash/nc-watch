@@ -17,42 +17,50 @@
     </div>
 
     <md-content>
-
         <div ng-if="buildwith.isLoad">
+
             <h3>Profil détaillé des technologies utilisées sur {{buildwith.domain}} : </h3>
 
-            <div layout layout-wrap>
+            <!-- Première liste de catégories de technologies -->
+            <md-list flex="" ng-repeat="items in buildwith.techByTag">
 
-                <div layout flex="33" flex-xs="100" ng-repeat="items in buildwith.techByTag">
+                <md-subheader class="md-no-sticky"> {{ items.realTagName }} </md-subheader>
 
-                    <md-card style="background-color:#F6F6F6;">
+                <md-list-item>
 
-                        <md-card-title>
-                            <md-card-title-text>
-                                <span class="md-headline"> {{items.realTagName}} </span>
-                            </md-card-title-text>
-                        </md-card-title>
+                    <div flex>
 
-                        <div ng-repeat="item in items.technologies">
+                        <!-- Seconde liste de technologies -->
+                        <div flex class="md-list-item-text" layout="column" ng-repeat="item in items.technologies">
 
-                            <hr>
+                            <md-list-item>
 
-                            <md-card-content flex class="font-mono">
-                                <label><b> Nom : </b> {{ item.Name }} </label> <br>
-                                <label><b> Description : </b> {{ item.Description }} </label> <br>
-                                <label><b> Plus d'informations : </b> <a ng-href="{{item.Link}}">{{ item.Link }} </a> </label> <br>
-                                <label><b> Première détection par Built With : </b> {{ item.FirstDetected }} </label> <br>
-                                <label><b> Dernière détection par Built With : </b> {{ item.LastDetected }} </label> <br>
-                                <label ng-if="item.Categories.length > 0"><b> Catégories : </b> {{ item.Categories }} </label> <br>
-                            </md-card-content>
+                                <div flex>
+                                    <label><b> {{ item.Name }} </b></label> <br>
+
+                                    <div flex-offset="5">
+                                        <label>{{ item.Description }} </label> <br>
+                                        <label><b> Plus d'informations : </b> <a ng-href="{{item.Link}}">{{ item.Link }} </a> </label> <br>
+                                        <label><b> Première détection par Built With : </b> {{ item.FirstDetected | date:"dd/MM/yyyy 'à' h:mma"}} </label> <br>
+                                        <label><b> Dernière détection par Built With : </b> {{ item.LastDetected | date:"dd/MM/yyyy 'à' h:mma" }} </label> <br>
+                                        <label ng-if="item.Categories.length > 0"><b> Catégories : </b> {{ item.Categories }} </label> <br>
+                                    </div>
+
+                                    <br>
+                                    <br>
+                                </div>
+
+                            </md-list-item>
 
                         </div>
 
-                    </md-card>
+                    </div>
 
-                </div>
+                </md-list-item>
 
-            </div>
+                <md-divider></md-divider>
+
+            </md-list>
         </div>
 
     </md-content>
