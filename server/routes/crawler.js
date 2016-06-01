@@ -5,33 +5,28 @@ var Crawler = require("crawler");
 var Robots = require("robots");
 
 router.post('/', crawlPost);
-router.get('/', crawlGet);
 router.get('/robots', getRobots);
 
 function crawlPost(req, res, next) {
-	var c = new Crawler({
-		maxConnections : 10,
-		callback : function (error, result, $) {
-			/* $('a').each(function(index, a) {
-				var toQueueUrl = $(a).attr('href');
-				c.queue(toQueueUrl);
-			});*/
-			//var r = {"headers" : result.headers, "request" : result.request};
-			res.json(result);
-		}
-	});
-	c.queue(req.body.url);
-	// Queue a list of URLs
-	//c.queue(['http://jamendo.com/','http://tedxparis.com']);
-	/c.queue({ uri: googleSearch('adacis') });*/
-}
-
-function crawlGet(req, res, next) {
-	var c = new Crawler({
-		maxConnections : 10,
-		callback : function (error, result, $) { res.json(result); }
-	});
-	c.queue(req.query.url);
+	if (req.body.url) {
+		var c = new Crawler({
+			maxConnections : 3,
+			callback : function (error, result, $) {
+				if (error) {
+					res.json({
+						err: 'Impossible d\'accéder au site'
+					});
+				} else {
+					res.json(result);
+				}
+			}
+		});
+		c.queue(req.body.url);
+	} else {
+		res.json({
+			err: 'Aucune url spécifée'
+		});
+	}
 }
 
 function getRobots(req, res, next) {
