@@ -15,46 +15,47 @@
                 <div layout="column" flex>
                     <md-input-container flex>
                         <label>Google Dorks</label>
-                        <md-select ng-model="googledorks.dorkSelected" name="googleDorks"
-                                   ng-change="googledorks.changedValue(googledorks.dorkSelected)" required>
-                            <md-option ng-repeat="dork in googledorks.dorksList" value="{{dork}}">
-                                {{dork.name}}
-                            </md-option>
-                        </md-select>
-                        <div ng-messages="googleDorksForm.googleDorks.$error">
-                            <div ng-message="required">Veuillez choisir un google dorks.</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container flex style="margin-top: -20%; padding: 0" ng-show="googledorks.dorkSelectedDetail.name =='Personnalisé'">
-                        <label>Google Dorks Personnalisé</label>
-                        <input ng-model="googledorks.customDork"/>
-                    </md-input-container>
-                    <md-input-container flex style="margin-top: -20%; padding: 0">
-                        <input ng-show="googledorks.dorkSelectedDetail && googledorks.dorkSelectedDetail.name !='Personnalisé'" ng-disabled="true"
-                               value="{{googledorks.dorkSelectedDetail.dork}}"/>
-                    </md-input-container>
-                </div>
-            </div>
-            <div flex="31">
-                <md-button class="md-raised" ng-click="googledorks.search()" type="submit"
-                           ng-disabled="googleDorksForm.$invalid">
-                    Chercher
-                </md-button>
-            </div>
+                        <md-select ng-model="googledorks.dorkSelected" name="googleDorksSelect"
+                        ng-change="googledorks.changedValue(googledorks.dorkSelected)" required>
+                        <md-option ng-repeat="dork in googledorks.dorksList" value="{{dork}}">
+                            {{dork.name}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="googleDorksForm.googleDorksSelect.$error">
+                        <div ng-message="required">Veuillez choisir un google dorks.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex ng-show="googledorks.dorkSelectedDetail.name =='Personnalisé'">
+                    <label>Google Dorks Personnalisé</label>
+                    <input ng-model="googledorks.customDork"/>
+                </md-input-container>
+                <md-input-container flex style="margin-top:-20px"> 
+                   <label></label>
+                   <input ng-show="googledorks.dorkSelectedDetail && googledorks.dorkSelectedDetail.name !='Personnalisé'" ng-disabled="true"
+                   value="{{googledorks.dorkSelectedDetail.dork}}"/>
+               </md-input-container>
+           </div>
+       </div>
+       <div flex="31">
+        <md-button class="md-raised" ng-click="googledorks.search()" type="submit"
+        ng-disabled="googleDorksForm.$invalid">
+        Chercher
+    </md-button>
+</div>
 
-        </div>
-    </form>
-    <md-divider ng-if="googledorks.hasResult"></md-divider>
-    <md-content layout layout-padding>
-        <md-list ng-if="googledorks.hasResult">
-            <md-list-item class="md-3-line" ng-repeat="result in googledorks.googleSearchResult">
-                <div class="md-list-item-text" layout="column">
-                    <h3><a target="_blank" ng-href="{{result.href}}" ng-bind-html="result.title"></a></h3>
-                    <h4 style="color:#009688">{{result.href}}</h4>
-                    <p ng-bind-html="result.description"></p>
-                </div>
-            </md-list-item>
-        </md-list>
-        <h4 ng-if="googledorks.hasResult==false">No documents correspond to the specified search terms</h4>
-    </md-content>
+</div>
+</form>
+<md-divider ng-if="googledorks.hasResult"></md-divider>
+<md-content layout layout-padding>
+    <md-list ng-if="googledorks.hasResult">
+        <md-list-item class="md-3-line" ng-repeat="result in googledorks.googleSearchResult">
+            <div class="md-list-item-text" layout="column">
+                <h3><a target="_blank" ng-href="{{result.href}}" ng-bind-html="result.title"></a></h3>
+                <h4 style="color:#009688">{{result.href}}</h4>
+                <p ng-bind-html="result.description"></p>
+            </div>
+        </md-list-item>
+    </md-list>
+    <h4 ng-if="googledorks.hasResult==false">No documents correspond to the specified search terms</h4>
+</md-content>
 </md-content>

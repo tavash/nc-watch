@@ -7,7 +7,7 @@
 		return function(input, params) {
 			var begin = parseInt(params.begin);
 			var end = parseInt(params.end);
-			var res=[]
+			var res=[];
 			for(var i in input) {
 				if(i>= begin && i <= end) {
 					res.push(input[i]);
