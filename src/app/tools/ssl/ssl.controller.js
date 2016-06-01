@@ -286,6 +286,7 @@
 		vm.getSsl = getSsl;
 
 		function getSsl(){
+			vm.isSsl = false;
 			SslService.getSsl(vm.domain).success(function(res){
 				vm.sslResult = res;
 				vm.isSsl = true;
