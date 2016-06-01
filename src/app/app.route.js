@@ -101,8 +101,8 @@
                     }
                 }
             })
-            .state('tools.buildwith', {
-                url: '/buildwith',
+            .state('tools.builtwith', {
+                url: '/builtwith',
                 views: {
                     '': {
                         templateUrl: 'app/tools/tools.html',
@@ -110,9 +110,9 @@
                         controllerAs: 'tools'
                     },
                     'tab@tools': {
-                        templateUrl: 'app/tools/buildwith/buildwith.html',
-                        controller: 'BuildwithController',
-                        controllerAs: 'buildwith',
+                        templateUrl: 'app/tools/builtwith/builtwith.html',
+                        controller: 'BuiltwithController',
+                        controllerAs: 'builtwith',
                     }
                 }
             })

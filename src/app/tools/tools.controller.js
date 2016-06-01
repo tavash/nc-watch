@@ -36,8 +36,8 @@
                 url: '/ssl'
             },
             {
-                name: 'Build With',
-                url: '/buildwith'
+                name: 'Built With',
+                url: '/builtwith'
             }
         ]
 
