@@ -122,9 +122,43 @@
 							</md-card-content>
 						</md-card>
 					</div>
+					<div flex layout>
+						<md-card flex>
+							<md-card-title flex>
+								<md-card-title-text><h3> Protocol Details </h3></md-card-title-text>
+							</md-card-title>
+							<md-card-content flex>
+								<label><b> DROWN : </b></label>
+								<label ng-show="item.details.drownHosts.length == 0"> No, server keys and hostname not seen elsewhere with SSLv2. <br> <a href="https://blog.qualys.com/securitylabs/2016/03/04/ssl-labs-drown-test-implementation-details" target="_blank"> More informations</a>
+								</label>
+								<div ng-show="item.details.drownHosts.length > 0" ng-repeat="drown in item.details.drownHosts">
+									<label >{{drown}}</label>
+								</div><br>
+								<label><b>Secure Renegotiation : </b> {{item.details.renegSupport | renegSupportFilter}}</label><br>
+								<label><b>BEAST attack : </b> {{item.details.vulnBeast | vulnBeastFilter}}</label><br>
+								<label><b>POODLE (SSLv3) : </b> {{item.details.poodle | poddleFilter}}</label><br>
+								<label><b>POODLE (TLS) : </b> {{item.details.poodleTls | poddleTlsFilter}}</label><br>
+								<label><b>Downgrade attack prevention : </b> {{item.details.fallbackScsv  | fallbackScsvFilter}}</label><br>
+								<label><b>SSL/TLS compression : </b> {{item.details.compressionMethods   | compressionMethodsFilter}}</label><br>
+								<label><b>RC4 : </b> {{item.details.supportsRc4 | yesNowithBooleanFilter}}</label><br>
+								<label><b>Heartbeat (extension) : </b> {{item.details.heartbeat | yesNowithBooleanFilter}}</label><br>
+								<label><b>Heartbleed (vulnerability) : </b> {{item.details.Heartbleed | yesNowithBooleanFilter}}</label><br>
+								<label><b>OpenSSL CCS vuln. (CVE-2014-0224) : </b> {{item.details.openSslCcs | openSslCcsFilter}}</label><br>
+								<label><b>Forward Secrecy : </b> {{item.details.forwardSecrecy | forwardSecrecyFilter}}</label><br>
+								<label><b>ALPN (SNI) : </b> {{item.details.sniRequired  | yesNowithBooleanFilter}}</label><br>
+								<label><b>NPN : </b> {{item.details.supportsNpn  | yesNowithBooleanFilter}}</label><br>
+								<label><b>Session resumption (caching) : </b> {{item.details.sessionResumption  | sessionResumptionFilter}}</label><br>
+								<label><b>Session resumption (tickets) : </b> {{item.details.sessionTickets | sessionTicketsFilter}}</label><br>
+								<label><b>OCSP stapling : </b> {{item.details.ocspStapling | yesNowithBooleanFilter}}</label><br>
+								<label><b>Strict Transport Security (HSTS) : </b> {{item.details.hstsPolicy.status}}</label><br>
+
+							</md-card-content>
+						</md-card>
+					</div>
 				</md-card-content>
 			</md-card>
 		</div>
 	</div>
+	<a href="https://github.com/ssllabs/ssllabs-scan/blob/stable/ssllabs-api-docs.md" target="_blank">SSL Labs API documentation</a>
 </md-content>
 
