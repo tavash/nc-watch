@@ -6,14 +6,15 @@
         .controller('GoogleDorksController', GoogleDorksController);
 
     /** @ngInject */
-    function GoogleDorksController($window, GoogleDorksService, HowToMessages) {
+    function GoogleDorksController($window, GoogleDorksService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.search = search;
         vm.changedValue = changedValue;
         //var googleLink = https://www.google.com/webhp?ie=utf-8&oe=utf-8gfe_rd=cr&ei=ILFGV6GTL7Ss8wer_7igAw#safe=off&q=";
         var googleGroupsLink = "https://groups.google.com/forum/#!search/";
-        vm.GOOGLEDORKS_MESSAGE_INFO = HowToMessages.googleDorks;
+				vm.GOOGLEDORKS_HOW_TO = HowToMessages.googleDorks;
+				vm.GOOGLEDORKS_MESSAGE_INFO = InfosMessages.googleDorks;
 
         vm.dorkSelected = '';
         vm.dorkSelectedDetail = '';
