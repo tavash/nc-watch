@@ -7,23 +7,26 @@
 
 
 	/** @ngInject */
-	function WhoIsController(WhoIsService) {
+	function WhoIsController(WhoIsService, HowToMessages, InfosMessages) {
 
 		var vm = this;
 
 		vm.whois = whois;
+		vm.WHOIS_HOW_TO = HowToMessages.whois;
+		vm.WHOIS_MESSAGE_INFO = InfosMessages.whois;
 
 		function whois(){
 			var domain = vm.domain;
 			vm.isMap = false;
+
 			WhoIsService.whois(domain).success(function(res) {
 				vm.whoIsResult = res;
 				var addressSiegeSocial = null;
 				// On ajoute l'adresse d siège social si elle existe
 				if (vm.whoIsResult.adminStreet && vm.whoIsResult.adminCity && vm.whoIsResult.adminPostalCode) {
 					addressSiegeSocial = vm.whoIsResult.adminStreet + " " 
-														 + vm.whoIsResult.adminCity + " " 
-														 + vm.whoIsResult.adminPostalCode
+					+ vm.whoIsResult.adminCity + " " 
+					+ vm.whoIsResult.adminPostalCode
 				}
 				// Si on a une adresse de siège social, on affiche la map
 				if (addressSiegeSocial != null) {
@@ -45,11 +48,10 @@
 		function getGeocode(name, address, zoom) {
 			WhoIsService.geocode(address).success(function(data) {
 				if (data.status == 'OK') {
-					console.log(data.results[0].geometry.location);
 					var lat = data.results[0].geometry.location.lat;
 					var long = data.results[0].geometry.location.lng;
 					var marker = L.marker([lat, long])
-						 .addTo(vm.map);
+					.addTo(vm.map);
 					marker.bindPopup(name + " " + address).openPopup();
 					vm.map.setView([lat, long], zoom);
 				}
