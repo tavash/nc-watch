@@ -15,22 +15,24 @@
                 <div layout="column" flex>
                     <md-input-container flex>
                         <label>Google Dorks</label>
-                        <md-select ng-model="googledorks.dorkSelected" name="googleDorks"
+                        <md-select ng-model="googledorks.dorkSelected" name="googleDorksSelect"
                                    ng-change="googledorks.changedValue(googledorks.dorkSelected)" required>
                             <md-option ng-repeat="dork in googledorks.dorksList" value="{{dork}}">
                                 {{dork.name}}
                             </md-option>
                         </md-select>
-                        <div ng-messages="googleDorksForm.googleDorks.$error">
+                        <div ng-messages="googleDorksForm.googleDorksSelect.$error">
                             <div ng-message="required">Veuillez choisir un google dorks.</div>
                         </div>
                     </md-input-container>
-                    <md-input-container flex style="margin-top: -20%; padding: 0" ng-show="googledorks.dorkSelectedDetail.name =='Personnalisé'">
+                    <md-input-container flex ng-show="googledorks.dorkSelectedDetail.name =='Personnalisé'">
                         <label>Google Dorks Personnalisé</label>
                         <input ng-model="googledorks.customDork"/>
                     </md-input-container>
-                    <md-input-container flex style="margin-top: -20%; padding: 0">
-                        <input ng-show="googledorks.dorkSelectedDetail && googledorks.dorkSelectedDetail.name !='Personnalisé'" ng-disabled="true"
+                    <md-input-container flex style="margin-top:-20px">
+                        <label></label>
+                        <input ng-show="googledorks.dorkSelectedDetail && googledorks.dorkSelectedDetail.name !='Personnalisé'"
+                               ng-disabled="true"
                                value="{{googledorks.dorkSelectedDetail.dork}}"/>
                     </md-input-container>
                 </div>
@@ -40,6 +42,11 @@
                            ng-disabled="googleDorksForm.$invalid">
                     Chercher
                 </md-button>
+                <md-icon>
+                    <md-tooltip>
+                        {{googledorks.GOOGLEDORKS_MESSAGE_INFO}}
+                    </md-tooltip>
+                    <i class="material-icons">help</i></md-icon>
             </div>
 
         </div>

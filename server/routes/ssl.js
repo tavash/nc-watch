@@ -3,6 +3,8 @@ var router = express.Router();
 var ssllabs = require("node-ssllabs");
 
 router.get('/scan', scan);
+router.get('/analyze', analyze);
+
 
 function scan(req,res,next){
 	var options = {
@@ -10,10 +12,18 @@ function scan(req,res,next){
 		"fromCache": true,
 		"maxAge": 24
 	};
-	ssllabs.scan(options, function (err, host) {
-		console.log(host);
-		res.json(host);
-	});
+	ssllabs.scan(options, function (err, host) { res.json(host); });
+}
+
+function analyze(req, res, next){
+	var options = {
+		"host": req.query.domain,
+		"publish": true,
+		"startNew": true,
+		"all": "done",
+		"ignoreMismatch": true
+	};
+	ssllabs.analyze(options, function (err, host) { res.json(host); });
 }
 
 module.exports = router;

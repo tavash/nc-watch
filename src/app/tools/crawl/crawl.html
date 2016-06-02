@@ -2,23 +2,18 @@
 	<div flex>
 		<form>
 			<div layout layout-align="center" layout-xs="column">
-				<md-input-container flex="33%">
+				<md-input-container flex="10">
 					<label>Préfixe</label>
 					<md-select ng-model="crawl.prefixeSelected" name="prefixe" required>
-						<md-option value="http://">
-							http://
-						</md-option>
-						<md-option value="https://">
-							https://
-						</md-option>
+						<md-option value="http://">http://</md-option>
+						<md-option value="https://">https://</md-option>
 					</md-select>
 				</md-input-container>
-				<md-input-container flex="33%" class="md-icon-float md-block">
+				<md-input-container flex="40" class="md-icon-float md-block">
 					<label>URL</label>
-					<md-icon><i class="material-icons">http</i></md-icon>
 					<input ng-model="crawl.url" name="url">
 				</md-input-container>
-				<div flex="33%">
+				<div flex="50">
 					<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
 				</div>
 			</div>
