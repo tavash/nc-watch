@@ -281,9 +281,12 @@
 	.controller('SslController', SslController);
 
 	/** @ngInject */
-	function SslController(SslService) {
+	function SslController(SslService, HowToMessages, InfosMessages) {
 		var vm = this;
 		vm.getSsl = getSsl;
+
+		vm.SSL_HOW_TO = HowToMessages.ssl;
+		vm.SSL_MESSAGE_INFO = InfosMessages.ssl;
 
 		function getSsl(){
 			vm.isSsl = false;
