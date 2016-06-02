@@ -2,7 +2,7 @@
 	<div flex>
 		<form>
 			<div layout layout-align="center" layout-xs="column">
-				<md-input-container flex="10">
+				<md-input-container flex="10" flex-offset="20">
 					<label>Préfixe</label>
 					<md-select ng-model="crawl.prefixeSelected" name="prefixe" required>
 						<md-option value="http://">http://</md-option>
@@ -13,7 +13,7 @@
 					<label>URL</label>
 					<input ng-model="crawl.url" name="url">
 				</md-input-container>
-				<div flex="50">
+				<div flex="30">
 					<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
 				</div>
 			</div>
