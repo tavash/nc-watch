@@ -2,25 +2,35 @@
 
 	<div flex>
 		<form name="haveibeenpwnedForm">
-			<div layout layout-align="center">
-				
-				<div flex="30">
-					<md-input-container class="md-icon-float md-block" flex="100">
-						<label>Email</label>
-						<md-icon><i class="material-icons">email</i></md-icon>
-						<input ng-model="haveibeenpwned.email" name="testedEmail" type="email" required>
-						<div ng-messages="haveibeenpwnedForm.testedEmail.$error">
-							<div ng-message="required">Ce champ est obligatoire.</div>
-							<div ng-message="email">Ceci n'est pas une adresse email valide.</div>
-						</div>
-					</md-input-container>
-
+			<div flex class="search">
+				<md-toolbar class="title-tool">
+					CRAWLER
+				</md-toolbar>
+				<div class="text-infos">
+					{{haveibeenpwned.HAVEIBEENPWNED_MESSAGE_INFO}}
 				</div>
-
-				<div>
-					<md-button class="md-raised" ng-click="haveibeenpwned.haveIBeenPwned()" ng-disabled="haveibeenpwnedForm.$invalid" type="submit">HAVEIBEENPWNED</md-button>
+				<div layout layout-align="center">
+					<div flex="30">
+						<md-input-container class="md-icon-float md-block" flex="100">
+							<label>Email</label>
+							<md-icon><i class="material-icons">email</i></md-icon>
+							<input ng-model="haveibeenpwned.email" name="testedEmail" type="email" required>
+							<div ng-messages="haveibeenpwnedForm.testedEmail.$error">
+								<div ng-message="required">Ce champ est obligatoire.</div>
+								<div ng-message="email">Ceci n'est pas une adresse email valide.</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div>
+						<md-button class="md-raised" ng-click="haveibeenpwned.haveIBeenPwned()" ng-disabled="haveibeenpwnedForm.$invalid" type="submit">HAVEIBEENPWNED</md-button>
+						<md-icon>
+							<md-tooltip>
+								{{haveibeenpwned.HAVEIBEENPWNED_HOW_TO}}
+							</md-tooltip>
+							<i class="material-icons">help</i>
+						</md-icon>
+					</div>
 				</div>
-
 			</div>
 		</form>
 	</div>
