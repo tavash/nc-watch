@@ -29,7 +29,12 @@
             .state('tools.crawl', {
                 url: '/crawl',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/crawl/crawl.html',
                         controller: 'CrawlController',
                         controllerAs: 'crawl'
@@ -39,7 +44,12 @@
             .state('tools.haveibeenpwned', {
                 url: '/haveibeenpwned',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/haveibeenpwned/haveibeenpwned.html',
                         controller: 'HaveIBeenPwnedController',
                         controllerAs: 'haveibeenpwned'
@@ -49,7 +59,12 @@
             .state('tools.whois', {
                 url: '/whois',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/whois/whois.html',
                         controller: 'WhoIsController',
                         controllerAs: 'whois'
@@ -59,7 +74,12 @@
             .state('tools.shodan', {
                 url: '/shodan',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/shodan/shodan.html',
                         controller: 'ShodanController',
                         controllerAs: 'shodan'
@@ -69,20 +89,45 @@
             .state('tools.googledorks', {
                 url: '/googledorks',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/googledorks/googledorks.html',
                         controller: 'GoogleDorksController',
-                        controllerAs: 'googledorks',
+                        controllerAs: 'googledorks'
                     }
                 }
             })
             .state('tools.buildwith', {
                 url: '/buildwith',
                 views: {
-                    '@': {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
                         templateUrl: 'app/tools/buildwith/buildwith.html',
                         controller: 'BuildwithController',
                         controllerAs: 'buildwith',
+                    }
+                }
+            })
+            .state('tools.ssl', {
+                url: '/ssl',
+                views: {
+                    '': {
+                        templateUrl: 'app/tools/tools.html',
+                        controller: 'ToolsController',
+                        controllerAs: 'tools'
+                    },
+                    'tab@tools': {
+                        templateUrl: 'app/tools/ssl/ssl.html',
+                        controller: 'SslController',
+                        controllerAs: 'ssl',
                     }
                 }
             })
@@ -91,17 +136,8 @@
                 templateUrl: 'app/contact/contact.html',
                 controller: 'ContactController',
                 controllerAs: 'contact'
-            })
-            .state('tools.ssl', {
-                url: '/ssl',
-                views: {
-                    '@': {
-                        templateUrl: 'app/tools/ssl/ssl.html',
-                        controller: 'SslController',
-                        controllerAs: 'ssl',
-                    }
-                }
             });
+
         $urlRouterProvider.otherwise('/');
     }
 
