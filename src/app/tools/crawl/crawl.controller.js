@@ -6,10 +6,12 @@
 	.controller('CrawlController', CrawlController);
 
 	/** @ngInject */
-	function CrawlController(CrawlService, $mdDialog, $mdToast) {
+	function CrawlController(CrawlService, $mdDialog, $mdToast, HowToMessages, InfosMessages) {
 		var vm = this;
 		vm.crawl = crawl;
 		vm.prefixeSelected = 'http://';
+		vm.CRAWL_HOW_TO = HowToMessages.crawl;
+		vm.CRAWL_MESSAGE_INFO = InfosMessages.crawl;
 
 		vm.isCrawl = false;
 		vm.isRobots = false;
