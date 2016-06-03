@@ -10,16 +10,20 @@
         var vm = this;
 
         vm.shodanHost = shodanHost;
-        vm.hostIsLoad = false;
-				vm.SHODAN_HOW_TO = HowToMessages.shodan;
-				vm.SHODAN_MESSAGE_INFO = InfosMessages.shodan;
+        vm.SHODAN_HOW_TO = HowToMessages.shodan;
+        vm.SHODAN_MESSAGE_INFO = InfosMessages.shodan;
+        vm.isLoad = false;
 
         function shodanHost(){
             var domain = vm.domain;
 
             ShodanService.shodanHost(domain).success(function(res){
                 vm.shodanHostResult = res;
-                vm.hostIsLoad = true;
+
+                vm.ports = res.ports;
+                vm.dataPorts = res.data;
+
+                vm.isLoad = true;
             });
         }
 

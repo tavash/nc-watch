@@ -1,37 +1,183 @@
-<md-content layout="column" layout-padding flex md-whiteframe="2">
-	<div flex>
-		<form>
-			<div flex class="search">
-				<md-toolbar class="title-tool">
-					SHODAN
-				</md-toolbar>
-				<div class="text-infos">
-					{{shodan.SHODAN_MESSAGE_INFO}}
-				</div>
-				<div layout layout-align="center" layout-padding>
-					<div flex="30">
-						<md-input-container class="md-icon-float md-block" flex-gt-sm="">
-							<label>Domain</label>
-							<input ng-model="shodan.domain" name="domain">
-						</md-input-container>
-					</div>
-					<div>
-						<md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN HOST</md-button>
-						<md-icon>
-							<md-tooltip>
-								{{shodan.SHODAN_HOW_TO}}
-							</md-tooltip>
-							<i class="material-icons">help</i>
-						</md-icon>
-					</div>
-				</div>
+<md-content layout="column" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
+    <div flex>
+        <form>
+            <!-- <div layout layout-align="center" layout-padding>
+                 <div flex="30">
+                     <md-input-container class="md-icon-float md-block" flex-gt-sm="">
+                         <label>Domain</label>
+                         <input ng-model="shodan.domain" name="domain">
+                     </md-input-container>
+                 </div>
+                 <div>
+                     <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN</md-button>
+                 </div>
+             </div>-->
 
-				<div ng-show="shodan.hostIsLoad">
-					<json-formatter json="shodan.shodanHostResult" open="10"></json-formatter>
-				</div>
+            <md-toolbar class="title-tool">
+                SHODAN
+            </md-toolbar>
+            <div class="text-infos">
+                {{shodan.SHODAN_MESSAGE_INFO}}
+            </div>
+            <div layout layout-align="center" layout-padding>
+                <div flex="30">
+                    <md-input-container class="md-icon-float md-block" flex-gt-sm="">
+                        <label>Domain</label>
+                        <input ng-model="shodan.domain" name="domain">
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN HOST</md-button>
+                    <md-icon>
+                        <md-tooltip>
+                            {{shodan.SHODAN_HOW_TO}}
+                        </md-tooltip>
+                        <i class="material-icons">help</i>
+                    </md-icon>
+                </div>
+            </div>
 
 
-			</form>
-		</div>
+            <md-content>
+                <div ng-if="shodan.isLoad">
 
-	</md-content>
+                    <h3>Liste des ports scannés par SHODAN sur {{shodan.domain}} : </h3>
+
+                    <div layout layout-wrap>
+                        <div layout flex="50" flex-xs="100" ng-repeat="dataPort in shodan.dataPorts">
+                            <md-card flex>
+
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline"><b>Port</b> {{ dataPort.port }}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+
+                                <md-card-content flex>
+                                    <!-- Commun  -->
+                                    <label>ISP : <b> {{ dataPort.isp }} </b></label><br>
+                                    <label>Hostnames : <b> {{ dataPort.hostnames }} </b></label><br>
+                                    <label>Timestamp : <b> {{ dataPort.timestamp }} </b></label><br>
+                                    <label>Domains : <b> {{ dataPort.domains }} </b></label><br>
+                                    <label>Organisation : <b> {{ dataPort.org }} </b></label><br>
+                                    <label>XML Data : <b> {{ dataPort.data }} </b></label><br>
+                                    <label>ASN : <b> {{ dataPort.asn }} </b></label><br>
+                                    <label>Transport : <b> {{ dataPort.transport }} </b></label><br>
+                                    <label>IP : <b> {{ dataPort.ip_str }} </b></label><br>
+                                    <label>Location: <b> {{ dataPort.location }} </b></label><br>
+
+                                    <!-- Spécifique -->
+                                    <label>ISP : <b> {{ dataPort.isp }} </b></label><br>
+
+                                    <div>
+                                        <label>SSL <b></b></label><br>
+                                        <label>Prime : <b> {{ dataPort.ssl.prime }} </b></label><br>
+                                        <label>Public key : <b> {{ dataPort.ssl.public_key }} </b></label><br>
+                                        <label>Bits : <b> {{ dataPort.ssl.bits }} </b></label><br>
+                                        <label>Fingerprint : <b> {{ dataPort.ssl.fingerprint }} </b></label><br>
+
+                                        <div ng-repeat="item in dataPorts.ssl.tslsext">
+                                            <label>ID : <b> {{ item.id }} </b></label><br>
+                                            <label>Name : <b> {{ item.name }} </b></label><br>
+                                        </div>
+
+                                        <div ng-repeat="item in dataPorts.ssl.versions">
+                                            <label><b> {{ item }} </b></label><br>
+                                        </div>
+
+                                        <label>Certificates<b></b></label><br>
+                                        <label>Sig Alg : <b> {{ dataPort.ssl.cert.sig_alg }} </b></label><br>
+                                        <label>Issued : <b> {{ dataPort.ssl.cert.issued }} </b></label><br>
+                                        <label>Sig Alg : <b> {{ dataPort.ssl.cert.expires }} </b></label><br>
+
+                                        <label><b>Public key</b></label><br>
+                                        <label>Bits : <b> {{ dataPort.ssl.cert.pubkey }} </b></label><br>
+                                        <label>Type : <b> {{ dataPort.ssl.cert.type }} </b></label><br>
+
+                                        <label>Version : <b> {{ dataPort.ssl.cert.version }} </b></label><br>
+
+                                        <div ng-repeat="item in dataPorts.ssl.cert.extensions">
+                                            <label>Name : <b> {{ item.name }} </b></label><br>
+                                            <label>Data : <b> {{ item.data }} </b></label><br>
+                                        </div>
+
+                                        <label><b>Fingerprint</b></label><br>
+                                        <label>SHA256 : <b> {{ dataPort.ssl.cert.fingerprint.sha256 }} </b></label><br>
+                                        <label>SHA1 : <b> {{ dataPort.ssl.cert.fingerprint.sha1 }} </b></label><br>
+
+                                        <label>Signal : <b> {{ dataPort.ssl.cert.serial }} </b></label><br>
+
+                                        <label><b>Issuer</b></label><br>
+                                        <label>C : <b> {{ dataPort.ssl.cert.issuer.C }} </b></label><br>
+                                        <label>OU : <b> {{ dataPort.ssl.cert.issuer.OU }} </b></label><br>
+                                        <label>O : <b> {{ dataPort.ssl.cert.issuer.O }} </b></label><br>
+                                        <label>CN : <b> {{ dataPort.ssl.cert.issuer.CN }} </b></label><br>
+
+                                        <label>Expired : <b> {{ dataPort.ssl.cert.expired }} </b></label><br>
+
+                                        <label><b>Subject</b></label><br>
+                                        <label>C : <b> {{ dataPort.ssl.cert.subject.C }} </b></label><br>
+                                        <label>Email address : <b> {{ dataPort.ssl.cert.subject.emailAddress }} </b></label><br>
+                                        <label>CN : <b> {{ dataPort.ssl.cert.subject.CN }} </b></label><br>
+
+                                    </div>
+
+
+
+
+                                </md-card-content>
+
+                            </md-card>
+                        </div>
+                    </div>
+
+                    <!--
+                    <div layout="column">
+
+                        <div layout="row" layout-wrap ng-repeat="port in shodan.ports">
+
+                            <md-card flex="33" style="background-color:#F6F6F6;">
+
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Domaine</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+
+                                <md-card-content flex class="font-mono">
+                                    <label><b> Nom : </b>  </label> <br>
+                                    <label><b> Identifiant : </b> </label> <br>
+                                    <label><b> Date création : </b> </label> <br>
+                                    <label><b> Date expiration : </b> </label> <br>
+                                    <label><b> Statut : </b> </label> <br>
+                                    <label><b> Serveur : </b> </label> <br>
+                                    <label><b> DNSSEC : </b> </label> <br>
+                                </md-card-content>
+
+                            </md-card>
+
+                        </div>
+                        -->
+
+                </div>
+
+
+
+
+
+
+    </div>
+
+</md-content>
+
+<br>
+
+<div ng-show="shodan.isLoad">
+    <json-formatter json="shodan.shodanHostResult" open="10"></json-formatter>
+</div>
+
+</form>
+</div>
+
+</md-content>
+
