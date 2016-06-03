@@ -1,24 +1,37 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2">
-    <div flex>
-        <form>
-            <div layout layout-align="center" layout-padding>
-                <div flex="30">
-                    <md-input-container class="md-icon-float md-block" flex-gt-sm="">
-                        <label>Domain</label>
-                        <input ng-model="shodan.domain" name="domain">
-                    </md-input-container>
-                </div>
-                <div>
-                    <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN HOST</md-button>
-                </div>
-            </div>
+	<div flex>
+		<form>
+			<div flex class="search">
+				<md-toolbar class="title-tool">
+					SHODAN
+				</md-toolbar>
+				<div class="text-infos">
+					{{shodan.SHODAN_MESSAGE_INFO}}
+				</div>
+				<div layout layout-align="center" layout-padding>
+					<div flex="30">
+						<md-input-container class="md-icon-float md-block" flex-gt-sm="">
+							<label>Domain</label>
+							<input ng-model="shodan.domain" name="domain">
+						</md-input-container>
+					</div>
+					<div>
+						<md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN HOST</md-button>
+						<md-icon>
+							<md-tooltip>
+								{{shodan.SHODAN_HOW_TO}}
+							</md-tooltip>
+							<i class="material-icons">help</i>
+						</md-icon>
+					</div>
+				</div>
 
-            <div ng-show="shodan.hostIsLoad">
-                <json-formatter json="shodan.shodanHostResult" open="10"></json-formatter>
-            </div>
+				<div ng-show="shodan.hostIsLoad">
+					<json-formatter json="shodan.shodanHostResult" open="10"></json-formatter>
+				</div>
 
 
-        </form>
-    </div>
+			</form>
+		</div>
 
-</md-content>
+	</md-content>

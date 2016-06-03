@@ -6,11 +6,13 @@
         .controller('BuiltwithController', BuiltwithController);
 
     /** @ngInject */
-    function BuiltwithController(BuiltwithService) {
+    function BuiltwithController(BuiltwithService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.builtwith = builtwith;
         vm.isLoad = false;
+				vm.BUILTWITH_HOW_TO = HowToMessages.buildwith;
+				vm.BUILTWITH_MESSAGE_INFO = InfosMessages.buildwith;
 
 
         function builtwith(){

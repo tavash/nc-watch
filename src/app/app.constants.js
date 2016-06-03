@@ -15,7 +15,7 @@
             whois: 'Veuillez entrer un nom de domaine valide de type "domaine.com"'
         })
         .constant('InfosMessages', {
-            googleDorks: 'Cet outil permet de',
+            googleDorks: 'Cet outil permet d\'effectuer des recherches spécifiques sur Google. Il utilise des opérateurs de Google',
             buildwith: 'Cet outil permet de lister la liste des technologies utilisées pour développer le site web sélectionné.',
             crawl: 'Cet outil permet de faire l\'analyse syntaxique d\'une page web comme elle téléchargée de manière asynchrone.',
             haveIBeenPwend: 'Cet outil permet de savoir si un des sites, où l\'adresse mail donnée a été utilisée pour créer un compte, a été hacké.',
