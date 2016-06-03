@@ -19,48 +19,47 @@
     <md-content>
 
         <div ng-if="builtwith.isLoad">
-            <h3>Profil détaillé des technologies utilisées sur {{builtwith.domain}} : </h3>
-
+            <!-- <h3>Profil détaillé des technologies utilisées sur {{builtwith.domain}} : </h3>
+ -->
             <div layout layout-wrap>
 
-                <div layout flex="33" flex-xs="100" ng-repeat="items in builtwith.techByTag">
+                <div layout flex="100" flex-xs="100" ng-repeat="items in builtwith.techByTag">
 
-                    <md-card style="background-color:#F6F6F6;">
+                    <md-card flex style="background-color:#F6F6F6;">
 
-                        <md-card-title>
+                        <md-card-title flex style="background-color:#E1F5FE;">
                             <md-card-title-text>
                                 <span class="md-headline"> {{items.realTagName}} </span>
                             </md-card-title-text>
                         </md-card-title>
 
-                        <div ng-repeat="item in items.technologies">
+                        <md-card-content flex class="font-mono">
+                         <div ng-repeat="item in items.technologies">
 
-                            <hr>
-
-                            <md-card-content flex class="font-mono">
-                                <label><b> Nom : </b> {{ item.Name }} </label> <br>
-                                <label><b> Description : </b> {{ item.Description }} </label> <br>
-                                <label><b> Plus d'informations : </b> <a ng-href="{{item.Link}}">{{ item.Link }} </a> </label> <br>
-                                <label><b> Première détection par Built With : </b> {{ item.FirstDetected }} </label> <br>
-                                <label><b> Dernière détection par Built With : </b> {{ item.LastDetected }} </label> <br>
-                                <label ng-if="item.Categories.length > 0"><b> Catégories : </b> {{ item.Categories }} </label> <br>
-                            </md-card-content>
-
+                            <label style="font-size:1.3em"><b> {{ item.Name }} </b></label> <br>
+                            <label>{{ item.Description }} </label> <br>
+                            <label><a ng-href="{{item.Link}}" style="text-decoration:none"> Plus d'informations...</a></label> <br>
+                           <!--  <label><b> Première détection par Built With : </b> {{ item.FirstDetected }} </label> <br>
+                            <label><b> Dernière détection par Built With : </b> {{ item.LastDetected }} </label> <br> -->
+                            <label ng-if="item.Categories.length > 0"><b> Catégories : </b> {{ item.Categories }} </label>
+                            <br>
+                            <br>
                         </div>
+                    </md-card-content>
 
-                    </md-card>
-
-                </div>
+                </md-card>
 
             </div>
+
         </div>
-
-    </md-content>
-
-    <div ng-show="builtwith.isLoad">
-        <h3 ng-if="builtwith.isLoad">Contenu brut</h3>
-        <json-formatter json="builtwith.builtwithResult" open="10"></json-formatter>
     </div>
+
+</md-content>
+
+<div ng-show="builtwith.isLoad">
+    <h3 ng-if="builtwith.isLoad">Contenu brut</h3>
+    <json-formatter json="builtwith.builtwithResult" open="10"></json-formatter>
+</div>
 
 </md-content>
 

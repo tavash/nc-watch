@@ -14,13 +14,13 @@
 
 
         function builtwith(){
-
+          
             BuiltwithService.builtwith(vm.domain)
                 .success(function(res){
                     vm.builtwithResult = res;
 
                     // On récupère seulement les technologies trouvées et utilisées
-                    vm.buildwithTechnologiesResult = res.Results[0].Result.Paths[0].Technologies;
+                    vm.builtwithTechnologiesResult = res.Results[0].Result.Paths[0].Technologies;
 
                     var tagsName = [];
                     for(var i = 0; i < vm.builtwithTechnologiesResult.length; i++) {
