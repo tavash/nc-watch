@@ -24,7 +24,6 @@
 			
 			$scope.$on('$stateChangeSuccess', function (event, toState) {
 				vm.state = $state.current.name;
-				console.log(vm.state);
 			});
 		}
 	}

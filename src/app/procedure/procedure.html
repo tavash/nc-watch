@@ -1,26 +1,59 @@
-<md-content layout="column" layout-padding flex md-whiteframe="2">
+<md-content layout="column" flex md-whiteframe="2">
 
-    	
-	<div flex>
-		<h3>Procedure</h3>		
-	</div>
-	<div flex>
-		<h3>Etape 1</h3>
+	<div flex layout>
 		<div>
-			<p>Récupération des informations : serveur (localication serveur, etc...), fichiers (PDF, Word, PPT, etc...)</p>
+			<md-sidenav class="md-sidenav-left" md-component-id="procedureSidenav" md-whiteframe="2" md-is-locked-open="true">
+				<md-toolbar layout="row">
+					<div class="md-toolbar-tools">
+						<h2>Procedure</h2>
+					</div>
+				</md-toolbar>
+				<md-content layout="column" layout-padding flex>
+					<md-list>
+
+						<md-subheader>Step 1</md-subheader>
+
+						<md-list-item ng-click="procedure.redirectTo('stepone')">
+							How to fetch data
+						</md-list-item>
+						<md-list-item ng-click="procedure.redirectTo('stepone')">
+							How to fetch data
+						</md-list-item>
+
+						<md-divider></md-divider>
+
+						<md-subheader>Step 2</md-subheader>
+						<md-list-item ng-click="procedure.redirectTo('steptwo')">
+							How to sort data
+						</md-list-item>
+						<md-list-item ng-click="procedure.redirectTo('steptwo')">
+							Tache
+						</md-list-item>
+
+						<md-divider></md-divider>
+
+						<md-subheader>Step 3</md-subheader>
+						<md-list-item ng-click="procedure.redirectTo('stepthree')">
+							How to determine 
+						</md-list-item>
+						<md-list-item ng-click="procedure.redirectTo('stepthree')">
+							Tache 4
+						</md-list-item>
+					</md-list>
+				</md-content>
+			</md-sidenav>
+
+		</div>
+		<div flex layout layout-padding>
+			
+			<div flex>
+				<div>
+					<div ng-include="procedure.page"></div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
-	<div flex>
-		<h3>Etape 2</h3>
-		<div>
-			<p>Tri des informations par catégories</p>
-		</div>
-	</div>
-	<div flex>
-		<h3>Etape 3</h3>
-		<div>
-			<p>Estimation du niveau de criticité des informations</p>
-		</div>
-	</div>
-  
+
+
 </md-content>

@@ -54,7 +54,6 @@
 
         $scope.$on('$stateChangeSuccess', function (event, toState) {
         	vm.currentTab = toState.data.selectedTab;
-        	console.log(vm.currentTab);
         });
     }
 })();
