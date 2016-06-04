@@ -21,21 +21,20 @@
 </md-content>-->
 
 <md-content>
-    <div layout-align="center" layout flex>
+   <!--  <div layout-align="center" layout flex>
         <div>
             <h3>Tools list</h3>
         </div>
+    </div> -->
+
+    <div>
+
+        <md-tabs md-dynamic-height md-border-bottom md-selected="tools.currentTab">
+            <md-tab ng-repeat="tab in tools.tabs" md-on-select="tools.switchTab($index)" label="{{tab.name}}"></md-tab>
+        </md-tabs>
+
+        <div ui-view></div>
+        
     </div>
 
-        <div>
-
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab ng-repeat="tab in tools.tabs" label="{{tab.name}}"
-                        md-on-select="tools.switchTab($index)"></md-tab>
-            </md-tabs>
-
-            <div ui-view="tab"></div>
-
-        </div>
-    
 </md-content>

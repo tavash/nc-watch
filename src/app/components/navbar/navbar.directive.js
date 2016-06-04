@@ -20,11 +20,26 @@
 
 		/** @ngInject */
 		function NavbarController(moment) {
-			/*var vm = this;*/
+			var vm = this;
 
-      // "vm.creationDate" is available by directive option "bindToController: true"
-      /*  vm.relativeDate = moment(vm.creationDate).fromNow();*/
-    }
+			vm.navbarElements = [
+			{
+				name: 'Home',
+				route: 'home'
+			},
+			{
+				name: 'Procedure',
+				route: 'procedure'
+			},
+			{
+				name: 'Tools',
+				route: 'tools.crawl'
+			},
+			{
+				name: 'Contact',
+				route: 'contact'
+			}];
+    	}
   }
 
 })();

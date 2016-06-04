@@ -1,8 +1,5 @@
 <md-toolbar layout="row" layout-align="center center" flex md-whiteframe="2">
 	<section flex layout="row" layout-align="center">
-		<md-button ui-sref="home" class="">Home</md-button>
-		<md-button ui-sref="procedure">Procedure</md-button>
-		<md-button ui-sref="tools" class="">Tools</md-button>
-		<md-button ui-sref="contact" class="">Contact</md-button>
+		<md-button ng-repeat="b in vm.navbarElements" ui-sref="{{b.route}}" ui-sref-active="md-raised">{{b.name}}</md-button>
 	</section>
 </md-toolbar>

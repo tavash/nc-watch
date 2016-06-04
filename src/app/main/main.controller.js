@@ -43,10 +43,10 @@
 			return d.promise;
 		};
 
-		function extractEmails (text)
+		function extractEmails (text, word)
 		{
 			//return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-			return text.match(/([a-zA-Z0-9._-]+@adacis.net+)/gi);
+			return text.match(/([a-zA-Z0-9._-]+word+)/gi);
 
 			/*var data =result[i].data;
 			console.log(data);

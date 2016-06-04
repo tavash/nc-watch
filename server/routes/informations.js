@@ -12,7 +12,7 @@ var querystring = require('querystring');
 router.get('/whois', getWhoIs);
 router.get('/shodanHost', getShodanHost);
 router.get('/geolocation', getGeolocation);
-router.get('/buildwith', getBuildwith);
+router.get('/builtwith', getBuiltwith);
 
 // Récupérer des informations sur le possesseur du domaine
 function getWhoIs(req, res, next) {
@@ -47,11 +47,11 @@ function getShodanHost(req, res, next) {
     });
 }
 
-function getBuildwith(req, res, next) {
+function getBuiltwith(req, res, next) {
 
     var options = {
         host: 'api.builtwith.com',
-        path: '/v9/api.json?key=' + keys.buildwithKey + '&lookup=' + req.query.domain,
+        path: '/v9/api.json?key=' + keys.builtwithKey + '&lookup=' + req.query.domain,
         method: 'GET',
         port: 80
     };
