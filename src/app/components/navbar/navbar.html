@@ -1,5 +1,16 @@
 <md-toolbar layout="row" layout-align="center center" flex md-whiteframe="2">
 	<section flex layout="row" layout-align="center">
-		<md-button ng-repeat="b in vm.navbarElements" ui-sref="{{b.route}}" ui-sref-active="md-raised">{{b.name}}</md-button>
+		<md-button ui-sref="home" ui-sref-active="md-raised"
+		>Home</md-button>
+
+		<md-button ui-sref="procedure" ui-sref-active="md-raised"
+		 >Procedure</md-button>
+
+		<md-button ui-sref="tools.crawl" ng-class="{ 'md-raised' : vm.state.includes('tools') }" 
+		 >Tools</md-button>
+
+		<md-button ui-sref="contact" ui-sref-active="md-raised"
+		>Contact</md-button>
+
 	</section>
 </md-toolbar>

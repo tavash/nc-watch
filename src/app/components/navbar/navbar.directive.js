@@ -19,27 +19,14 @@
 		return directive;
 
 		/** @ngInject */
-		function NavbarController(moment) {
+		function NavbarController($state, $scope) {
 			var vm = this;
-
-			vm.navbarElements = [
-			{
-				name: 'Home',
-				route: 'home'
-			},
-			{
-				name: 'Procedure',
-				route: 'procedure'
-			},
-			{
-				name: 'Tools',
-				route: 'tools.crawl'
-			},
-			{
-				name: 'Contact',
-				route: 'contact'
-			}];
-    	}
-  }
+			
+			$scope.$on('$stateChangeSuccess', function (event, toState) {
+				vm.state = $state.current.name;
+				console.log(vm.state);
+			});
+		}
+	}
 
 })();
