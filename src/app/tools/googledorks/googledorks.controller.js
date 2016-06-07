@@ -6,9 +6,9 @@
         .controller('GoogleDorksController', GoogleDorksController);
 
     /** @ngInject */
-    function GoogleDorksController($window, GoogleDorksService, HowToMessages, InfosMessages) {
+    function GoogleDorksController($window, GoogleDorksService, HowToMessages, InfosMessages, ToolsService) {
         var vm = this;
-
+        //ToolsService.saveGoogleDorks(vm);
         vm.search = search;
         vm.changedValue = changedValue;
         //var googleLink = https://www.google.com/webhp?ie=utf-8&oe=utf-8gfe_rd=cr&ei=ILFGV6GTL7Ss8wer_7igAw#safe=off&q=";
