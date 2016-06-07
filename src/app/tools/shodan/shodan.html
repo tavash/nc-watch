@@ -44,7 +44,7 @@
                     <h3>Liste des ports scannés par SHODAN sur {{shodan.domain}} : </h3>
 
                     <div layout layout-wrap>
-                        <div layout flex="50" flex-xs="100" ng-repeat="dataPort in shodan.dataPorts">
+                        <div layout flex="100" flex-xs="100" ng-repeat="dataPort in shodan.dataPorts">
                             <md-card flex>
 
                                 <md-card-title>
@@ -55,75 +55,190 @@
 
                                 <md-card-content flex>
                                     <!-- Commun  -->
-                                    <label>ISP : <b> {{ dataPort.isp }} </b></label><br>
-                                    <label>Hostnames : <b> {{ dataPort.hostnames }} </b></label><br>
-                                    <label>Timestamp : <b> {{ dataPort.timestamp }} </b></label><br>
-                                    <label>Domains : <b> {{ dataPort.domains }} </b></label><br>
-                                    <label>Organisation : <b> {{ dataPort.org }} </b></label><br>
-                                    <label>XML Data : <b> {{ dataPort.data }} </b></label><br>
-                                    <label>ASN : <b> {{ dataPort.asn }} </b></label><br>
-                                    <label>Transport : <b> {{ dataPort.transport }} </b></label><br>
-                                    <label>IP : <b> {{ dataPort.ip_str }} </b></label><br>
-                                    <label>Location: <b> {{ dataPort.location }} </b></label><br>
+                                    <div ng-if="dataPort.isp"><label>ISP : <b> {{ dataPort.isp }} </b></label><br></div>
+                                    <div ng-if="dataPort.hostnames"><label>Hostnames : <b> {{ dataPort.hostnames[0] }} </b></label><br></div>
+                                    <div ng-if="dataPort.timestamp"><label>Timestamp : <b> {{ dataPort.timestamp }} </b></label><br></div>
 
-                                    <!-- Spécifique -->
-                                    <label>ISP : <b> {{ dataPort.isp }} </b></label><br>
+                                    <div ng-if="dataPort.domains[0]"><label>Domains : <b> {{ dataPort.domains[0] }} </b></label><br></div>
 
-                                    <div>
-                                        <label>SSL <b></b></label><br>
-                                        <label>Prime : <b> {{ dataPort.ssl.prime }} </b></label><br>
-                                        <label>Public key : <b> {{ dataPort.ssl.public_key }} </b></label><br>
-                                        <label>Bits : <b> {{ dataPort.ssl.bits }} </b></label><br>
-                                        <label>Fingerprint : <b> {{ dataPort.ssl.fingerprint }} </b></label><br>
+                                    <div ng-if="dataPort.org"><label>Organisation : <b> {{ dataPort.org }} </b></label><br></div>
+                                    <div ng-if="dataPort.data"><label>XML Data : <b> {{ dataPort.data }} </b></label><br></div>
+                                    <div ng-if="dataPort.asn"><label>ASN : <b> {{ dataPort.asn }} </b></label><br></div>
+                                    <div ng-if="dataPort.transport"><label>Transport : <b> {{ dataPort.transport }} </b></label><br></div>
+                                    <div ng-if="dataPort.ip_str"><label>IP : <b> {{ dataPort.ip_str }} </b></label><br></div>
+                                    <div ng-if="dataPort.isp"><label>ISP : <b> {{ dataPort.isp }} </b></label><br></div>
 
-                                        <div ng-repeat="item in dataPorts.ssl.tslsext">
-                                            <label>ID : <b> {{ item.id }} </b></label><br>
-                                            <label>Name : <b> {{ item.name }} </b></label><br>
-                                        </div>
-
-                                        <div ng-repeat="item in dataPorts.ssl.versions">
-                                            <label><b> {{ item }} </b></label><br>
-                                        </div>
-
-                                        <label>Certificates<b></b></label><br>
-                                        <label>Sig Alg : <b> {{ dataPort.ssl.cert.sig_alg }} </b></label><br>
-                                        <label>Issued : <b> {{ dataPort.ssl.cert.issued }} </b></label><br>
-                                        <label>Sig Alg : <b> {{ dataPort.ssl.cert.expires }} </b></label><br>
-
-                                        <label><b>Public key</b></label><br>
-                                        <label>Bits : <b> {{ dataPort.ssl.cert.pubkey }} </b></label><br>
-                                        <label>Type : <b> {{ dataPort.ssl.cert.type }} </b></label><br>
-
-                                        <label>Version : <b> {{ dataPort.ssl.cert.version }} </b></label><br>
-
-                                        <div ng-repeat="item in dataPorts.ssl.cert.extensions">
-                                            <label>Name : <b> {{ item.name }} </b></label><br>
-                                            <label>Data : <b> {{ item.data }} </b></label><br>
-                                        </div>
-
-                                        <label><b>Fingerprint</b></label><br>
-                                        <label>SHA256 : <b> {{ dataPort.ssl.cert.fingerprint.sha256 }} </b></label><br>
-                                        <label>SHA1 : <b> {{ dataPort.ssl.cert.fingerprint.sha1 }} </b></label><br>
-
-                                        <label>Signal : <b> {{ dataPort.ssl.cert.serial }} </b></label><br>
-
-                                        <label><b>Issuer</b></label><br>
-                                        <label>C : <b> {{ dataPort.ssl.cert.issuer.C }} </b></label><br>
-                                        <label>OU : <b> {{ dataPort.ssl.cert.issuer.OU }} </b></label><br>
-                                        <label>O : <b> {{ dataPort.ssl.cert.issuer.O }} </b></label><br>
-                                        <label>CN : <b> {{ dataPort.ssl.cert.issuer.CN }} </b></label><br>
-
-                                        <label>Expired : <b> {{ dataPort.ssl.cert.expired }} </b></label><br>
-
-                                        <label><b>Subject</b></label><br>
-                                        <label>C : <b> {{ dataPort.ssl.cert.subject.C }} </b></label><br>
-                                        <label>Email address : <b> {{ dataPort.ssl.cert.subject.emailAddress }} </b></label><br>
-                                        <label>CN : <b> {{ dataPort.ssl.cert.subject.CN }} </b></label><br>
-
+                                    <div ng-if="dataPort.location">
+                                        <br>
+                                        <div><label><b>Location </b></label><br></div>
+                                    </div>
+                                    <div flex-offset="5">
+                                        <div ng-if="dataPort.location.city"><label>City : <b> {{ dataPort.location.city }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.region_code"><label>Region code : <b> {{ dataPort.location.region_code }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.area_code"><label>Area code : <b> {{ dataPort.location.area_code }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.postal_code"><label>Postal code : <b> {{ dataPort.location.postal_code }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.dma_code"><label>Dma code : <b> {{ dataPort.location.dma_code }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.country_code"><label>Country code : <b> {{ dataPort.location.country_code }} </b></label><br></div>
+                                        <div ng-if="dataPort.location.country_name"><label>Country name : <b> {{ dataPort.location.country_name }} </b></label><br></div>
+                                        <br>
                                     </div>
 
+                                    <br>
+
+                                    <div ng-if="dataPort.ssl">
+                                        <div>
+                                            <label><b>SSL</b></label><br>
+                                            <br>
+
+                                            <div flex-offset="5">
+                                                <label><b>DHPARAMS</b></label><br>
+                                                <div flex-offset="5">
+                                                    <div ng-if="dataPort.ssl.dhparams.prime"><label>Prime : <b> {{ dataPort.ssl.dhparams.prime }} </b></label><br></div>
+                                                    <div ng-if="dataPort.ssl.dhparams.public_key"><label>Public key : <b> {{ dataPort.ssl.dhparams.public_key }} </b></label><br></div>
+                                                    <div ng-if="dataPort.ssl.dhparams.bits"><label>Bits : <b> {{ dataPort.ssl.dhparams.bits }} </b></label><br></div>
+                                                    <div ng-if="dataPort.ssl.dhparams.fingerprint"><label>Fingerprint : <b> {{ dataPort.ssl.dhparams.fingerprint }} </b></label><br></div>
+                                                    <br>
+                                                </div>
+
+                                                <div ng-if="dataPort.ssl.tslsext.id">
+                                                    <label><b>TLSEXT</b></label><br>
+                                                    <div flex-offset="5">
+                                                        <div ng-repeat="item in dataPort.ssl.tslsext" >
+                                                            <div ng-if="item.id"><label>ID : <b> {{ item.id }} </b></label><br></div>
+                                                            <div ng-if="item.name"><label>Name : <b> {{ item.name }} </b></label><br></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div ng-if="dataPort.ssl.versions[0]">
+                                                    <label><b>Versions</b></label><br>
+                                                    <div flex-offset="5">
+                                                        <div ng-repeat="item in dataPort.ssl.versions">
+                                                            <label><b> {{ item }} </b></label><br>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </div>
 
 
+                                                <div>
+                                                    <div ng-if="dataPort.ssl.cert">
+                                                        <label><b>Certificates</b></label><br>
+                                                        <div flex-offset="5">
+                                                            <label>Sig Alg : <b> {{ dataPort.ssl.cert.sig_alg }} </b></label><br>
+                                                            <label>Issued : <b> {{ dataPort.ssl.cert.issued }} </b></label><br>
+                                                            <label>Expires : <b> {{ dataPort.ssl.cert.expires }} </b></label><br>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-if="dataPort.ssl.cert.pubkey">
+                                                        <label><b>Public key</b></label><br>
+                                                        <div flex-offset="5">
+                                                            <label>Bits : <b> {{ dataPort.ssl.cert.pubkey.bits }} </b></label><br>
+                                                            <label>Type : <b> {{ dataPort.ssl.cert.pubkey.type }} </b></label><br>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+
+                                                    <div ng-if="dataPort.ssl.cert.version"><label>Version : <b> {{ dataPort.ssl.cert.version }} </b></label><br><br></div>
+
+                                                    <div ng-if="dataPort.ssl.cert.fingerprint">
+                                                        <label><b>Fingerprint</b></label><br>
+                                                        <div flex-offset="5">
+                                                            <label flex>SHA256 : <b> {{ dataPort.ssl.cert.fingerprint.sha256 }} </b></label><br>
+                                                            <label flex>SHA1 : <b> {{ dataPort.ssl.cert.fingerprint.sha1 }} </b></label><br>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-if="dataPort.ssl.cert.serial"><label>Serial : <b> {{ dataPort.ssl.cert.serial }} </b></label><br><br></div>
+
+                                                    <div ng-if="dataPort.ssl.issuer">
+                                                        <label><b>Issuer</b></label><br>
+                                                        <div flex-offset="5">
+                                                            <label>C : <b> {{ dataPort.ssl.cert.issuer.C }} </b></label><br>
+                                                            <label>OU : <b> {{ dataPort.ssl.cert.issuer.OU }} </b></label><br>
+                                                            <label>O : <b> {{ dataPort.ssl.cert.issuer.O }} </b></label><br>
+                                                            <label>CN : <b> {{ dataPort.ssl.cert.issuer.CN }} </b></label><br>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div ng-if="dataPort.ssl.cert.expired"><label>Expired : <b> {{ dataPort.ssl.cert.expired }} </b></label><br><br></div>
+
+                                                    <div ng-if="dataPort.ssl.cert.suject">
+                                                        <label><b>Subject</b></label><br>
+                                                        <div flex-offset="5">
+                                                            <label>C : <b> {{ dataPort.ssl.cert.subject.C }} </b></label><br>
+                                                            <label>Email address : <b> {{ dataPort.ssl.cert.subject.emailAddress }} </b></label><br>
+                                                            <label>CN : <b> {{ dataPort.ssl.cert.subject.CN }} </b></label><br>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div ng-if="dataPort.ssl.cipher">
+                                                    <label><b>Cipher</b></label><br>
+                                                    <div flex-offset="5">
+                                                        <label>Version : <b> {{ dataPort.ssl.cipher.version }} </b></label><br>
+                                                        <label>Bits : <b> {{ dataPort.ssl.cipher.bits }} </b></label><br>
+                                                        <label>Name : <b> {{ dataPort.ssl.cipher.name }} </b></label><br>
+                                                        <br>
+                                                    </div>
+                                                </div>
+
+                                                <div ng-if="dataPort.ssl.chain">
+                                                    <label><b>Chain certificates</b></label><br>
+                                                    <div flex-offset="5">
+                                                        <div ng-repeat="item in dataPort.ssl.chain">
+                                                            <label> {{ item }} </label><br><br>
+                                                        </div>
+                                                        <br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="dataPort.opts.heartbleed">
+                                        <label><b>Opts</b></label><br>
+                                        <div flex-offset="5">
+                                            <div ng-repeat="item in dataPort.opts.vulns">
+                                                <label> {{ item }} </label><br>
+                                            </div>
+                                            <div ng-if="dataPort.opts.heartbleed"><label>Heartbleed : <b> {{ dataPort.opts.heartbleed }} </b></label><br></div>
+                                            <div ng-if="dataPort.opts.pem"><label>Pem : <b> {{ dataPort.opts.pem }} </b></label><br></div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="dataPort.html"><label>Html : <b> {{ dataPort.html }} </b></label><br></div>
+                                    <div ng-if="dataPort.product"><label>Product : <b> {{ dataPort.product }} </b></label><br><br></div>
+
+                                    <div ng-if="dataPort.http">
+                                        <label><b>HTTP</b></label><br>
+                                        <div flex-offset="5">
+                                            <label>Title : <b> {{ dataPort.http.title }} </b></label><br>
+                                            <label>Server : <b> {{ dataPort.http.server }} </b></label><br>
+                                            <label>Host : <b> {{ dataPort.http.host }} </b></label><br>
+                                            <label>Html : <b> {{ dataPort.http.html }} </b></label><br>
+                                            <label>Location : <b> {{ dataPort.http.location }} </b></label><br>
+                                            <label>Html_hash : <b> {{ dataPort.http.html_hash }} </b></label><br>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="dataPort.deprecated">
+                                        <label><b>Deprecated</b></label><br>
+                                        <div flex-offset="5">
+                                            <label> {{ dataPort.deprecated }} </label><br>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div ng-if="dataPort.http.cep[0]"><label>Cpe : <b> {{ dataPort.http.cpe[0] }} </b></label><br></div>
 
                                 </md-card-content>
 
@@ -131,53 +246,19 @@
                         </div>
                     </div>
 
-                    <!--
-                    <div layout="column">
-
-                        <div layout="row" layout-wrap ng-repeat="port in shodan.ports">
-
-                            <md-card flex="33" style="background-color:#F6F6F6;">
-
-                                <md-card-title>
-                                    <md-card-title-text>
-                                        <span class="md-headline">Domaine</span>
-                                    </md-card-title-text>
-                                </md-card-title>
-
-                                <md-card-content flex class="font-mono">
-                                    <label><b> Nom : </b>  </label> <br>
-                                    <label><b> Identifiant : </b> </label> <br>
-                                    <label><b> Date création : </b> </label> <br>
-                                    <label><b> Date expiration : </b> </label> <br>
-                                    <label><b> Statut : </b> </label> <br>
-                                    <label><b> Serveur : </b> </label> <br>
-                                    <label><b> DNSSEC : </b> </label> <br>
-                                </md-card-content>
-
-                            </md-card>
-
-                        </div>
-                        -->
 
                 </div>
+            </md-content>
 
+            <br>
 
+            <div ng-show="shodan.isLoad">
+                <h3>Contenu brut</h3>
+                <json-formatter json="shodan.shodanHostResult" open="0"></json-formatter>
+            </div>
 
-
-
-
+        </form>
     </div>
-
-</md-content>
-
-<br>
-
-<div ng-show="shodan.isLoad">
-    <json-formatter json="shodan.shodanHostResult" open="10"></json-formatter>
-</div>
-
-</form>
-</div>
 
 </md-content>
 
