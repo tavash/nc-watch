@@ -4,10 +4,10 @@ var bodyParser = require('body-parser');
 var Crawler = require("crawler");
 var Robots = require("robots");
 
-router.post('/', crawlPost);
+router.post('/', analyzerPost);
 router.get('/robots', getRobots);
 
-function crawlPost(req, res, next) {
+function analyzerPost(req, res, next) {
 	if (req.body.url) {
 		var c = new Crawler({
 			maxConnections : 3,

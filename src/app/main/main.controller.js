@@ -5,17 +5,18 @@
 	.controller('MainController', MainController);
 
 	/** @ngInject */
-	function MainController(WhoIsService, GoogleDorksService, SslService, HaveIBeenPwnedService, $q) {
+	function MainController(WhoIsService, GoogleDorksService, SslService, AnalyzerService, $q) {
 		var vm = this;
 
 		vm.watch = watch;
 		vm.hasResult = false;
 		vm.watchResult = {	'BUILTWITH': {'title': 'BuiltWith', 'content': null, 'route' : 'tools.builtwith'},
 		'HAVEIBEENPWNED': {'title': 'HaveIBeenPwned', 'content': null, 'route' : 'tools.haveibeenpwned'},
-		'FILES': {'title': 'Relatives Files', 'content': null, 'route' : 'tools.googledorks'},
+		'GOOGLEDORKS': {'title': 'Googles dorks : Emails', 'content': null, 'route' : 'tools.googledorks'},
 		'SHODAN': {'title': 'Shodan', 'content': null, 'route' : 'tools.shodan'},
 		'SSL': {'title': 'Ssl labs', 'content': null, 'route' : 'tools.ssl'},
-		'WHOIS': {'title': 'Whois', 'content': null, 'route' : 'tools.whois'}};
+		'WHOIS': {'title': 'Whois', 'content': null, 'route' : 'tools.whois'},
+		'ANALYZER' : {'title': 'Analyzer', 'content': null, 'route' : 'tools.analyzer'}};
 
 		function whois() {
 			var d = $q.defer();
@@ -34,6 +35,13 @@
 		function ssl() {
 			var d = $q.defer();
 			SslService.getSsl(vm.domain).then(function(result) { d.resolve(result); });
+			return d.promise;
+		};
+
+		function analyzer() {
+			var d = $q.defer();
+			var prefixeSelected = 'https://';
+			AnalyzerService.analyzer(prefixeSelected+vm.domain).then(function(result) { d.resolve(result); });
 			return d.promise;
 		};
 
@@ -64,9 +72,9 @@
 		function watch() {
 			var promises = [];
 			promises.push(whois());
-			promises.push(haveibeenpwned());
 			//promises.push(googleSearch());
-			promises.push(ssl());
+			//promises.push(ssl());
+			promises.push(analyzer());
 
 			$q.all(promises)
 			.then(function(result) {
@@ -75,16 +83,12 @@
 					var url = result[i].config.url;
 					if (url.indexOf('whois')>-1){
 						vm.watchResult.WHOIS.content = result[i].data;
-					} else if (url.indexOf('buildwith')>-1){
-						vm.watchResult.BUILTWITH.content = result[i].data;
 					} else if (url.indexOf('ssl')>-1){
 						vm.watchResult.SSL.content = result[i].data;
-					} else if (url.indexOf('shodan')>-1){
-						vm.watchResult.SHODAN.content = result[i].data;
 					} else if (url.indexOf('googleSearch')>-1){
-						vm.watchResult.FILES.content = data;
-					} else if (url.indexOf('haveibeenpwned')>-1){
-						vm.watchResult.HAVEIBEENPWNED.content = result[i].data;
+						vm.watchResult.GOOGLEDORKS.content = result[i].data.splice(-2);
+					}	else if (url.indexOf('analyzer')>-1){
+						vm.watchResult.ANALYZER.content = result[i].data;
 					}
 				}
 				vm.hasResult = true;

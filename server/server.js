@@ -21,7 +21,7 @@ app.use(cors());
 app.get('/', function (req, res) { return res.redirect('/api'); });
 // API 
 app.get('/api', function(req, res) { res.render('index', {'title' : config.name}); });
-app.use('/api/crawl', require('./routes/crawler'));
+app.use('/api/analyzer', require('./routes/analyzer'));
 app.use('/api/informations', require('./routes/informations'));
 app.use('/api/googleSearch', require('./routes/googleSearch'));
 app.use('/api/ssl', require('./routes/ssl'));

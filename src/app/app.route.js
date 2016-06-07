@@ -31,11 +31,11 @@
                 }
             }
         })
-        .state('tools.crawl', {
-            url: '/crawl',
-            templateUrl: 'app/tools/crawl/crawl.html',
-            controller: 'CrawlController',
-            controllerAs: 'crawl',
+        .state('tools.analyzer', {
+            url: '/analyzer',
+            templateUrl: 'app/tools/analyzer/analyzer.html',
+            controller: 'AnalyzerController',
+            controllerAs: 'analyzer',
             data: {
                 'selectedTab': 0
             }

@@ -12,9 +12,9 @@
 
 		vm.tabs = [
 		{
-			name: 'Crawl',
-			url: 'crawl',
-			state: 'tools.crawl'
+			name: 'Analyzer',
+			url: 'analyzer',
+			state: 'tools.analyzer'
 		},
 		{
 			name: 'Have I Been Pwned',

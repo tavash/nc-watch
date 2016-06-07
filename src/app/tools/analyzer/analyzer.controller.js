@@ -3,46 +3,46 @@
 
 	angular
 	.module('ncwatch')
-	.controller('CrawlController', CrawlController);
+	.controller('AnalyzerController', AnalyzerController);
 
 	/** @ngInject */
-	function CrawlController(CrawlService, $mdDialog, $mdToast, HowToMessages, InfosMessages) {
+	function AnalyzerController(AnalyzerService, $mdDialog, $mdToast, HowToMessages, InfosMessages) {
 		var vm = this;
-		vm.crawl = crawl;
+		vm.analyzer = analyzer;
 		vm.prefixeSelected = 'http://';
-		vm.CRAWL_HOW_TO = HowToMessages.crawl;
-		vm.CRAWL_MESSAGE_INFO = InfosMessages.crawl;
+		vm.ANALYZER_HOW_TO = HowToMessages.analyzer;
+		vm.ANALYZER_MESSAGE_INFO = InfosMessages.analyzer;
 
-		vm.isCrawl = false;
+		vm.isAnalyzer = false;
 		vm.isRobots = false;
 		vm.isHtaccess = false;
 		vm.isSitemap = false;
 
-		vm.crawlResult = {};
+		vm.analyzerResult = {};
 		vm.robotsTxtResult = {};
 		vm.htaccess = '';
 		vm.sitemap = '';
 
-		function crawl() {
+		function analyzer() {
 			var url = vm.prefixeSelected + vm.url;
-			vm.isCrawl = false;
+			vm.isAnalyzer = false;
 			vm.isRobots = false;
 			vm.isHtaccess = false;
 			vm.isSitemap = false;
 
-			// Crawl de l'index du site
-			CrawlService.crawl(url).success(function(res){
+			// Analyzer de l'index du site
+			AnalyzerService.analyzer(url).success(function(res){
 				if (res.err) {
-					vm.isCrawl = false;
-					vm.crawlResult = {};
+					vm.isAnalyzer = false;
+					vm.analyzerResult = {};
 					showErreurDialog(res.err);
 				} else {
 					getSitemap(url);
 					getRobots(url);
 					getHtaccess(url);
-					vm.crawlResult = res;
-					delete vm.crawlResult.body;
-					vm.isCrawl = true;
+					vm.analyzerResult = res;
+					delete vm.analyzerResult.body;
+					vm.isAnalyzer = true;
 				}
 			});
 		}
@@ -52,7 +52,7 @@
 			var sitemapUrl = url + '/sitemap.xml';
 			vm.sitemap = '';
 
-			CrawlService.crawl(sitemapUrl).success(function(res){
+			AnalyzerService.analyzer(sitemapUrl).success(function(res){
 				if (res.err) {
 					vm.isSitemap = false;
 				} else {
@@ -73,7 +73,7 @@
 
 		// Récupération du Robots.txt
 		function getRobots(url) {
-			CrawlService.getRobots(url).success(function(res) {
+			AnalyzerService.getRobots(url).success(function(res) {
 				if (res.err) {
 					vm.isRobots = false;
 					vm.robotsTxtResult = {};
@@ -89,7 +89,7 @@
 		function getHtaccess(url) {
 			vm.htaccess = '';
 			var urlHtaccess = url + '/.htaccess';
-			CrawlService.crawl(urlHtaccess).success(function(res) {
+			AnalyzerService.analyzer(urlHtaccess).success(function(res) {
 				if (!res.err) {
 					vm.isHtaccess = true;
 					switch (res.statusCode) {

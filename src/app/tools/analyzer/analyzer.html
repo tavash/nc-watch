@@ -3,28 +3,28 @@
 		<form>
 			<div flex class="search">
 				<md-toolbar class="title-tool">
-					CRAWLER
+					ANALYZER
 				</md-toolbar>
 				<div class="text-infos">
-					{{crawl.CRAWL_MESSAGE_INFO}}
+					{{analyzer.ANALYZER_MESSAGE_INFO}}
 				</div>
 				<div layout layout-align="center" layout-xs="column">
 					<md-input-container flex="10" flex-offset="20">
 						<label>Préfixe</label>
-						<md-select ng-model="crawl.prefixeSelected" name="prefixe" required>
+						<md-select ng-model="analyzer.prefixeSelected" name="prefixe" required>
 							<md-option value="http://">http://</md-option>
 							<md-option value="https://">https://</md-option>
 						</md-select>
 					</md-input-container>
 					<md-input-container flex="40" class="md-icon-float md-block">
 						<label>URL</label>
-						<input ng-model="crawl.url" name="url">
+						<input ng-model="analyzer.url" name="url">
 					</md-input-container>
 					<div flex="30">
-						<md-button class="md-raised" ng-click="crawl.crawl()" type="submit">CRAWL</md-button>
+						<md-button class="md-raised" ng-click="analyzer.analyzer()" type="submit">analyzer</md-button>
 						<md-icon>
 							<md-tooltip>
-								{{crawl.CRAWL_HOW_TO}}
+								{{analyzer.ANALYZER_HOW_TO}}
 							</md-tooltip>
 							<i class="material-icons">help</i>
 						</md-icon>
@@ -33,7 +33,7 @@
 			</div>
 		</form>
 
-		<div layout layout-wrap ng-show="crawl.isCrawl" flex-offset="1">
+		<div layout layout-wrap ng-show="analyzer.isAnalyzer" flex-offset="1">
 			<div layout flex="100">
 				<h2>Informations de la requête HTTP</h2>
 			</div>
@@ -45,10 +45,10 @@
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-content flex class="font-mono">
-						<label><b> Type : </b> {{ crawl.crawlResult.headers.server }} </label> <br>
-						<label><b> Version : </b> {{ crawl.crawlResult.headers['x-powered-by'] || 'Inconnu'}} </label> <br>
-						<label><b> Port : </b> {{ crawl.crawlResult.request.uri.port }} </label> <br>
-						<label><b> Protocole : </b> {{ crawl.crawlResult.request.uri.protocol }} </label> <br>
+						<label><b> Type : </b> {{ analyzer.analyzerResult.headers.server }} </label> <br>
+						<label><b> Version : </b> {{ analyzer.analyzerResult.headers['x-powered-by'] || 'Inconnu'}} </label> <br>
+						<label><b> Port : </b> {{ analyzer.analyzerResult.request.uri.port }} </label> <br>
+						<label><b> Protocole : </b> {{ analyzer.analyzerResult.request.uri.protocol }} </label> <br>
 					</md-card-content>
 				</md-card>
 			</div>
@@ -60,18 +60,18 @@
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-content flex class="font-mono">
-						<label><b> Dernière modification : </b> {{ (crawl.crawlResult.headers['last-modified'] | date: 'dd/MM:YYYY hh:mm') || 'Inconnu'}} </label> <br>
-						<label><b> Type de contenu : </b> {{ crawl.crawlResult.headers['content-type'] }} </label> <br>
-						<label><b> Encodage : </b> {{ crawl.crawlResult.headers['content-encoding'] }} </label> <br>
-						<label><b> Liens : </b> {{ crawl.crawlResult.headers.link || 'Aucun' }} </label> <br>
-						<label><b> Langue : </b> {{ crawl.crawlResult.headers['content-language'] || 'Non défini' }} </label> <br>
+						<label><b> Dernière modification : </b> {{ (analyzer.analyzerResult.headers['last-modified'] | date: 'dd/MM:YYYY hh:mm') || 'Inconnu'}} </label> <br>
+						<label><b> Type de contenu : </b> {{ analyzer.analyzerResult.headers['content-type'] }} </label> <br>
+						<label><b> Encodage : </b> {{ analyzer.analyzerResult.headers['content-encoding'] }} </label> <br>
+						<label><b> Liens : </b> {{ analyzer.analyzerResult.headers.link || 'Aucun' }} </label> <br>
+						<label><b> Langue : </b> {{ analyzer.analyzerResult.headers['content-language'] || 'Non défini' }} </label> <br>
 					</md-card-content>
 				</md-card>
 			</div>
 		</div>
 		<div layout layout-wrap>
 			<div layout flex="50">
-				<div layout layout-wrap flex ng-show="crawl.isHtaccess">
+				<div layout layout-wrap flex ng-show="analyzer.isHtaccess">
 					<div layout flex="100">
 						<h2>Récupération de l'htaccess</h2>
 					</div>
@@ -83,14 +83,14 @@
 								</md-card-title-text>
 							</md-card-title>
 							<md-card-content flex class="font-mono">
-								<label>{{crawl.htaccess}}</label>
+								<label>{{analyzer.htaccess}}</label>
 							</md-card-content>
 						</md-card>
 					</div>
 				</div>
 			</div>
 			<div layout flex="50">
-				<div layout layout-wrap flex ng-if="crawl.isSitemap">
+				<div layout layout-wrap flex ng-if="analyzer.isSitemap">
 					<div layout flex="100">
 						<h2>Récupération du sitemap.xml</h2>
 					</div>
@@ -102,7 +102,7 @@
 								</md-card-title-text>
 							</md-card-title>
 							<md-card-content flex class="font-mono">
-								<label ng-bind-html="crawl.sitemap"></label>
+								<label ng-bind-html="analyzer.sitemap"></label>
 							</md-card-content>
 						</md-card>
 					</div>
@@ -110,11 +110,11 @@
 			</div>
 		</div>
 
-		<div layout layout-wrap ng-show="crawl.isRobots">
+		<div layout layout-wrap ng-show="analyzer.isRobots">
 			<div layout flex="100">
 				<h2>Récupération du Robots.txt</h2>
 			</div>
-			<div layout flex="100" ng-if="crawl.robotsTxtResult.sitemaps.length > 0">
+			<div layout flex="100" ng-if="analyzer.robotsTxtResult.sitemaps.length > 0">
 				<md-card flex style="background-color:#F6F6F6;">
 					<md-card-title>
 						<md-card-title-text>
@@ -122,13 +122,13 @@
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-content flex class="font-mono">
-						<div ng-repeat="sitemap in crawl.robotsTxtResult.sitemaps">
+						<div ng-repeat="sitemap in analyzer.robotsTxtResult.sitemaps">
 							<a href="{{sitemap}}" target="_blank">{{sitemap}}</a>
 						</div>
 					</md-card-content>
 				</md-card>
 			</div>
-			<div layout flex="50" ng-if="crawl.robotsTxtResult.defaultEntry.rules.length > 0">
+			<div layout flex="50" ng-if="analyzer.robotsTxtResult.defaultEntry.rules.length > 0">
 				<md-card flex style="background-color:#F6F6F6;">
 					<md-card-title>
 						<md-card-title-text>
@@ -136,18 +136,18 @@
 						</md-card-title-text>
 					</md-card-title>
 					<md-card-content flex class="font-mono">
-						<h3 ng-if="(crawl.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}).length">Autorisé</h3>
-						<div ng-repeat="entry in crawl.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}">
+						<h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}).length">Autorisé</h3>
+						<div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}">
 							<label>{{entry.path | decodeURL}}</label>
 						</div>
-						<h3 ng-if="(crawl.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}).length">Interdit</h3>
-						<div ng-repeat="entry in crawl.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}">
+						<h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}).length">Interdit</h3>
+						<div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}">
 							<label>{{entry.path | decodeURL}}</label>
 						</div>
 					</md-card-content>
 				</md-card>
 			</div>
-			<div layout flex="50" ng-repeat="robot in crawl.robotsTxtResult.entries">
+			<div layout flex="50" ng-repeat="robot in analyzer.robotsTxtResult.entries">
 				<md-card flex style="background-color:#F6F6F6;" >
 					<md-card-title>
 						<md-card-title-text>
@@ -168,20 +168,20 @@
 			</div>
 		</div>
 		
-		<div layout layout-wrap layout-padding ng-if="crawl.isCrawl">
+		<div layout layout-wrap layout-padding ng-if="analyzer.isAnalyzer">
 			<div layout flex="100">
 				<h2>Requête HTTP de la page</h2>
 			</div>
 			<div layout flex="100">
-				<json-formatter class="brutResult" flex json="crawl.crawlResult" open="2"></json-formatter>
+				<json-formatter class="brutResult" flex json="analyzer.analyzerResult" open="2"></json-formatter>
 			</div>
 		</div>
-		<div layout layout-wrap layout-padding ng-if="crawl.isRobots">
+		<div layout layout-wrap layout-padding ng-if="analyzer.isRobots">
 			<div layout flex="100">
 				<h2>Résultat du Robots.txt</h2>
 			</div>
 			<div layout flex="100">
-				<pre flex class="brutResult" type="txt">{{crawl.robotsTxtResult.chunks[0]}}</code>
+				<pre flex class="brutResult" type="txt">{{analyzer.robotsTxtResult.chunks[0]}}</code>
 			</div>
 		</div>
 

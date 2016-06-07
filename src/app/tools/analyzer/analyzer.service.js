@@ -3,20 +3,20 @@
 
 	angular
 	.module('ncwatch')
-	.factory('CrawlService', CrawlService);
+	.factory('AnalyzerService', AnalyzerService);
 
 	/** @ngInject */
-	function CrawlService($http) {
+	function AnalyzerService($http) {
 		var service = {};
 
-		service.crawl = crawl;
+		service.analyzer = analyzer;
 		service.getRobots = getRobots;
 		return service;
 
-		function crawl(url) {
+		function analyzer(url) {
 			return $http({
 				method: 'POST',
-				url: '/api/crawl',
+				url: '/api/analyzer',
 				data: JSON.stringify({'url': url}),
 				headers: { 'Content-Type': 'application/json' }
 			});
@@ -25,7 +25,7 @@
 		function getRobots(url) {
 			return $http({
 				method: 'GET',
-				url: '/api/crawl/robots',
+				url: '/api/analyzer/robots',
 				params: {url: url},
 				headers: { 'Content-Type': 'application/json' }
 			});

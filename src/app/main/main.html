@@ -19,12 +19,12 @@
 		<md-card flex style="background-color:#E8EAF6;">
 			<md-card-title>	
 				
-				<md-card-title-text>
+				<md-card-title-text style="text-align:center">
 					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.WHOIS.route}}">{{main.watchResult.WHOIS.title}}</a>
 				</md-card-title-text>
 			</md-card-title>
 			<md-card-content flex class="font-mono" style="min-height:350px">
-				<h4>Domain</h4>
+				<h3>Domain</h3>
 				<label><b> Nom : </b> {{ main.watchResult.WHOIS.content.domainName }} </label> <br>
 				<label><b> Identifiant : </b> {{ main.watchResult.WHOIS.content.registryDomainId }} </label> <br>
 				<label><b> Date création : </b> {{ main.watchResult.WHOIS.content.creationDate | date: 'dd/MM/yyyy' }} </label> <br>
@@ -33,7 +33,7 @@
 				<label><b> Serveur : </b> {{ main.watchResult.WHOIS.content.nameServer }} </label> <br>
 				<label><b> DNSSEC : </b> {{ main.watchResult.WHOIS.content.dnssec }} </label> <br>
 
-				<h4>Owner</h4>
+				<h3>Owner</h3>
 				<label><b> Nom : </b> {{  main.watchResult.WHOIS.content.registrantName }} </label> <br>
 				<label><b> Entreprise : </b> {{  main.watchResult.WHOIS.content.registrantOrganization }} </label> <br>
 				<label><b> Adresse : </b> {{  main.watchResult.WHOIS.content.registrantStreet }}   {{  main.watchResult.WHOIS.content.registrantCity }}   {{  main.watchResult.WHOIS.content.registrantPostalCode }}   {{  main.watchResult.WHOIS.content.registrantCountry }}</label> <br>
@@ -45,13 +45,13 @@
 	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
 		<md-card flex style="background-color:#E0F2F1">
 			<md-card-title>
-				<md-card-title-text>
-					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.FILES.route}}">{{main.watchResult.FILES.title}}</a>
+				<md-card-title-text style="text-align:center">
+					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.GOOGLEDORKS.route}}">{{main.watchResult.GOOGLEDORKS.title}}</a>
 				</md-card-title-text>
 			</md-card-title>
 			<md-card-content flex style="min-height:350px">
 				<md-list flex>
-					<md-list-item layout class="md-3-line" ng-repeat="result in main.watchResult.FILES.content" flex>
+					<md-list-item layout class="md-3-line" ng-repeat="result in main.watchResult.GOOGLEDORKS.content" flex>
 						<div class="md-list-item-text" flex>
 							<h3><a target="_blank" ng-href="{{result.href}}" ng-bind-html="result.title"></a></h3>
 							<h4 style="color:#009688">{{result.href}}</h4>
@@ -59,22 +59,92 @@
 						</div>
 					</md-list-item>
 				</md-list>
-				<h4 ng-if="main.watchResult.FILES.content.length==0">No documents correspond to the specified search terms</h4>
+				<h4 ng-if="main.watchResult.GOOGLEDORKS.content.length==0">No documents correspond to the specified search terms</h4>
 
 			</md-card-content>
 		</md-card>
 	</div>
 
 	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
+		<md-card flex style="background-color:#ECEFF1;">
+			<md-card-title>
+				<md-card-title-text style="text-align:center">
+					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.ANALYZER.route}}">{{main.watchResult.ANALYZER.title}}</a>
+				</md-card-title-text>
+				
+			</md-card-title>
+			<md-card-content flex style="min-height:350px" class="font-mono">
+				<h3>Serveur</h3>
+				<label><b> Type : </b> {{ main.watchResult.ANALYZER.content.headers.server }} </label> <br>
+				<label><b> Version : </b> {{ main.watchResult.ANALYZER.content.headers['x-powered-by'] || 'Inconnu'}} </label> <br>
+				<label><b> Port : </b> {{ main.watchResult.ANALYZER.content.request.uri.port }} </label> <br>
+				<label><b> Protocole : </b> {{ main.watchResult.ANALYZER.content.request.uri.protocol }} </label> <br>
+
+				<h3>Site</h3>
+				<label><b> Dernière modification : </b> {{ (main.watchResult.ANALYZER.content.headers['last-modified'] | date: 'dd/MM:YYYY hh:mm') || 'Inconnu'}} </label> <br>
+				<label><b> Type de contenu : </b> {{ main.watchResult.ANALYZER.content.headers['content-type'] }} </label> <br>
+				<label><b> Encodage : </b> {{ main.watchResult.ANALYZER.content.headers['content-encoding'] }} </label> <br>
+				<label><b> Liens : </b> {{ main.watchResult.ANALYZER.content.headers.link || 'Aucun' }} </label> <br>
+				<label><b> Langue : </b> {{ main.watchResult.ANALYZER.content.headers['content-language'] || 'Non défini' }} </label> <br>
+			</md-card-content>
+		</md-card>
+	</div>
+
+	<div flex="100">
+		<h3>Autres outils</h3>
+	</div>
+	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
+		<md-card flex style="background-color:#FFF3E0;">
+			<md-card-title>
+				<md-card-title-text style="text-align:center">
+					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.BUILTWITH.route}}">{{main.watchResult.BUILTWITH.title}}</a>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content flex>
+				
+
+			</md-card-content>
+		</md-card>
+	</div>
+
+	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
+		<md-card flex style="background-color:#F9FBE7;">
+			<md-card-title>
+				<md-card-title-text  style="text-align:center">
+					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.SHODAN.route}}">{{main.watchResult.SHODAN.title}}</a>
+				</md-card-title-text>
+				
+			</md-card-title>
+			<md-card-content flex >
+			</md-card-content>
+		</md-card>
+	</div>
+
+
+	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
+		<md-card flex style="background-color:#EFEBE9;">
+			<md-card-title>
+				<md-card-title-text style="text-align:center">
+					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.HAVEIBEENPWNED.route}}">{{main.watchResult.HAVEIBEENPWNED.title}}</a>
+				</md-card-title-text>
+				
+			</md-card-title>
+			<md-card-content flex >
+			</md-card-content>
+		</md-card>
+	</div>
+
+	
+	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
 		<md-card flex style="background-color:#F1F8E9;">
 			<md-card-title>
-				<md-card-title-text>
+				<md-card-title-text style="text-align:center">
 					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.SSL.route}}">{{main.watchResult.SSL.title}}</a>
 				</md-card-title-text>
 			</md-card-title>
-			<md-card-content flex style="min-height:350px">
+			<md-card-content flex >
 
-				<label><b> Host : </b> {{ main.watchResult.SSL.content.host }} </label> <br>
+				<!-- <label><b> Host : </b> {{ main.watchResult.SSL.content.host }} </label> <br>
 				<label><b> Port : </b> {{ main.watchResult.SSL.content.port }} </label> <br>
 				<label><b> Protocol : </b> {{ main.watchResult.SSL.content.protocol }} </label> <br>
 				<label><b> IsPublic: </b> {{ main.watchResult.SSL.content.isPublic }} </label> <br>
@@ -82,7 +152,7 @@
 
 				<div layout>
 					
-					<table style="width:100%">
+					<table style="width:100%; background-color:#C5E1A5">
 						<tr style="text-align:left">
 							<th>Server</th>
 							<th>Grade</th>
@@ -92,37 +162,8 @@
 							<td style="text-align:center;color: #64DD17;">{{item.grade}}</td>
 						</tr>
 					</table>
-				</div>
+				</div> -->
 
-			</md-card-content>
-		</md-card>
-	</div>
-
-	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
-		<md-card flex style="background-color:#FFF3E0;">
-			<md-card-title>
-				<md-card-title-text>
-					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.BUILTWITH.route}}">{{main.watchResult.BUILTWITH.title}}</a>
-				</md-card-title-text>
-			</md-card-title>
-			<md-card-content flex style="min-height:350px">
-				<label>List of elements</label> 
-				{{item.content}}
-			</md-card-content>
-		</md-card>
-	</div>
-
-	<div flex="33" flex-xs="100" flex-sm="100" flex-md="50">
-		<md-card flex style="background-color:#EFEBE9;">
-			<md-card-title>
-				<md-card-title-text>
-					<a class="md-headline" style="text-decoration: none;" ui-sref="{{main.watchResult.SHODAN.route}}">{{main.watchResult.SHODAN.title}}</a>
-				</md-card-title-text>
-				
-			</md-card-title>
-			<md-card-content flex style="min-height:350px">
-				<label>List of elements</label> 
-				{{item.content}}
 			</md-card-content>
 		</md-card>
 	</div>
