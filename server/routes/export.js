@@ -15,7 +15,6 @@ function saveInFile(req, res) {
         if(err != null)
             console.error(err);
     });
-
     res.json(data);
 }
 

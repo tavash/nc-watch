@@ -1,191 +1,196 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
-	<div flex>
-		<form>
-			<div flex class="search">
-				<md-toolbar class="title-tool">
-					ANALYZER
-				</md-toolbar>
-				<div class="text-infos">
-					{{analyzer.ANALYZER_MESSAGE_INFO}}
-				</div>
-				<div layout layout-align="center" layout-xs="column">
-					<md-input-container flex="10" flex-offset="20">
-						<label>Préfixe</label>
-						<md-select ng-model="analyzer.prefixeSelected" name="prefixe" required>
-							<md-option value="http://">http://</md-option>
-							<md-option value="https://">https://</md-option>
-						</md-select>
-					</md-input-container>
-					<md-input-container flex="40" class="md-icon-float md-block">
-						<label>URL</label>
-						<input ng-model="analyzer.url" name="url">
-					</md-input-container>
-					<div flex="30">
-						<md-button class="md-raised" ng-click="analyzer.analyzer()" type="submit">analyzer</md-button>
-						<md-icon>
-							<md-tooltip>
-								{{analyzer.ANALYZER_HOW_TO}}
-							</md-tooltip>
-							<i class="material-icons">help</i>
-						</md-icon>
-					</div>
-				</div>
-			</div>
-		</form>
+    <div flex>
+        <form>
+            <div flex class="search">
+                <md-toolbar class="title-tool">
+                    ANALYZER
+                </md-toolbar>
+                <div class="text-infos">
+                    {{analyzer.ANALYZER_MESSAGE_INFO}}
+                </div>
+                <div layout layout-align="center" layout-xs="column">
+                    <md-input-container flex="10" flex-offset="20">
+                        <label>Préfixe</label>
+                        <md-select ng-model="analyzer.prefixeSelected" name="prefixe" required>
+                            <md-option value="http://">http://</md-option>
+                            <md-option value="https://">https://</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="40" class="md-icon-float md-block">
+                        <label>URL</label>
+                        <input ng-model="analyzer.url" name="url">
+                    </md-input-container>
+                    <div flex="30">
+                        <md-button class="md-raised" ng-click="analyzer.analyzer()" type="submit">analyzer</md-button>
+                        <md-icon>
+                            <md-tooltip>
+                                {{analyzer.ANALYZER_HOW_TO}}
+                            </md-tooltip>
+                            <i class="material-icons">help</i>
+                        </md-icon>
+                    </div>
+                </div>
+                <div ng-if="analyzer.isAnalyzer">
+                    <div layout layout-align="center">
+                        <md-button class="md-raised md-primary" ng-click="analyzer.exportData()">Export JSON</md-button>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </form>
 
-		<div layout layout-wrap ng-show="analyzer.isAnalyzer" flex-offset="1">
-			<div layout flex="100">
-				<h2>Informations de la requête HTTP</h2>
-			</div>
-			<div layout flex="50">
-				<md-card flex style="background-color:#F6F6F6;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">Serveur</span> 
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-						<label><b> Type : </b> {{ analyzer.analyzerResult.headers.server }} </label> <br>
-						<label><b> Version : </b> {{ analyzer.analyzerResult.headers['x-powered-by'] || 'Inconnu'}} </label> <br>
-						<label><b> Port : </b> {{ analyzer.analyzerResult.request.uri.port }} </label> <br>
-						<label><b> Protocole : </b> {{ analyzer.analyzerResult.request.uri.protocol }} </label> <br>
-					</md-card-content>
-				</md-card>
-			</div>
-			<div layout flex="50">
-				<md-card flex style="background-color:#F6F6F6;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">Site</span> 
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-						<label><b> Dernière modification : </b> {{ (analyzer.analyzerResult.headers['last-modified'] | date: 'dd/MM:YYYY hh:mm') || 'Inconnu'}} </label> <br>
-						<label><b> Type de contenu : </b> {{ analyzer.analyzerResult.headers['content-type'] }} </label> <br>
-						<label><b> Encodage : </b> {{ analyzer.analyzerResult.headers['content-encoding'] }} </label> <br>
-						<label><b> Liens : </b> {{ analyzer.analyzerResult.headers.link || 'Aucun' }} </label> <br>
-						<label><b> Langue : </b> {{ analyzer.analyzerResult.headers['content-language'] || 'Non défini' }} </label> <br>
-					</md-card-content>
-				</md-card>
-			</div>
-		</div>
-		<div layout layout-wrap>
-			<div layout flex="50">
-				<div layout layout-wrap flex ng-show="analyzer.isHtaccess">
-					<div layout flex="100">
-						<h2>Récupération de l'htaccess</h2>
-					</div>
-					<div layout flex="100">
-						<md-card flex style="background-color:#F6F6F6;">
-							<md-card-title>
-								<md-card-title-text>
-									<span class="md-headline">Htaccess</span> 
-								</md-card-title-text>
-							</md-card-title>
-							<md-card-content flex class="font-mono">
-								<label>{{analyzer.htaccess}}</label>
-							</md-card-content>
-						</md-card>
-					</div>
-				</div>
-			</div>
-			<div layout flex="50">
-				<div layout layout-wrap flex ng-if="analyzer.isSitemap">
-					<div layout flex="100">
-						<h2>Récupération du sitemap.xml</h2>
-					</div>
-					<div layout flex="100">
-						<md-card flex style="background-color:#F6F6F6;">
-							<md-card-title>
-								<md-card-title-text>
-									<span class="md-headline">Sitemap</span> 
-								</md-card-title-text>
-							</md-card-title>
-							<md-card-content flex class="font-mono">
-								<label ng-bind-html="analyzer.sitemap"></label>
-							</md-card-content>
-						</md-card>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div layout layout-wrap ng-show="analyzer.isAnalyzer" flex-offset="1">
+            <div layout flex="100">
+                <h2>Informations de la requête HTTP</h2>
+            </div>
+            <div layout flex="50">
+                <md-card flex style="background-color:#F6F6F6;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Serveur</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content flex class="font-mono">
+                        <label><b> Type : </b> {{ analyzer.analyzerResult.headers.server }} </label> <br>
+                        <label><b> Version : </b> {{ analyzer.analyzerResult.headers['x-powered-by'] || 'Inconnu'}} </label> <br>
+                        <label><b> Port : </b> {{ analyzer.analyzerResult.request.uri.port }} </label> <br>
+                        <label><b> Protocole : </b> {{ analyzer.analyzerResult.request.uri.protocol }} </label> <br>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div layout flex="50">
+                <md-card flex style="background-color:#F6F6F6;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Site</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content flex class="font-mono">
+                        <label><b> Dernière modification : </b> {{ (analyzer.analyzerResult.headers['last-modified'] | date: 'dd/MM:YYYY hh:mm') || 'Inconnu'}} </label> <br>
+                        <label><b> Type de contenu : </b> {{ analyzer.analyzerResult.headers['content-type'] }} </label> <br>
+                        <label><b> Encodage : </b> {{ analyzer.analyzerResult.headers['content-encoding'] }} </label> <br>
+                        <label><b> Liens : </b> {{ analyzer.analyzerResult.headers.link || 'Aucun' }} </label> <br>
+                        <label><b> Langue : </b> {{ analyzer.analyzerResult.headers['content-language'] || 'Non défini' }} </label> <br>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+        <div layout layout-wrap>
+            <div layout flex="50">
+                <div layout layout-wrap flex ng-show="analyzer.isHtaccess">
+                    <div layout flex="100">
+                        <h2>Récupération de l'htaccess</h2>
+                    </div>
+                    <div layout flex="100">
+                        <md-card flex style="background-color:#F6F6F6;">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Htaccess</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content flex class="font-mono">
+                                <label>{{analyzer.htaccess}}</label>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+            <div layout flex="50">
+                <div layout layout-wrap flex ng-if="analyzer.isSitemap">
+                    <div layout flex="100">
+                        <h2>Récupération du sitemap.xml</h2>
+                    </div>
+                    <div layout flex="100">
+                        <md-card flex style="background-color:#F6F6F6;">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Sitemap</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content flex class="font-mono">
+                                <label ng-bind-html="analyzer.sitemap"></label>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div layout layout-wrap ng-show="analyzer.isRobots">
-			<div layout flex="100">
-				<h2>Récupération du Robots.txt</h2>
-			</div>
-			<div layout flex="100" ng-if="analyzer.robotsTxtResult.sitemaps.length > 0">
-				<md-card flex style="background-color:#F6F6F6;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">Sitemaps</span> 
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-						<div ng-repeat="sitemap in analyzer.robotsTxtResult.sitemaps">
-							<a href="{{sitemap}}" target="_blank">{{sitemap}}</a>
-						</div>
-					</md-card-content>
-				</md-card>
-			</div>
-			<div layout flex="50" ng-if="analyzer.robotsTxtResult.defaultEntry.rules.length > 0">
-				<md-card flex style="background-color:#F6F6F6;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">Tous les robots</span> 
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-						<h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}).length">Autorisé</h3>
-						<div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}">
-							<label>{{entry.path | decodeURL}}</label>
-						</div>
-						<h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}).length">Interdit</h3>
-						<div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}">
-							<label>{{entry.path | decodeURL}}</label>
-						</div>
-					</md-card-content>
-				</md-card>
-			</div>
-			<div layout flex="50" ng-repeat="robot in analyzer.robotsTxtResult.entries">
-				<md-card flex style="background-color:#F6F6F6;" >
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">{{robot.userAgents | join}}</span> 
-						</md-card-title-text>
-					</md-card-title>
-					<md-card-content flex class="font-mono">
-						<h3 ng-if="(robot.rules | filter: {allowance:true}).length">Autorisé</h3>
-						<div ng-repeat="entry in robot.rules | filter: {allowance:true}">
-							<label>{{entry.path | decodeURL}}</label>
-						</div>
-						<h3 ng-if="(robot.rules | filter: {allowance:false}).length">Interdit</h3>
-						<div ng-repeat="entry in robot.rules | filter: {allowance:false}">
-							<label>{{entry.path | decodeURL}}</label>
-						</div>
-					</md-card-content>
-				</md-card>
-			</div>
-		</div>
-		
-		<div layout layout-wrap layout-padding ng-if="analyzer.isAnalyzer">
-			<div layout flex="100">
-				<h2>Requête HTTP de la page</h2>
-			</div>
-			<div layout flex="100">
-				<json-formatter class="brutResult" flex json="analyzer.analyzerResult" open="2"></json-formatter>
-			</div>
-		</div>
-		<div layout layout-wrap layout-padding ng-if="analyzer.isRobots">
-			<div layout flex="100">
-				<h2>Résultat du Robots.txt</h2>
-			</div>
-			<div layout flex="100">
-				<pre flex class="brutResult" type="txt">{{analyzer.robotsTxtResult.chunks[0]}}</code>
-			</div>
-		</div>
+        <div layout layout-wrap ng-show="analyzer.isRobots">
+            <div layout flex="100">
+                <h2>Récupération du Robots.txt</h2>
+            </div>
+            <div layout flex="100" ng-if="analyzer.robotsTxtResult.sitemaps.length > 0">
+                <md-card flex style="background-color:#F6F6F6;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Sitemaps</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content flex class="font-mono">
+                        <div ng-repeat="sitemap in analyzer.robotsTxtResult.sitemaps">
+                            <a href="{{sitemap}}" target="_blank">{{sitemap}}</a>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div layout flex="50" ng-if="analyzer.robotsTxtResult.defaultEntry.rules.length > 0">
+                <md-card flex style="background-color:#F6F6F6;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Tous les robots</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content flex class="font-mono">
+                        <h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}).length">Autorisé</h3>
+                        <div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}">
+                            <label>{{entry.path | decodeURL}}</label>
+                        </div>
+                        <h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}).length">Interdit</h3>
+                        <div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:false}">
+                            <label>{{entry.path | decodeURL}}</label>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div layout flex="50" ng-repeat="robot in analyzer.robotsTxtResult.entries">
+                <md-card flex style="background-color:#F6F6F6;" >
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{robot.userAgents | join}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content flex class="font-mono">
+                        <h3 ng-if="(robot.rules | filter: {allowance:true}).length">Autorisé</h3>
+                        <div ng-repeat="entry in robot.rules | filter: {allowance:true}">
+                            <label>{{entry.path | decodeURL}}</label>
+                        </div>
+                        <h3 ng-if="(robot.rules | filter: {allowance:false}).length">Interdit</h3>
+                        <div ng-repeat="entry in robot.rules | filter: {allowance:false}">
+                            <label>{{entry.path | decodeURL}}</label>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
 
+        <div layout layout-wrap layout-padding ng-if="analyzer.isAnalyzer">
+            <div layout flex="100">
+                <h2>Requête HTTP de la page</h2>
+            </div>
+            <div layout flex="100">
+                <json-formatter class="brutResult" flex json="analyzer.analyzerResult" open="2"></json-formatter>
+            </div>
+        </div>
+        <div layout layout-wrap layout-padding ng-if="analyzer.isRobots">
+            <div layout flex="100">
+                <h2>Résultat du Robots.txt</h2>
+            </div>
+            <div layout flex="100">
+                <pre flex class="brutResult" type="txt">{{analyzer.robotsTxtResult.chunks[0]}}</pre>
+            </div>
+        </div>
 
-	</div>
+    </div>
 
 </md-content>

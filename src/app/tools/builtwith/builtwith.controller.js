@@ -6,10 +6,11 @@
         .controller('BuiltwithController', BuiltwithController);
 
     /** @ngInject */
-    function BuiltwithController(BuiltwithService, HowToMessages, InfosMessages) {
+    function BuiltwithController(BuiltwithService, ToolsService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.builtwith = builtwith;
+        vm.exportData = exportData;
         vm.isLoad = false;
         vm.BUILTWITH_HOW_TO = HowToMessages.buildwith;
         vm.BUILTWITH_MESSAGE_INFO = InfosMessages.buildwith;
@@ -35,6 +36,10 @@
                     vm.techByTag = techByTag;
                     vm.isLoad = true;
                 });
+        }
+
+        function exportData() {
+            ToolsService.exportDataInFile('builtwith', vm.builtwithResult);
         }
 
         function sortTechnologiesByTag(tagsName, technologies) {
