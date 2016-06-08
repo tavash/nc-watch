@@ -32,22 +32,10 @@
 			return d.promise;
 		};
 
-		function ssl() {
-			var d = $q.defer();
-			SslService.getSsl(vm.domain).then(function(result) { d.resolve(result); });
-			return d.promise;
-		};
-
 		function analyzer() {
 			var d = $q.defer();
 			var prefixeSelected = 'https://';
 			AnalyzerService.analyzer(prefixeSelected+vm.domain).then(function(result) { d.resolve(result); });
-			return d.promise;
-		};
-
-		function haveibeenpwned(){
-			var d = $q.defer();
-			HaveIBeenPwnedService.haveIBeenPwned("foo@bar.com").then(function(result) { d.resolve(result); });
 			return d.promise;
 		};
 
@@ -71,9 +59,9 @@
 
 		function watch() {
 			var promises = [];
+			
 			promises.push(whois());
 			//promises.push(googleSearch());
-			//promises.push(ssl());
 			promises.push(analyzer());
 
 			$q.all(promises)
@@ -83,8 +71,6 @@
 					var url = result[i].config.url;
 					if (url.indexOf('whois')>-1){
 						vm.watchResult.WHOIS.content = result[i].data;
-					} else if (url.indexOf('ssl')>-1){
-						vm.watchResult.SSL.content = result[i].data;
 					} else if (url.indexOf('googleSearch')>-1){
 						vm.watchResult.GOOGLEDORKS.content = result[i].data.splice(-2);
 					}	else if (url.indexOf('analyzer')>-1){

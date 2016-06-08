@@ -17,7 +17,7 @@
 		function whois(domain){
 			return $http({
 				method: 'GET',
-				url: '/api/informations/whois',
+				url: '/api/whois',
 				params: {domain: domain},
 				headers: { 'Content-Type': 'application/json' }
 			});

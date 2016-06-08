@@ -17,7 +17,7 @@
         function builtwith(domain){
             return $http({
                 method: 'GET',
-                url: '/api/informations/builtwith',
+                url: '/api/builtwith',
                 params: {domain: domain},
                 headers: { 'Content-Type': 'application/json'}
             });

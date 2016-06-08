@@ -53,7 +53,8 @@
         }
 
         $scope.$on('$stateChangeSuccess', function (event, toState) {
-        	vm.currentTab = toState.data.selectedTab;
+        	if(toState.name.indexOf('tools')>-1)
+        		vm.currentTab = toState.data.selectedTab;
         });
     }
 })();

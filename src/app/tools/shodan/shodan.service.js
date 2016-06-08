@@ -16,7 +16,7 @@
         function shodanHost(domain){
             return $http({
                 method: 'GET',
-                url: '/api/informations/shodanHost',
+                url: '/api/bluebox/shodanHost',
                 params: {domain: domain},
                 headers: { 'Content-Type': 'application/json' }
             });
