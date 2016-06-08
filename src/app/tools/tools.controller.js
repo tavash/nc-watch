@@ -45,7 +45,12 @@
 			name: 'Built With',
 			url: 'builtwith',
 			state: 'tools.builtwith'
-		}
+		},
+			{
+				name: 'DNS BL',
+				url: 'dnsbl',
+				state: 'tools.dnsbl'
+			}
 		]
 
 		function switchTab(index) {

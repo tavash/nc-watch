@@ -24,6 +24,7 @@ app.get('/', function (req, res) { return res.redirect('/api'); });
 app.get('/api', function(req, res) { res.render('index', {'title' : config.name}); });
 app.use('/api/analyzer', require('./routes/analyzer'));
 app.use('/api/builtwith', require('./routes/builtwith'));
+app.use('/api/dnsbl', require('./routes/dnsbl'));
 app.use('/api/whois', require('./routes/whois'));
 app.use('/api/bluebox', require('./routes/bluebox'));
 app.use('/api/googlesearch', require('./routes/googlesearch'));
@@ -44,15 +45,15 @@ app.all('*', function(req, res, next) {
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // production error handler
 app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.render('error', { message: err.message, error: {} });
+    res.status(err.status || 500);
+    res.render('error', { message: err.message, error: {} });
 });
 
 

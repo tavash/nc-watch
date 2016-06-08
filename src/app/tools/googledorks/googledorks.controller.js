@@ -13,8 +13,8 @@
         vm.changedValue = changedValue;
         //var googleLink = https://www.google.com/webhp?ie=utf-8&oe=utf-8gfe_rd=cr&ei=ILFGV6GTL7Ss8wer_7igAw#safe=off&q=";
         var googleGroupsLink = "https://groups.google.com/forum/#!search/";
-				vm.GOOGLEDORKS_HOW_TO = HowToMessages.googleDorks;
-				vm.GOOGLEDORKS_MESSAGE_INFO = InfosMessages.googleDorks;
+        vm.GOOGLEDORKS_HOW_TO = HowToMessages.googleDorks;
+        vm.GOOGLEDORKS_MESSAGE_INFO = InfosMessages.googleDorks;
 
         vm.dorkSelected = '';
         vm.dorkSelectedDetail = '';
@@ -31,6 +31,8 @@
             {dork: 'filetype:rtf site:', name: 'RTF'},
             {dork: 'site:domain -domain', name: 'Recherche'}, // TO DO
             {dork: 'filetype:txt site:', name: 'TXTs'},
+            {dork: 'site:github.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb intext:"', name: 'Code source github.com'},
+            {dork: 'site:pastebin.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb intext:"', name: 'Code source pastebin.com'},
             {dork: '', name: 'Personnalisé'}
         ];
 
@@ -48,6 +50,11 @@
                     break;
                 case 'Google Groupes':
                     $window.open(dorkSelected.dork + domain);
+                    break;
+                case 'Code source github.com':
+                case 'Code source pastebin.com':
+                    var site = domain.split('.');
+                    query = dorkSelected.dork + site[0]+'"';
                     break;
                 case 'Personnalisé' :
                     query = vm.customDork;

@@ -1,0 +1,58 @@
+<md-content layout="column" layout-padding flex md-whiteframe="2" ng-cloak>
+    <form name="dnsblForm">
+        <div flex class="search">
+            <md-toolbar class="title-tool">
+                DNS BL
+            </md-toolbar>
+            <div class="text-infos">
+                {{dnsbl.DNSBL_MESSAGE_INFO}}
+            </div>
+            <div layout layout-align="center" layout-xs="column">
+                <div flex="10"></div>
+                <md-input-container flex="31" class="md-icon-float md-block">
+                    <label>Domain</label>
+                    <md-icon><i class="material-icons">search</i></md-icon>
+                    <input ng-model="dnsbl.domain" name="domain" required>
+                    <div ng-messages="dnsblForm.domain.$error">
+                        <div ng-message="required">Ce champ est obligatoire.</div>
+                    </div>
+                </md-input-container>
+
+                <div flex="31">
+                    <md-button class="md-raised" ng-click="dnsbl.isBL()" type="submit"
+                               ng-disabled="dnsblForm.$invalid">
+                        Chercher
+                    </md-button>
+                    <md-icon>
+                        <md-tooltip>{{dnsbl.DNSBL_HOW_TO}}</md-tooltip>
+                        <i class="material-icons">help</i>
+                    </md-icon>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <md-divider ng-if="dnsbl.hasResult"></md-divider>
+
+    <md-content layout layout-padding>
+        <div flex="100" ng-show="dnsbl.hasResult">
+            <div>
+                <h3>Blacklisté sur les bases suivantes</h3>
+
+                <div ng-repeat="result in dnsbl.result">
+                    <li> {{result.zone}} </li>
+                </div>
+
+            </div>
+        </div>
+        <div flex="100" ng-show="dnsbl.isNotListed">
+            <div>
+                <h3>Ce domaine n'est pas blacklisté</h3>
+            </div>
+        </div>
+        <div flex="100" ng-show="dnsbl.hasError">
+            <h3>{{dnsbl.message}}</h3>
+        </div>
+    </md-content>
+
+</md-content>
