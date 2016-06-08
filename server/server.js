@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.get('/', function (req, res) { return res.redirect('/api'); });
+
 // API 
 app.get('/api', function(req, res) { res.render('index', {'title' : config.name}); });
 app.use('/api/analyzer', require('./routes/analyzer'));
@@ -27,6 +28,7 @@ app.use('/api/whois', require('./routes/whois'));
 app.use('/api/bluebox', require('./routes/bluebox'));
 app.use('/api/googlesearch', require('./routes/googlesearch'));
 app.use('/api/ssl', require('./routes/ssl'));
+app.use('/api/export', require('./routes/export'));
 
 
 // Gestion CORS (permet d'autoriser ou refuser l acces à l'API en fonction de l'origine de la requete)

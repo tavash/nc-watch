@@ -243,6 +243,7 @@
             <div ng-show="shodan.isLoad">
                 <h3>Contenu brut</h3>
                 <json-formatter json="shodan.shodanHostResult" open="0"></json-formatter>
+                <md-button class="md-raised md-primary" ng-click="shodan.exportData()">Export JSON</md-button>
             </div>
 
         </form>

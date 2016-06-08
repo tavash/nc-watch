@@ -20,6 +20,7 @@
     "node-ssllabs": "^0.4.3",
     "robots": "^0.9.4",
     "static-favicon": "~1.0.0",
-    "whois-json": "^1.0.1"
+    "whois-json": "^1.0.1",
+    "jsonfile": "^2.3.1"
   }
 }
