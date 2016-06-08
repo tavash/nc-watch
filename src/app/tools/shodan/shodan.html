@@ -1,17 +1,6 @@
 <md-content layout="column" layout-padding flex md-whiteframe="2" xmlns="http://www.w3.org/1999/html">
     <div flex>
         <form>
-            <!-- <div layout layout-align="center" layout-padding>
-                 <div flex="30">
-                     <md-input-container class="md-icon-float md-block" flex-gt-sm="">
-                         <label>Domain</label>
-                         <input ng-model="shodan.domain" name="domain">
-                     </md-input-container>
-                 </div>
-                 <div>
-                     <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN</md-button>
-                 </div>
-             </div>-->
 
             <md-toolbar class="title-tool">
                 SHODAN
@@ -27,7 +16,7 @@
                     </md-input-container>
                 </div>
                 <div>
-                    <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN HOST</md-button>
+                    <md-button class="md-raised" ng-click="shodan.shodanHost()" type="submit">GO SHODAN</md-button>
                     <md-icon>
                         <md-tooltip>
                             {{shodan.SHODAN_HOW_TO}}
@@ -36,7 +25,6 @@
                     </md-icon>
                 </div>
             </div>
-
 
             <md-content>
                 <div ng-if="shodan.isLoad">

@@ -11,8 +11,8 @@
 
         vm.builtwith = builtwith;
         vm.isLoad = false;
-				vm.BUILTWITH_HOW_TO = HowToMessages.buildwith;
-				vm.BUILTWITH_MESSAGE_INFO = InfosMessages.buildwith;
+        vm.BUILTWITH_HOW_TO = HowToMessages.buildwith;
+        vm.BUILTWITH_MESSAGE_INFO = InfosMessages.buildwith;
 
 
         function builtwith(){
@@ -20,6 +20,23 @@
             BuiltwithService.builtwith(vm.domain)
                 .success(function(res){
                     vm.builtwithResult = res;
+
+
+                    /*
+                    var txtFile = "/tmp/test.txt";
+                    var file = new File(txtFile,"write");
+                    var str = JSON.stringify(res);
+
+                    log("opening file...");
+                    //file.open();
+                    log("writing file..");
+                    //file.writeline(str);
+                    //file.close();
+
+
+                    console.log('res');
+                    console.log(res);
+                    */
 
                     // On récupère seulement les technologies trouvées et utilisées
                     vm.builtwithTechnologiesResult = res.Results[0].Result.Paths[0].Technologies;
