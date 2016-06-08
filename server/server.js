@@ -23,9 +23,9 @@ app.get('/', function (req, res) { return res.redirect('/api'); });
 app.get('/api', function(req, res) { res.render('index', {'title' : config.name}); });
 app.use('/api/analyzer', require('./routes/analyzer'));
 app.use('/api/builtwith', require('./routes/builtwith'));
-app.use('/api/whois ', require('./routes/whois'));
+app.use('/api/whois', require('./routes/whois'));
 app.use('/api/bluebox', require('./routes/bluebox'));
-app.use('/api/googleSearch', require('./routes/googleSearch'));
+app.use('/api/googlesearch', require('./routes/googlesearch'));
 app.use('/api/ssl', require('./routes/ssl'));
 
 

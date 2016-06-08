@@ -16,7 +16,7 @@
         function googleSearch(query) {
             return $http({
                 method: 'GET',
-                url: '/api/googleSearch',
+                url: '/api/googlesearch',
                 params: {query: query},
                 headers: {'Content-Type': 'application/json'}
             });

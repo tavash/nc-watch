@@ -8,7 +8,7 @@ function getWhoIs(req, res, next) {
     whois(req.query.domain, function (err, result) {
         if (err) res.send(err);
         else res.json(result);
-    })
+    });
 }
 
 module.exports = router;
