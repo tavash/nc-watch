@@ -20,6 +20,7 @@
           
             BuiltwithService.builtwith(vm.domain)
                 .success(function(res){
+                    vm.saveDomain = vm.domain;
                     vm.builtwithResult = res;
 
                     // On récupère seulement les technologies trouvées et utilisées
@@ -39,7 +40,7 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('builtwith', vm.builtwithResult);
+            ToolsService.exportDataInFile('builtwith', vm.saveDomain, vm.builtwithResult);
         }
 
         function sortTechnologiesByTag(tagsName, technologies) {

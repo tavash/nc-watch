@@ -30,7 +30,7 @@
                         </md-icon>
                     </div>
                 </div>
-                <div ng-if="analyzer.isAnalyzer">
+                <div ng-if="analyzer.isAnalyzer && analyzer.isRobots">
                     <div layout layout-align="center">
                         <md-button class="md-raised md-primary" ng-click="analyzer.exportData()">Export JSON</md-button>
                     </div>

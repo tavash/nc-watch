@@ -13,11 +13,14 @@
 
         return service;
 
-        function exportDataInFile(tool, data) {
+        function exportDataInFile(tool, domain, data) {
             return $http({
                 method: 'POST',
                 url: '/api/export',
-                params: {tool: tool},
+                params: {
+                    tool: tool,
+                    domain: domain
+                },
                 data: data,
                 headers: {'Content-Type': 'application/json'}
             });

@@ -26,6 +26,7 @@
 
         function analyzer() {
             var url = vm.prefixeSelected + vm.url;
+            vm.saveDomain = vm.url;
             vm.isAnalyzer = false;
             vm.isRobots = false;
             vm.isHtaccess = false;
@@ -42,7 +43,7 @@
                     getRobots(url);
                     getHtaccess(url);
                     vm.analyzerResult = res;
-                    vm.saveCrawlResult = res;
+                    vm.saveAnalyzerResult = res;
                     delete vm.analyzerResult.body;
                     vm.isAnalyzer = true;
                 }
@@ -50,7 +51,8 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('analyzer', vm.saveCrawlResult);
+            ToolsService.exportDataInFile('analyzer', vm.saveDomain, vm.saveAnalyzerResult);
+            ToolsService.exportDataInFile('robots', vm.saveDomain, vm.robotsTxtResult);
         }
 
         function getSitemap(url) {

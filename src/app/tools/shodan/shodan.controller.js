@@ -18,6 +18,7 @@
 
         function shodanHost(){
             var domain = vm.domain;
+            vm.saveDomain = domain;
 
             ShodanService.shodanHost(domain).success(function(res){
                 vm.shodanHostResult = res;
@@ -28,7 +29,7 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('shodan', vm.shodanHostResult);
+            ToolsService.exportDataInFile('shodan', vm.saveDomain, vm.shodanHostResult);
         }
 
     }

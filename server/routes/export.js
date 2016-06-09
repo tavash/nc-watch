@@ -8,8 +8,9 @@ router.post('/', saveInFile);
 function saveInFile(req, res) {
     var tool = req.query.tool;
     var data = req.body;
+    var domain = req.query.domain;
     var currentDate = getDateTime();
-    var file = '../export/' + tool + '_' + currentDate + '.json';
+    var file = '../export/' + domain + '_' + tool + '_' + currentDate + '.json';
 
     jsonfile.writeFile(file, data, {spaces: 2}, function (err) {
         if(err != null)
@@ -31,7 +32,7 @@ function getDateTime() {
     month = (month < 10 ? "0" : "") + month;
     var day  = date.getDate();
     day = (day < 10 ? "0" : "") + day;
-    return day + month + year + "_" + hour + min + sec;
+    return year + month + day + "_" + hour + min + sec;
 }
 
 module.exports = router;

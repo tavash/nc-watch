@@ -1,72 +1,78 @@
 <md-content layout="column" layout-padding md-whiteframe="2">
 
-	<div flex>
-		<form name="haveibeenpwnedForm">
-			<div flex class="search">
-				<md-toolbar class="title-tool">
-					HAVE I BEEN PWNED
-				</md-toolbar>
-				<div class="text-infos">
-					{{haveibeenpwned.HAVEIBEENPWNED_MESSAGE_INFO}}
-				</div>
-				<div layout layout-align="center">
-					<div flex="30">
-						<md-input-container class="md-icon-float md-block" flex="100">
-							<label>Email</label>
-							<md-icon><i class="material-icons">email</i></md-icon>
-							<input ng-model="haveibeenpwned.email" name="testedEmail" type="email" required>
-							<div ng-messages="haveibeenpwnedForm.testedEmail.$error">
-								<div ng-message="required">Ce champ est obligatoire.</div>
-								<div ng-message="email">Ceci n'est pas une adresse email valide.</div>
-							</div>
-						</md-input-container>
-					</div>
-					<div>
-						<md-button class="md-raised" ng-click="haveibeenpwned.haveIBeenPwned()" ng-disabled="haveibeenpwnedForm.$invalid" type="submit">HAVEIBEENPWNED</md-button>
-						<md-icon>
-							<md-tooltip>
-								{{haveibeenpwned.HAVEIBEENPWNED_HOW_TO}}
-							</md-tooltip>
-							<i class="material-icons">help</i>
-						</md-icon>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-	<md-content>
-		<div layout="column" ng-show="haveibeenpwned.isPwned">
-			<div layout layout-align="center center">
-				<h2 style="color:red"><i class="material-icons">mood_bad</i> Pwned ! </h2>
-			</div>
-			<div layout layout-align="center center">
-				<h3>{{haveibeenpwned.testedEmail}} : Pwned on {{haveibeenpwned.haveIBeenPwnedResult.length}} breached sites </h3>
-			</div>
-		</div>
-		<div layout flex="100" ng-show="haveibeenpwned.isPwned==false" layout-align="center">
-			<div>
-				<h2 style="color:green"><i class="material-icons" >mood</i> No breached accounts ! </h2>
-			</div>
-		</div>
-		<div layout layout-wrap ng-if="haveibeenpwned.isPwned">
-			<div layout flex="50" flex-xs="100" ng-repeat="item in haveibeenpwned.haveIBeenPwnedResult">
-				<md-card flex style="background-color:#FFCDD2;">
-					<md-card-title>
-						<md-card-title-text>
-							<span class="md-headline">{{ item.Title }}</span>
-						</md-card-title-text>
-						<md-card-title-media>
-							<div class="md-media-md card-media">
-								<img ng-src="{{item.Logo}}">
-							</div>
-						</md-card-title-media>
-					</md-card-title>
-					<md-card-content flex>
-						<label>Compromised data : <b> {{ item.DataClasses }} </b></label> 
-					</md-card-content>
-				</md-card>
-			</div>
-		</div>
+    <div flex>
+        <form name="haveibeenpwnedForm">
+            <div flex class="search">
+                <md-toolbar class="title-tool">
+                    HAVE I BEEN PWNED
+                </md-toolbar>
+                <div class="text-infos">
+                    {{haveibeenpwned.HAVEIBEENPWNED_MESSAGE_INFO}}
+                </div>
+                <div layout layout-align="center">
+                    <div flex="30">
+                        <md-input-container class="md-icon-float md-block" flex="100">
+                            <label>Email</label>
+                            <md-icon><i class="material-icons">email</i></md-icon>
+                            <input ng-model="haveibeenpwned.email" name="testedEmail" type="email" required>
+                            <div ng-messages="haveibeenpwnedForm.testedEmail.$error">
+                                <div ng-message="required">Ce champ est obligatoire.</div>
+                                <div ng-message="email">Ceci n'est pas une adresse email valide.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-button class="md-raised" ng-click="haveibeenpwned.haveIBeenPwned()" ng-disabled="haveibeenpwnedForm.$invalid" type="submit">HAVEIBEENPWNED</md-button>
+                        <md-icon>
+                            <md-tooltip>
+                                {{haveibeenpwned.HAVEIBEENPWNED_HOW_TO}}
+                            </md-tooltip>
+                            <i class="material-icons">help</i>
+                        </md-icon>
+                    </div>
+                </div>
+                <div ng-if="haveibeenpwned.isPwned">
+                    <div layout layout-align="center">
+                        <md-button class="md-raised md-primary" ng-click="haveibeenpwned.exportData()">Export JSON</md-button>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+    <md-content>
+        <div layout="column" ng-show="haveibeenpwned.isPwned">
+            <div layout layout-align="center center">
+                <h2 style="color:red"><i class="material-icons">mood_bad</i> Pwned ! </h2>
+            </div>
+            <div layout layout-align="center center">
+                <h3>{{haveibeenpwned.testedEmail}} : Pwned on {{haveibeenpwned.haveIBeenPwnedResult.length}} breached sites </h3>
+            </div>
+        </div>
+        <div layout flex="100" ng-show="haveibeenpwned.isPwned==false" layout-align="center">
+            <div>
+                <h2 style="color:green"><i class="material-icons" >mood</i> No breached accounts ! </h2>
+            </div>
+        </div>
+        <div layout layout-wrap ng-if="haveibeenpwned.isPwned">
+            <div layout flex="50" flex-xs="100" ng-repeat="item in haveibeenpwned.haveIBeenPwnedResult">
+                <md-card flex style="background-color:#FFCDD2;">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{ item.Title }}</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-md card-media">
+                                <img ng-src="{{item.Logo}}">
+                            </div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-content flex>
+                        <label>Compromised data : <b> {{ item.DataClasses }} </b></label>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
 
-	</md-content>
+    </md-content>
 </md-content>
