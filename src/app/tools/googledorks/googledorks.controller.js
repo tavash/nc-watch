@@ -31,8 +31,8 @@
             {dork: 'filetype:rtf site:', name: 'RTF'},
             {dork: 'site:domain -domain', name: 'Recherche'}, // TO DO
             {dork: 'filetype:txt site:', name: 'TXTs'},
-            {dork: 'site:github.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb | filetype:java intext:"', name: 'Code source github.com'},
-            {dork: 'site:pastebin.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb | filetype:java intext:"', name: 'Code source pastebin.com'},
+            {dork: 'site:github.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb | filetype:java | filetype:md intext:"', name: 'Code source github.com'},
+            {dork: 'site:pastebin.com filetype:js | filetype:txt | filetype:cpp | filetype:c | filetype:py | filetype:php | filetype:h | filetype:hpp | filetype:cs | filetype:vb | filetype:java | filetype:md intext:"', name: 'Code source pastebin.com'},
             {dork: '', name: 'Personnalisé'}
         ];
 
@@ -61,6 +61,7 @@
                     break;
                 default:
                     query = dorkSelected.dork + domain;
+                    console.log(query);
                     break;
             }
             if (dorkSelected.name != 'Google Groupes') {
