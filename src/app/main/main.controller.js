@@ -61,7 +61,7 @@
 			var promises = [];
 			
 			promises.push(whois());
-			//promises.push(googleSearch());
+			promises.push(googleSearch());
 			promises.push(analyzer());
 
 			$q.all(promises)
@@ -71,7 +71,7 @@
 					var url = result[i].config.url;
 					if (url.indexOf('whois')>-1){
 						vm.watchResult.WHOIS.content = result[i].data;
-					} else if (url.indexOf('googleSearch')>-1){
+					} else if (url.indexOf('googlesearch')>-1){
 						vm.watchResult.GOOGLEDORKS.content = result[i].data.splice(-2);
 					}	else if (url.indexOf('analyzer')>-1){
 						vm.watchResult.ANALYZER.content = result[i].data;

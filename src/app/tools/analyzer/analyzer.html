@@ -127,7 +127,7 @@
                             <span class="md-headline">Sitemaps</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <md-card-content flex class="font-mono">
+                    <md-card-content class="font-mono">
                         <div ng-repeat="sitemap in analyzer.robotsTxtResult.sitemaps">
                             <a href="{{sitemap}}" target="_blank">{{sitemap}}</a>
                         </div>
@@ -141,7 +141,7 @@
                             <span class="md-headline">Tous les robots</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <md-card-content flex class="font-mono">
+                    <md-card-content class="font-mono">
                         <h3 ng-if="(analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}).length">Autorisé</h3>
                         <div ng-repeat="entry in analyzer.robotsTxtResult.defaultEntry.rules | filter: {allowance:true}">
                             <label>{{entry.path | decodeURL}}</label>
@@ -160,7 +160,7 @@
                             <span class="md-headline">{{robot.userAgents | join}}</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <md-card-content flex class="font-mono">
+                    <md-card-content class="font-mono">
                         <h3 ng-if="(robot.rules | filter: {allowance:true}).length">Autorisé</h3>
                         <div ng-repeat="entry in robot.rules | filter: {allowance:true}">
                             <label>{{entry.path | decodeURL}}</label>
