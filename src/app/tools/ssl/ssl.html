@@ -1,6 +1,6 @@
 <md-content layout="column" layout-padding flex xmlns="http://www.w3.org/1999/html">
     <div flex>
-        <form layout>
+        <form layout name="sslForm">
             <div flex class="search">
                 <md-toolbar class="title-tool">
                     SSLLabs
@@ -12,10 +12,13 @@
 
                     <md-input-container flex="33%" class="md-icon-float md-block">
                         <label>Domain</label>
-                        <input ng-model="ssl.domain" name="domain">
+                        <input ng-model="ssl.domain" name="domain" required>
+                        <div ng-messages="sslForm.domain.$error">
+                            <div ng-message="required">Ce champ est obligatoire.</div>
+                        </div>
                     </md-input-container>
                     <div flex="33%">
-                        <md-button class="md-raised" ng-click="ssl.getSsl()" type="submit">CHECK</md-button>
+                        <md-button class="md-raised" ng-click="ssl.getSsl()" type="submit" ng-disabled="sslForm.$invalid">CHECK</md-button>
                         <md-icon class="icon-info">
                             <md-tooltip>
                                 {{ssl.SSL_HOW_TO}}
