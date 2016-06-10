@@ -7,7 +7,7 @@
 
 
     /** @ngInject */
-    function WhoIsController(WhoIsService, ToolsService, HowToMessages, InfosMessages) {
+    function WhoIsController($mdToast, WhoIsService, ToolsService, HowToMessages, InfosMessages) {
 
         var vm = this;
 
@@ -48,7 +48,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('whois', vm.saveDomain, vm.whoIsResult);
+            ToolsService.exportDataInFile('whois', vm.saveDomain, vm.whoIsResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de Who Is ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
 
         function getGeocode(name, address, zoom) {

@@ -6,7 +6,7 @@
         .controller('DnsBlController', DnsBlController);
 
     /** @ngInject */
-    function DnsBlController(ToolsService, DnsBlService, HowToMessages, InfosMessages) {
+    function DnsBlController($mdToast, ToolsService, DnsBlService, HowToMessages, InfosMessages) {
         var vm = this;
         vm.isBL = isBL;
         vm.exportData = exportData;
@@ -43,7 +43,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('dnsbl', vm.saveDomain, vm.dnsBlResult);
+            ToolsService.exportDataInFile('dnsbl', vm.saveDomain, vm.dnsBlResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de DNS BL ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
 
         function arrayObjectIndexOf(myArray, searchTerm, property) {

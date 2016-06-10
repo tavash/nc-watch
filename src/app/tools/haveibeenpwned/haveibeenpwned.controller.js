@@ -6,7 +6,7 @@
         .controller('HaveIBeenPwnedController', HaveIBeenPwnedController);
 
     /** @ngInject */
-    function HaveIBeenPwnedController(HaveIBeenPwnedService, ToolsService, HowToMessages, InfosMessages) {
+    function HaveIBeenPwnedController($mdToast, HaveIBeenPwnedService, ToolsService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.haveIBeenPwned = haveIBeenPwned;
@@ -33,7 +33,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('haveibeenpwned', vm.saveEmail, vm.haveIBeenPwnedResult);
+            ToolsService.exportDataInFile('haveibeenpwned', vm.saveEmail, vm.haveIBeenPwnedResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de Have I Been Pwned ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
     }
 })();

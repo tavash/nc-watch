@@ -6,7 +6,7 @@
         .controller('BuiltwithController', BuiltwithController);
 
     /** @ngInject */
-    function BuiltwithController(BuiltwithService, ToolsService, HowToMessages, InfosMessages) {
+    function BuiltwithController($mdToast, BuiltwithService, ToolsService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.builtwith = builtwith;
@@ -40,7 +40,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('builtwith', vm.saveDomain, vm.builtwithResult);
+            ToolsService.exportDataInFile('builtwith', vm.saveDomain, vm.builtwithResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de Built With ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
 
         function sortTechnologiesByTag(tagsName, technologies) {

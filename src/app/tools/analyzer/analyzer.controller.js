@@ -51,8 +51,14 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('analyzer', vm.saveDomain, vm.saveAnalyzerResult);
-            ToolsService.exportDataInFile('robots', vm.saveDomain, vm.robotsTxtResult);
+            ToolsService.exportDataInFile('analyzer', vm.saveDomain, vm.saveAnalyzerResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de Analyzer ont bien été exportés (dossier export de l\'application) !')
+                });
+            ToolsService.exportDataInFile('robots', vm.saveDomain, vm.robotsTxtResult)
+                .success(function() {
+                    showSimpleToast('Robots.txt a bien été exporté (dossier export de l\'application) !')
+                });
         }
 
         function getSitemap(url) {
@@ -133,6 +139,15 @@
             $mdToast.show(
                 $mdToast.simple().position('top')
                     .textContent('Aucun Robots.txt n\'a été trouvé'));
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
     }
 

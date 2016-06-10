@@ -6,7 +6,7 @@
         .controller('ShodanController', ShodanController);
 
     /** @ngInject */
-    function ShodanController(ShodanService, ToolsService, HowToMessages, InfosMessages) {
+    function ShodanController($mdToast, ShodanService, ToolsService, HowToMessages, InfosMessages) {
         var vm = this;
 
         vm.shodanHost = shodanHost;
@@ -29,7 +29,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('shodan', vm.saveDomain, vm.shodanHostResult);
+            ToolsService.exportDataInFile('shodan', vm.saveDomain, vm.shodanHostResult)
+                .success(function() {
+                    showSimpleToast('Les résultats de Shodan ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
 
     }

@@ -281,7 +281,7 @@
         .controller('SslController', SslController);
 
     /** @ngInject */
-    function SslController(SslService, ToolsService, HowToMessages, InfosMessages) {
+    function SslController($mdToast, SslService, ToolsService, HowToMessages, InfosMessages) {
         var vm = this;
         vm.getSsl = getSsl;
         vm.exportData = exportData;
@@ -299,7 +299,19 @@
         }
 
         function exportData() {
-            ToolsService.exportDataInFile('ssl', vm.saveDomain, vm.sslResult);
+            ToolsService.exportDataInFile('ssl', vm.saveDomain, vm.sslResult)
+                .success(function() {
+                    showSimpleToast('Les résultats SSL ont bien été exportés (dossier export de l\'application) !')
+                });
+        }
+
+        function showSimpleToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .hideDelay(3000)
+            );
         }
 
     }
