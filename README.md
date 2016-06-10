@@ -19,6 +19,18 @@
 	On ne fait cette phase qu’une seule fois, c’est juste pour récupérer le projet quand on ne l’a pas.
 	Par défaut, on est sur la branche master du projet.
 
+## Avant de commencer
+    1) Dans le répertoire du projet, allez dans le dossier 'server'
+    2) Créer un fichier 'keys.jon'
+    3) Ajouter dans ce fichier : 
+        {
+            "shodanKey" : "",
+            "builtwithKey" : ""
+        }
+    4) Allez sur https://account.shodan.io/register et créez-vous un compte pour récupérer une key Shodan qu'il faudra renseigner dans le champ du fichier keys.json qui convient
+    5) Allez sur https://builtwith.com/login?B=http%3a%2f%2fbuiltwith.com%2f et comme précédemment, créez-vous un compte pour récupérer une key valide de Built With et renseignez là dans le fichier keys.json
+    
+
 ## Installation Windows
 
 	## Client (Dans un terminal)
