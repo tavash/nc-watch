@@ -21,14 +21,14 @@
 
 ## Avant l'installation
     1) Dans le répertoire du projet, allez dans le dossier 'server'
-    2) Créer un fichier 'keys.jon'
+    2) Créer un fichier 'keys.json'
     3) Ajouter dans ce fichier les lignes suivantes : 
         {
             "shodanKey" : "",
             "builtwithKey" : ""
         }
-    4) Allez sur le site de Shodan (lien en dessous) et créez-vous un compte pour récupérer une key Shodan qu'il faudra renseigner dans le champ du fichier keys.json qui convient
-    5) Allez sur le site de Built With(lien en dessous) et comme précédemment, créez-vous un compte pour récupérer une key valide de Built With et renseignez là dans le fichier keys.json
+    4) Allez sur le site de Shodan (lien en dessous) et créez-vous un compte pour récupérer une key Shodan qu'il faudra renseigner dans le champ du fichier keys.json qui convient entre les guillemets
+    5) Allez sur le site de Built With(lien en dessous) et comme précédemment, créez-vous un compte pour récupérer une key valide de Built With et renseignez là dans le fichier keys.json comme pour Shodan
 
 [Création compte Shodan](https://account.shodan.io/register)
 
