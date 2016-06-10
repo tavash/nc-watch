@@ -25,6 +25,12 @@
                         </md-icon>
                     </div>
                 </div>
+                <div ng-if="builtwith.isLoad">
+                    <div layout layout-align="center">
+                        <md-button class="md-raised md-primary" ng-click="builtwith.exportData()">Export JSON</md-button>
+                    </div>
+                    <br>
+                </div>
             </div>
 
         </form>
@@ -70,6 +76,5 @@
     <div ng-show="builtwith.isLoad">
         <h3 ng-if="builtwith.isLoad">Contenu brut</h3>
         <json-formatter json="builtwith.builtwithResult" open="0"></json-formatter>
-        <md-button class="md-raised md-primary" ng-click="builtwith.exportData()">Export JSON</md-button>
     </div>
 </md-content>

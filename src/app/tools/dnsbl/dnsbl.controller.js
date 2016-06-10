@@ -6,9 +6,10 @@
         .controller('DnsBlController', DnsBlController);
 
     /** @ngInject */
-    function DnsBlController($window, DnsBlService, HowToMessages, InfosMessages) {
+    function DnsBlController(ToolsService, DnsBlService, HowToMessages, InfosMessages) {
         var vm = this;
         vm.isBL = isBL;
+        vm.exportData = exportData;
 
         vm.DNSBL_HOW_TO = HowToMessages.dnsbl;
         vm.DNSBL_MESSAGE_INFO = InfosMessages.dnsbl;
@@ -16,6 +17,8 @@
         function isBL() {
             DnsBlService.getDnsBl(vm.domain).success(function (res) {
                 if (res.success) {
+                    vm.saveDomain = vm.domain;
+                    vm.dnsBlResult = res;
                     var result = res.data.result;
                     var sortedResult = [];
                     vm.isNotListed = true;
@@ -37,6 +40,10 @@
                     vm.message = "Domaine non défini";
                 }
             });
+        }
+
+        function exportData() {
+            ToolsService.exportDataInFile('dnsbl', vm.saveDomain, vm.dnsBlResult);
         }
 
         function arrayObjectIndexOf(myArray, searchTerm, property) {

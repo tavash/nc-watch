@@ -19,15 +19,18 @@
                 </md-input-container>
 
                 <div flex="31">
-                    <md-button class="md-raised" ng-click="dnsbl.isBL()" type="submit"
-                               ng-disabled="dnsblForm.$invalid">
-                        Chercher
-                    </md-button>
+                    <md-button class="md-raised" ng-click="dnsbl.isBL()" type="submit" ng-disabled="dnsblForm.$invalid">Chercher</md-button>
                     <md-icon>
                         <md-tooltip>{{dnsbl.DNSBL_HOW_TO}}</md-tooltip>
                         <i class="material-icons">help</i>
                     </md-icon>
                 </div>
+            </div>
+            <div ng-if="dnsbl.hasResult">
+                <div layout layout-align="center">
+                    <md-button class="md-raised md-primary" ng-click="dnsbl.exportData()">Export JSON</md-button>
+                </div>
+                <br>
             </div>
         </div>
     </form>
